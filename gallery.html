@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-cms-module="gallery">
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
@@ -162,6 +162,7 @@
       </div>
     </div>
   </section>
+  <section class="section section-alt"><div class="container"><div class="section-head"><span class="eyebrow">School Memories</span><h2>Latest gallery uploads</h2></div><div class="gallery-grid" data-cms-list></div></div></section>
   <footer id="contact-footer">
     <div class="container">
       <div class="foot-grid">
@@ -220,5 +221,10 @@
       </div>
     </div>
   </footer>
+<script src="assets/js/menu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/supabase-cms.js"></script>
+<script src="assets/js/cms-content.js"></script>
 </body>
 </html>
