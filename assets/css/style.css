@@ -59,7 +59,7 @@ header.main-nav{
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:82px;}
 .logo-wrap{display:flex; align-items:center; gap:12px;}
-.logo-wrap img{height:56px; width:auto;}
+.logo-wrap img{height:68px; width:auto;}
 nav.menu{display:flex; align-items:center; gap:2px;}
 nav.menu > ul{display:flex; align-items:center;}
 nav.menu > ul > li{position:relative;}
@@ -94,7 +94,8 @@ nav.menu > ul > li:hover .dropdown{opacity:1; visibility:visible; transform:tran
 
 /* ===== HERO (homepage) ===== */
 .hero{
-  position:relative; background:linear-gradient(120deg,var(--navy-deep) 0%, var(--navy) 55%, var(--blue) 130%);
+  position:relative;
+  background:linear-gradient(120deg,var(--navy-deep) 0%, var(--navy) 55%, var(--blue) 130%);
   color:#fff; padding:88px 0 150px; overflow:hidden;
 }
 .hero::after{
@@ -158,6 +159,17 @@ nav.menu > ul > li:hover .dropdown{opacity:1; visibility:visible; transform:tran
 .why-card:nth-child(2) .num{background:#FFF1E2; color:var(--orange);}
 .why-card h3{font-size:18.5px; color:var(--navy); margin-bottom:10px;}
 .why-card p{font-size:14px; color:var(--muted);}
+
+/* ===== CAMPUS PHOTO (homepage) ===== */
+.campus-photo-section{padding:0 0 96px; background:var(--cream);}
+.campus-photo-wrap{position:relative; overflow:hidden; min-height:420px; border-radius:20px; box-shadow:var(--shadow);}
+.campus-photo-wrap img,.campus-photo-wrap video{width:100%; height:420px; object-fit:cover;}
+.campus-photo-caption{
+  position:absolute; right:0; bottom:0; left:0; padding:32px 36px;
+  color:#fff; background:linear-gradient(transparent, rgba(7,29,59,.86));
+}
+.campus-photo-caption .eyebrow{color:var(--orange-light);}
+.campus-photo-caption h2{margin-top:8px; font-size:28px; color:#fff;}
 
 /* ===== ABOUT (homepage snippet) ===== */
 .about-wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
@@ -317,7 +329,7 @@ footer ul li a:hover{color:var(--orange-light);}
   .topbar-left{gap:8px 14px; flex-wrap:wrap;}
   .topbar-social{display:none;}
   .nav-inner{height:70px; position:relative;}
-  .logo-wrap img{height:48px;}
+  .logo-wrap img{height:56px;}
   nav.menu{
     display:none; position:absolute; top:calc(100% + 1px); right:0; left:0;
     background:#fff; border:1px solid var(--line); border-top:3px solid var(--orange);
@@ -359,9 +371,12 @@ footer ul li a:hover{color:var(--orange-light);}
   .gallery-grid{grid-template-columns:1fr 1fr;}
   .gallery-tile.wide{grid-column:span 2;}
   .page-hero h1{font-size:28px;}
+  .campus-photo-wrap, .campus-photo-wrap img, .campus-photo-wrap video{min-height:320px; height:320px;}
 }
 
 @media(max-width:600px){
+  /* Keep content sections full-width on small screens; navigation retains its touch spacing. */
+  .hero .container, .page-hero .container, .section > .container, footer > .container{padding-left:0; padding-right:0;}
   .topbar{font-size:11px;}
   .topbar-left span:last-child{display:none;}
   .hero{padding:56px 0 104px;}
@@ -371,6 +386,10 @@ footer ul li a:hover{color:var(--orange-light);}
   .hero-stats div{padding-right:10px;}
   .hero-stats b{font-size:22px;}
   .section{padding:64px 0;}
+  .campus-photo-section{padding-bottom:64px;}
+  .campus-photo-wrap, .campus-photo-wrap img, .campus-photo-wrap video{min-height:250px; height:250px; border-radius:14px;}
+  .campus-photo-caption{padding:22px 20px;}
+  .campus-photo-caption h2{font-size:22px;}
   .section-head{margin-bottom:32px;}
   .section-head h2, .about-text h2{font-size:26px;}
   .page-hero{padding:48px 0 54px;}
