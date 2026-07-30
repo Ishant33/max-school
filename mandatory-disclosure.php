@@ -21,7 +21,19 @@ function disclosure_table(array $rows): void {
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="topbar"><div class="container"><div class="topbar-left"><span>Safidon Road, Assandh, Karnal (HR)</span><span>9050294300 | 9050248300</span></div></div></div>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <span>📍 Safidon Road, Assandh, Karnal (HR)</span>
+        <span>📞 9050294300 · 9050248300</span>
+      </div>
+      <div class="topbar-social">
+        <a href="https://www.facebook.com/maxinternationalschoolassandh">f</a>
+        <a href="https://www.instagram.com/maxschool2019">ig</a>
+        <a href="https://www.youtube.com/@maxinternationalschool2041">yt</a>
+      </div>
+    </div>
+  </div>
   <header class="main-nav">
     <div class="container nav-inner">
       <a href="index.html" class="logo-wrap"><img src="assets/img/logo.png" alt="Max International School logo"></a>
@@ -42,7 +54,7 @@ function disclosure_table(array $rows): void {
               <a href="about-us.html#infra">360° View</a>
               <a href="about-us.html#infra">Virtual Tour</a>
               <a href="about-us.html#infra">Facilities</a>
-              <a href="mandatory-disclosure.html">CBSE Mandatory Disclosure</a>
+              <a href="mandatory-disclosure.php">CBSE Mandatory Disclosure</a>
               <a href="about-us.html#awards">Awards &amp; Honours</a>
             </div>
           </li>
@@ -84,7 +96,7 @@ function disclosure_table(array $rows): void {
               <a href="admission.html#apply">Apply Now</a>
             </div>
           </li>
-          <li class="active"><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
+          <li class="active"><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
           <li><a href="career.html">Career</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
         </ul>
@@ -132,7 +144,64 @@ function disclosure_table(array $rows): void {
     </div>
   </main>
 
-  <footer><div class="container"><div class="foot-bottom"><span>Copyright <?= date('Y') ?> Max International School. All rights reserved.</span><a href="index.html">Back to home</a></div></div></footer>
+  <footer id="contact-footer">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-logo">
+            <img src="assets/img/logo.png" alt="Max International School">
+          </div>
+          <p>Affiliated to CBSE, New Delhi. A stress-free environment for students and educators to draw out the best in every child.</p>
+          <div class="foot-social">
+            <a href="https://www.facebook.com/maxinternationalschoolassandh">f</a>
+            <a href="https://www.instagram.com/maxschool2019">ig</a>
+            <a href="https://www.youtube.com/@maxinternationalschool2041">yt</a>
+          </div>
+        </div>
+        <div>
+          <h5>About Max</h5>
+          <ul>
+            <li><a href="about-us.html">About Max International</a></li>
+            <li><a href="about-us.html#chairman">Chairman's Message</a></li>
+            <li><a href="about-us.html#secretary">Secretary's Message</a></li>
+            <li><a href="about-us.html#principal">Principal's Message</a></li>
+            <li><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Infrastructure</h5>
+          <ul>
+            <li><a href="about-us.html#infra">School Building</a></li>
+            <li><a href="about-us.html#infra">Science Labs</a></li>
+            <li><a href="about-us.html#infra">Computer Lab</a></li>
+            <li><a href="about-us.html#infra">Playground</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Life @ Max</h5>
+          <ul>
+            <li><a href="beyond-activities.html">Achievements</a></li>
+            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
+            <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Reach Us</h5>
+          <ul>
+            <li>Safidon Road, Assandh, District Karnal (HR)</li>
+            <li>principal@maxinternationalschool.com</li>
+            <li>info@maxinternationalschool.com</li>
+            <li>9050294300 · 9050249300</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© Max International School, Assandh — All rights reserved.</span>
+        <span>Redesign by Pathway Media</span>
+      </div>
+    </div>
+  </footer>
   <script src="assets/js/menu.js"></script>
 </body>
 </html>
