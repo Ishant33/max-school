@@ -4,12 +4,12 @@
   const target = document.querySelector('[data-cms-list]');
   if (!target) return;
 
-  const safe = value => String(value || '').replace(/[&<>'"]/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[character]));
-  const client = window.cmsSupabase;
-  if (!client) return;
-  client.from('cms_content').select('title, body, image_url').eq('module', module).eq('is_published', true).order('sort_order').order('id', { ascending: false })
-    .then(({ data: items, error }) => {
-      if (error || !items || !items.length) return;
+  const safe = value => String(value || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  fetch(`/backend/cms_list.php?module=${encodeURIComponent(module)}`)
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(items => {
+      if (!items || !items.length) return;
       target.innerHTML = items.map(item => {
         const title = safe(item.title);
         const body = safe(item.body).replace(/\n/g, '<br>');

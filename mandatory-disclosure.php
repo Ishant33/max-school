@@ -25,12 +25,22 @@ function disclosure_table(array $rows): void {
     <div class="container">
       <div class="topbar-left">
         <span>📍 Safidon Road, Assandh, Karnal (HR)</span>
-        <span>📞 9050294300 · 9050248300</span>
+        <span>📞 <a href="tel:+919050294300">9050294300</a> · <a href="tel:+919050248300">9050248300</a></span>
+        <span>📱 <a href="tel:+919050294300">+91 90502 94300</a></span>
       </div>
       <div class="topbar-social">
-        <a href="https://www.facebook.com/maxinternationalschoolassandh">f</a>
-        <a href="https://www.instagram.com/maxschool2019">ig</a>
-        <a href="https://www.youtube.com/@maxinternationalschool2041">yt</a>
+        <a href="https://www.facebook.com/maxinternationalschoolassandh" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/social-facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/maxinternationalassandh?igsh=MWlybHdhb3M5c29iZg%3D%3D&utm_source=qr" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/social-instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@maxinternationalschool2041" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/social-youtube.png" alt="YouTube">
+        </a>
+        <a href="https://wa.me/919050294300" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/social-whatsapp.png" alt="WhatsApp">
+        </a>
       </div>
     </div>
   </div>
@@ -54,7 +64,7 @@ function disclosure_table(array $rows): void {
               <a href="about-us.html#infra">360° View</a>
               <a href="about-us.html#infra">Virtual Tour</a>
               <a href="about-us.html#infra">Facilities</a>
-              <a href="mandatory-disclosure.php">CBSE Mandatory Disclosure</a>
+              <a href="mandatory-disclosure.html">CBSE Mandatory Disclosure</a>
               <a href="about-us.html#awards">Awards &amp; Honours</a>
             </div>
           </li>
@@ -96,7 +106,7 @@ function disclosure_table(array $rows): void {
               <a href="admission.html#apply">Apply Now</a>
             </div>
           </li>
-          <li class="active"><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
+          <li class="active"><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
           <li><a href="career.html">Career</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
         </ul>
@@ -153,9 +163,15 @@ function disclosure_table(array $rows): void {
           </div>
           <p>Affiliated to CBSE, New Delhi. A stress-free environment for students and educators to draw out the best in every child.</p>
           <div class="foot-social">
-            <a href="https://www.facebook.com/maxinternationalschoolassandh">f</a>
-            <a href="https://www.instagram.com/maxschool2019">ig</a>
-            <a href="https://www.youtube.com/@maxinternationalschool2041">yt</a>
+            <a href="https://www.facebook.com/maxinternationalschoolassandh" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/social-facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/maxinternationalassandh?igsh=MWlybHdhb3M5c29iZg%3D%3D&utm_source=qr" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/social-instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.youtube.com/@maxinternationalschool2041" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/social-youtube.png" alt="YouTube">
+            </a>
           </div>
         </div>
         <div>
@@ -165,7 +181,7 @@ function disclosure_table(array $rows): void {
             <li><a href="about-us.html#chairman">Chairman's Message</a></li>
             <li><a href="about-us.html#secretary">Secretary's Message</a></li>
             <li><a href="about-us.html#principal">Principal's Message</a></li>
-            <li><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
+            <li><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
           </ul>
         </div>
         <div>
@@ -190,18 +206,18 @@ function disclosure_table(array $rows): void {
           <h5>Reach Us</h5>
           <ul>
             <li>Safidon Road, Assandh, District Karnal (HR)</li>
-            <li>principal@maxinternationalschool.com</li>
-            <li>info@maxinternationalschool.com</li>
-            <li>9050294300 · 9050249300</li>
+            <li><a href="mailto:principal@maxinternationalschool.com">principal@maxinternationalschool.com</a></li>
+            <li><a href="mailto:info@maxinternationalschool.com">info@maxinternationalschool.com</a></li>
+            <li><a href="tel:+919050294300">9050294300</a> · <a href="tel:+919050248300">9050248300</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
         <span>© Max International School, Assandh — All rights reserved.</span>
-        <span>Redesign by Pathway Media</span>
       </div>
     </div>
   </footer>
   <script src="assets/js/menu.js"></script>
+  <script src="assets/js/chatbot.js"></script>
 </body>
 </html>

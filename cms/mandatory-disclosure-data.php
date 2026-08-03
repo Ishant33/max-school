@@ -8,7 +8,7 @@ return [
         ['School Name', 'Max International School'],
         ['Address', 'Safidon Road, Assandh, Karnal, Haryana'],
         ['Principal Name', 'Ms. Sonika Rai'],
-        ['School Contact Number', '9050294300 | 9050248300'],
+        ['School Contact Number', '9050294300 · 9050248300 · WhatsApp: +91 90502 94300'],
         ['School Email ID', 'Please contact the school office for the official email address.'],
         ['Affiliation Board', 'Central Board of Secondary Education (CBSE), New Delhi'],
     ],
