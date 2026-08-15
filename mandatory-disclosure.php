@@ -1,10 +1,90 @@
 <?php
-$disclosure = require __DIR__ . '/cms/mandatory-disclosure-data.php';
+/* Data now comes from backend/disclosure_data.json, written by the CMS panel.
+   The old cms/mandatory-disclosure-data.php is kept as a fallback so the page
+   still renders if the JSON is missing or unreadable on a fresh deploy. */
+$defaults = [
+    'updated' => '', 'general' => [], 'documents' => [],
+    'academics' => [], 'staff' => [], 'infrastructure' => [],
+];
 
+$disclosure = null;
+$jsonFile = __DIR__ . '/backend/disclosure_data.json';
+if (is_readable($jsonFile)) {
+    $disclosure = json_decode((string) file_get_contents($jsonFile), true);
+}
+if (!is_array($disclosure)) {
+    $legacy = __DIR__ . '/cms/mandatory-disclosure-data.php';
+    $old = is_readable($legacy) ? require $legacy : [];
+    // Convert the legacy positional arrays into the labelled shape.
+    $pairs = function ($rows) {
+        return array_map(function ($r) {
+            return ['label' => $r[0] ?? '', 'value' => $r[1] ?? ''];
+        }, is_array($rows) ? $rows : []);
+    };
+    $disclosure = [
+        'updated'   => $old['updated'] ?? '',
+        'general'   => $pairs($old['general'] ?? []),
+        'staff'     => $pairs($old['staff'] ?? []),
+        'academics' => $pairs($old['academics'] ?? []),
+        'documents' => array_map(function ($r) {
+            return ['title' => $r[0] ?? '', 'description' => $r[1] ?? '', 'pdf_url' => $r[2] ?? ''];
+        }, $old['documents'] ?? []),
+        'infrastructure' => $old['infrastructure'] ?? [],
+    ];
+}
+$disclosure = array_merge($defaults, $disclosure);
+
+function e($value): string {
+    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+}
+
+/* Numbered three-column table, matching the layout the static page used.
+   Rows are numbered by position so reordering renumbers automatically; a row
+   may override that with an explicit 'sno' (CBSE uses 11.1 in section B). */
+function disclosure_numbered_table(array $rows, string $colHead, string $valHead, bool $asPdf): void {
+    if (!$rows) {
+        echo '<p class="disclosure-empty">Details available at the school office.</p>';
+        return;
+    }
+    echo '<div class="disclosure-table-wrap"><table class="disclosure-table document-table"><thead><tr>'
+       . '<th>S. No.</th><th>' . e($colHead) . '</th><th>' . e($valHead) . '</th>'
+       . '</tr></thead><tbody>';
+    $n = 0;
+    foreach ($rows as $row) {
+        $n++;
+        $sno   = ($row['sno'] ?? '') !== '' ? $row['sno'] : (string) $n;
+        $name  = $row['title'] ?? $row['label'] ?? '';
+        $value = $row['description'] ?? $row['value'] ?? '';
+        $pdf   = $row['pdf_url'] ?? '';
+        echo '<tr><td>' . e($sno) . '</td><td>' . e($name) . '</td><td>';
+        if ($asPdf) {
+            echo $pdf !== ''
+                ? '<a class="document-action" href="' . e($pdf) . '" target="_blank" rel="noopener">View PDF</a>'
+                : '<span class="document-office">At school office</span>';
+        } else {
+            echo e($value);
+        }
+        echo '</td></tr>';
+    }
+    echo '</tbody></table></div>';
+}
+
+// Renders a label/value table; adds a PDF link column only if any row has one.
 function disclosure_table(array $rows): void {
+    if (!$rows) {
+        echo '<p class="disclosure-empty">Details available at the school office.</p>';
+        return;
+    }
     echo '<div class="disclosure-table-wrap"><table class="disclosure-table"><tbody>';
-    foreach ($rows as [$label, $value]) {
-        echo '<tr><th scope="row">' . htmlspecialchars($label) . '</th><td>' . htmlspecialchars($value) . '</td></tr>';
+    foreach ($rows as $row) {
+        $label = $row['label'] ?? '';
+        $value = $row['value'] ?? '';
+        $pdf   = $row['pdf_url'] ?? '';
+        echo '<tr><th scope="row">' . e($label) . '</th><td>' . e($value);
+        if ($pdf !== '') {
+            echo ' <a class="disclosure-pdf" href="' . e($pdf) . '" target="_blank" rel="noopener">View PDF</a>';
+        }
+        echo '</td></tr>';
     }
     echo '</tbody></table></div>';
 }
@@ -14,9 +94,28 @@ function disclosure_table(array $rows): void {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CBSE mandatory public disclosure for Max International School, Assandh.">
   <title>Mandatory Public Disclosure | Max International School</title>
+<!-- meta:start -->
+<meta name="description" content="CBSE Mandatory Public Disclosure for Max International School, Assandh - school documents, infrastructure details, staff and results.">
+<link rel="canonical" href="https://www.maxinternationalschool.com/mandatory-disclosure.php">
+<link rel="icon" href="assets/img/logo.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/logo.png">
+<meta name="theme-color" content="#0B2E59">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Max International School">
+<meta property="og:title" content="Mandatory Public Disclosure | Max International School">
+<meta property="og:description" content="CBSE Mandatory Public Disclosure for Max International School, Assandh - school documents, infrastructure details, staff and results.">
+<meta property="og:url" content="https://www.maxinternationalschool.com/mandatory-disclosure.php">
+<meta property="og:image" content="https://www.maxinternationalschool.com/assets/img/school-building-1.jpg">
+<meta property="og:image:alt" content="Max International School campus, Assandh">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mandatory Public Disclosure | Max International School">
+<meta name="twitter:description" content="CBSE Mandatory Public Disclosure for Max International School, Assandh - school documents, infrastructure details, staff and results.">
+<meta name="twitter:image" content="https://www.maxinternationalschool.com/assets/img/school-building-1.jpg">
+<!-- meta:end -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -50,7 +149,7 @@ function disclosure_table(array $rows): void {
       <nav class="menu" aria-label="Primary navigation">
         <ul>
           <li><a href="index.html">Homepage</a></li>
-          <li>
+          <li class="active">
             <a href="about-us.html">About Us <span class="car">▾</span></a>
             <div class="dropdown">
               <div class="sub-head">About Max</div>
@@ -64,7 +163,7 @@ function disclosure_table(array $rows): void {
               <a href="about-us.html#infra">360° View</a>
               <a href="about-us.html#infra">Virtual Tour</a>
               <a href="about-us.html#infra">Facilities</a>
-              <a href="mandatory-disclosure.html">CBSE Mandatory Disclosure</a>
+              <a href="mandatory-disclosure.php">CBSE Mandatory Disclosure</a>
               <a href="about-us.html#awards">Awards &amp; Honours</a>
             </div>
           </li>
@@ -90,13 +189,6 @@ function disclosure_table(array $rows): void {
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li>
-            <a href="gallery.html">Gallery <span class="car">▾</span></a>
-            <div class="dropdown">
-              <a href="gallery.html#newsletter">E-Newsletter</a>
-              <a href="gallery.html#events">Events &amp; Notifications</a>
-            </div>
-          </li>
           <li><a href="admission.html#promax">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
@@ -106,8 +198,8 @@ function disclosure_table(array $rows): void {
               <a href="admission.html#apply">Apply Now</a>
             </div>
           </li>
-          <li class="active"><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
           <li><a href="career.html">Career</a></li>
+          <li class="active"><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
         </ul>
       </nav>
@@ -124,7 +216,7 @@ function disclosure_table(array $rows): void {
       <span class="eyebrow">CBSE Compliance</span>
       <h1>Mandatory Public Disclosure</h1>
       <p>Statutory information and records for Max International School, Assandh.</p>
-      <span class="disclosure-updated">Academic session: <?= htmlspecialchars($disclosure['updated']) ?></span>
+      <?php if ($disclosure['updated'] !== ''): ?><span class="disclosure-updated">Academic session: <?= e($disclosure['updated']) ?></span><?php endif; ?>
     </div>
   </section>
 
@@ -138,17 +230,13 @@ function disclosure_table(array $rows): void {
 
       <section class="disclosure-section" id="general"><div class="disclosure-heading"><b>A</b><div><h2>General Information</h2><p>Basic school and affiliation details.</p></div></div><?php disclosure_table($disclosure['general']); ?></section>
 
-      <section class="disclosure-section" id="documents"><div class="disclosure-heading"><b>B</b><div><h2>Documents and Information</h2><p>Statutory certificates maintained by the school.</p></div></div><div class="document-grid">
-      <?php foreach ($disclosure['documents'] as [$name, $description, $url]): ?>
-        <article class="document-card"><span class="document-icon">PDF</span><h3><?= htmlspecialchars($name) ?></h3><p><?= htmlspecialchars($description) ?></p><?php if ($url): ?><a href="<?= htmlspecialchars($url) ?>" target="_blank" rel="noopener">View document</a><?php else: ?><span class="document-office">Available at school office</span><?php endif; ?></article>
-      <?php endforeach; ?>
-      </div></section>
+      <section class="disclosure-section" id="documents"><div class="disclosure-heading"><b>B</b><div><h2>Documents and Information</h2><p>Statutory certificates maintained by the school.</p></div></div><?php disclosure_numbered_table($disclosure['documents'], 'Documents / Information', 'Upload Documents', true); ?></section>
 
-      <section class="disclosure-section" id="academics"><div class="disclosure-heading"><b>C</b><div><h2>Results and Academics</h2><p>Academic and school information.</p></div></div><?php disclosure_table($disclosure['academics']); ?></section>
+      <section class="disclosure-section" id="academics"><div class="disclosure-heading"><b>C</b><div><h2>Result and Academics</h2><p>Academic records and school committees.</p></div></div><?php disclosure_numbered_table($disclosure['academics'], 'Documents / Information', 'Upload Documents', true); ?></section>
 
-      <section class="disclosure-section" id="staff"><div class="disclosure-heading"><b>D</b><div><h2>Staff Details</h2><p>Information for the current academic session.</p></div></div><?php disclosure_table($disclosure['staff']); ?></section>
+      <section class="disclosure-section" id="staff"><div class="disclosure-heading"><b>D</b><div><h2>Staff and Teaching</h2><p>Teaching and student-support details.</p></div></div><?php disclosure_numbered_table($disclosure['staff'], 'Information', 'Details', false); ?></section>
 
-      <section class="disclosure-section" id="infrastructure"><div class="disclosure-heading"><b>E</b><div><h2>School Infrastructure</h2><p>Learning, wellbeing and activity facilities.</p></div></div><div class="infrastructure-list"><?php foreach ($disclosure['infrastructure'] as $item): ?><span><?= htmlspecialchars($item) ?></span><?php endforeach; ?></div></section>
+      <section class="disclosure-section" id="infrastructure"><div class="disclosure-heading"><b>E</b><div><h2>School Infrastructure</h2><p>Learning, wellbeing and activity facilities.</p></div></div><div class="infrastructure-list"><?php foreach ($disclosure['infrastructure'] as $item): ?><span><?= e($item) ?></span><?php endforeach; ?></div></section>
 
       <aside class="disclosure-help"><strong>Need assistance?</strong><span>For inspection of records or clarification, please contact the school office during working hours.</span><a class="btn btn-navy" href="contact-us.html">Contact the school</a></aside>
     </div>
@@ -181,7 +269,7 @@ function disclosure_table(array $rows): void {
             <li><a href="about-us.html#chairman">Chairman's Message</a></li>
             <li><a href="about-us.html#secretary">Secretary's Message</a></li>
             <li><a href="about-us.html#principal">Principal's Message</a></li>
-            <li><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
+            <li><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
           </ul>
         </div>
         <div>
