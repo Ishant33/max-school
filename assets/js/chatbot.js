@@ -4,27 +4,27 @@
     {
       id: 'admission', label: '📋 Admission Process',
       keys: ['admission', 'apply', 'enroll', 'join', 'register', 'seat', 'form'],
-      ans: 'Admission 4 steps mein hoti hai:<br>1. Online enquiry ya campus visit<br>2. Documents verify (birth certificate, previous records, address proof)<br>3. Age-appropriate interaction/assessment<br>4. Fee payment se seat confirm<br><br>Admissions open hain 2026–27 batch ke liye.'
+      ans: 'Admission is a 4-step process:<br>1. Online enquiry or campus visit<br>2. Document verification (birth certificate, previous records, address proof)<br>3. Age-appropriate interaction/assessment<br>4. Seat confirmed on fee payment<br><br>Admissions are open for the 2026–27 batch.'
     },
     {
       id: 'fees', label: '💰 Fee Structure',
       keys: ['fee', 'fees', 'cost', 'price', 'charges', 'scholarship'],
-      ans: 'Grade-wise fees ke liye school office se contact karein.<br><br>🎓 <b>Max Ultimate Scholarship Test</b> se 90% tak scholarship milti hai — Physics Wallah Vidyapeeth ke saath.'
+      ans: 'Please contact the school office for grade-wise fees.<br><br>🎓 The <b>Max Ultimate Scholarship Test</b> offers scholarships of up to 90% — in association with Physics Wallah Vidyapeeth.'
     },
     {
       id: 'timing', label: '🕐 School Timings',
       keys: ['timing', 'time', 'hours', 'open', 'close', 'schedule'],
-      ans: 'Current timings ke liye office se contact karein:<br>📞 9050294300 · 9050248300'
+      ans: 'Please contact the office for current timings:<br>📞 9050294300 · 9050248300'
     },
     {
       id: 'transport', label: '🚌 Transport / Bus',
       keys: ['transport', 'bus', 'van', 'pickup', 'drop', 'route'],
-      ans: 'Transport routes ke liye school office se poochhein:<br>📞 9050294300 · 9050248300'
+      ans: 'Please ask the school office about transport routes:<br>📞 9050294300 · 9050248300'
     },
     {
       id: 'promax', label: '🏆 Pro Max / Competitive',
       keys: ['neet', 'jee', 'nda', 'competitive', 'coaching', 'promax', 'defense', 'defence'],
-      ans: 'Pro-Max regular academics ke saath competitive coaching deta hai:<br>• <b>NEET / JEE Track</b> — test series & mentorship<br>• <b>Defense Wing (NDA Prep)</b> — NDA aspirants ke liye<br>• <b>Max Ultimate Scholarship Test</b> — 90% tak scholarship'
+      ans: 'Pro-Max offers competitive coaching alongside regular academics:<br>• <b>NEET / JEE Track</b> — test series &amp; mentorship<br>• <b>Defense Wing (NDA Prep)</b> — for NDA aspirants<br>• <b>Max Ultimate Scholarship Test</b> — scholarships up to 90%'
     },
     {
       id: 'contact', label: '📍 Contact & Location',
@@ -57,10 +57,10 @@
     }, delay || 600);
   }
 
-  // Answer + "back to menu" button, typing indicator ke saath
+  // Answer + "back to menu" button, with typing indicator
   function showAnswer(ansHtml) {
     addBotMsgWithTyping(
-      ansHtml + '<br><br><button class="mx-qr mx-back">← Wapas menu pe</button>',
+      ansHtml + '<br><br><button class="mx-qr mx-back">← Back to menu</button>',
       650,
       function (d) {
         d.querySelector('.mx-back').addEventListener('click', function () {
@@ -103,7 +103,7 @@
     if (matched) {
       showAnswer(matched.ans);
     } else {
-      addBotMsgWithTyping('Is sawaal ka jawab abhi mere paas nahi hai. WhatsApp pe seedha poochhein 👇<br><br><a class="mx-wa" href="' + WA + '" target="_blank" rel="noopener">💬 WhatsApp pe poochho</a>', 650);
+      addBotMsgWithTyping('I don\'t have an answer for that yet. Please ask us directly on WhatsApp 👇<br><br><a class="mx-wa" href="' + WA + '" target="_blank" rel="noopener">💬 Ask on WhatsApp</a>', 650);
     }
   }
 
@@ -113,7 +113,7 @@
     box.innerHTML =
       '<div id="mx-head"><span>Max International School</span><button id="mx-close" aria-label="Close">✕</button></div>' +
       '<div id="mx-msgs"></div>' +
-      '<div id="mx-input-row"><input id="mx-input" type="text" placeholder="Apna sawaal likhein..." autocomplete="off"><button id="mx-send" aria-label="Send">➤</button></div>';
+      '<div id="mx-input-row"><input id="mx-input" type="text" placeholder="Type your question..." autocomplete="off"><button id="mx-send" aria-label="Send">➤</button></div>';
 
     document.body.appendChild(box);
 
@@ -122,7 +122,7 @@
       box.removeAttribute('hidden');
       if (!opened) {
         opened = true;
-        addMsg('Namaste! 🙏 Max International School mein aapka swagat hai.<br>Main kaise madad kar sakta hoon?', true);
+        addMsg('Welcome to Max International School! 🙏<br>How can I help you today?', true);
         showMenu();
       }
       var inp = document.getElementById('mx-input');
@@ -130,7 +130,7 @@
     }
     function closeChat() { box.setAttribute('hidden', ''); }
 
-    // Public API — menu.js ke "AI Assistant" button se open hota hai
+    // Public API — opened by the "AI Assistant" button in menu.js
     window.MaxChatbot = { open: openChat, close: closeChat };
 
     document.getElementById('mx-close').addEventListener('click', closeChat);
