@@ -27,6 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+     replaced photo is in place before the browser requests the original. -->
+<script src="assets/js/site-images.js"></script>
 </head>
 <body data-cms-module="academics">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -82,9 +85,13 @@
           <li class="active">
             <a href="academics.html">Academics <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="academics.html#planner">Yearly Planner</a>
+              <a href="academics.html#wings">Three Wings (Junior, Primary, Senior)</a>
+              <a href="promax.html">PRO Max Classes</a>
+              <a href="academics.html#how-we-teach">How We Teach</a>
               <a href="academics.html#curriculum">Curriculum</a>
-              <a href="academics.html#pedagogy">Pedagogy</a>
+              <a href="academics.html#beyond">Beyond Textbook</a>
+              <a href="academics.html#future-edge">Future Edge &amp; Careers</a>
+              <a href="academics.html#planner">Yearly Planner</a>
             </div>
           </li>
           <li>
@@ -101,13 +108,14 @@
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li><a href="career.html">Career</a></li>
@@ -127,103 +135,677 @@
     <div class="container">
       <span class="breadcrumb">Home <b>›</b> Academics</span>
       <h1>Academics at Max International</h1>
+      <p style="color:#d4e3f5; font-size:17px; max-width:680px; margin-top:8px;">Where Young Minds Learn to Think, Not Just Remember.</p>
     </div>
   </section>
 
+  <!-- Navigation anchors bar -->
   <nav class="jumpnav">
     <div class="container">
-      <a href="#planner">Yearly Planner</a>
-      <a href="#curriculum">Curriculum</a>
-      <a href="#pedagogy">Pedagogy</a>
+      <a href="#wings">🌱 Three Wings</a>
+      <a href="#promax">🏆 PRO Max</a>
+      <a href="#how-we-teach">💡 How We Teach</a>
+      <a href="#curriculum">📚 Curriculum</a>
+      <a href="#beyond">🚀 Beyond Textbook</a>
+      <a href="#journey">❤️ Learning Journey</a>
+      <a href="#future-edge">🚀 Future Edge</a>
+      <a href="#planner">📅 Yearly Planner</a>
     </div>
   </nav>
 
+  <!-- ACADEMICS INTRO -->
+  <section class="section">
+    <div class="container">
+      <div class="acad-lead-box">
+        <span class="eyebrow" style="color:var(--orange);">Individual Potential Unlocked</span>
+        <h3>Where Young Minds Learn to Think, Not Just Remember.</h3>
+        <p>At <strong>Max International School Assandh</strong>, every child learns differently, grows differently and shines differently. Our academic journey is designed to move students from <strong>curiosity to confidence</strong>, from <strong>concepts to competence</strong>, and from <strong>learning to leading</strong>.</p>
+      </div>
+
+      <!-- 🌱 OUR THREE ACADEMIC WINGS -->
+      <div class="section-head" id="wings">
+        <span class="eyebrow">Academic Structure</span>
+        <h2>🌱 Our Three Academic Wings</h2>
+        <p>A progressive, stage-appropriate educational journey from early childhood discovery to senior school mastery.</p>
+      </div>
+
+      <div class="wings-grid">
+        <!-- 🧸 JUNIOR WING -->
+        <div class="wing-card junior">
+          <span class="wing-badge">🌱 Foundation Years</span>
+          <h3>🧸 Junior Wing</h3>
+          <span class="wing-grade">Nursery – Grade II</span>
+          <div class="wing-quote">“I wonder. I explore. I discover.”</div>
+          <p class="wing-desc">A joyful beginning where little learners build strong foundations through play, stories, activities, exploration and hands-on experiences.</p>
+          
+          <div class="wing-section-title">Focus Areas</div>
+          <div class="wing-focus">English • Hindi • Mathematics • EVS • General Awareness • Art • Music • Physical Development • Life Skills</div>
+          
+          <div class="wing-section-title">Learning Style</div>
+          <div class="wing-style-tags">
+            <span class="wing-tag">🎈 Play-Based</span>
+            <span class="wing-tag">🎨 Creative</span>
+            <span class="wing-tag">🔍 Exploratory</span>
+          </div>
+        </div>
+
+        <!-- 📖 PRIMARY WING -->
+        <div class="wing-card primary">
+          <span class="wing-badge">📖 Discovery Years</span>
+          <h3>📖 Primary Wing</h3>
+          <span class="wing-grade">Grade III – Grade V</span>
+          <div class="wing-quote">“I question. I connect. I create.”</div>
+          <p class="wing-desc">Curiosity takes centre stage as students begin connecting classroom concepts with the real world around them through experiential exploration.</p>
+          
+          <div class="wing-section-title">Focus Areas</div>
+          <div class="wing-focus">English • Hindi • Mathematics • Science • Social Science • Computer Education • GK • Art • Music • Physical Education</div>
+          
+          <div class="wing-section-title">Learning Style</div>
+          <div class="wing-style-tags">
+            <span class="wing-tag">💡 Activity-Based</span>
+            <span class="wing-tag">🧩 Experiential</span>
+            <span class="wing-tag">🤝 Collaborative</span>
+          </div>
+        </div>
+
+        <!-- 🎓 SENIOR WING -->
+        <div class="wing-card senior">
+          <span class="wing-badge">🎓 Mastery &amp; Leadership</span>
+          <h3>🎓 Senior Wing</h3>
+          <span class="wing-grade">Grade VI – Grade XII</span>
+          <div class="wing-quote">“I think. I analyse. I excel.”</div>
+          <p class="wing-desc">Students develop deeper conceptual understanding, critical thinking, and the confidence to take on board examinations, higher education and future challenges.</p>
+          
+          <div class="wing-section-title">Academic Areas</div>
+          <div class="wing-focus">Languages • Mathematics • Sciences • Social Sciences • Commerce • Computer &amp; IT • Physical Education • Creative &amp; Performing Arts</div>
+          
+          <div class="wing-section-title">Learning Style</div>
+          <div class="wing-style-tags">
+            <span class="wing-tag">🧠 Conceptual</span>
+            <span class="wing-tag">🎯 Competency-Based</span>
+            <span class="wing-tag">🚀 Future-Ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🏆 PRO MAX CLASSES SPOTLIGHT -->
+  <section class="section section-alt" id="promax">
+    <div class="container">
+      <div class="promax-hero-box">
+        <span class="eyebrow">Academic Excellence Track</span>
+        <h2>🏆 PRO MAX CLASSES</h2>
+        <div class="promax-tagline">Think Beyond. Prepare Beyond. Achieve Beyond.</div>
+        <div style="font-size:16px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:1px;">
+          PRO Max = Prepare • Perform • Progress
+        </div>
+        <p class="promax-subtext">
+          For students who love a challenge, <strong>PRO Max Classes</strong> provide focused preparation for Olympiads, academic competitions, aptitude tests, and various competitive examinations alongside their regular curriculum.
+        </p>
+
+        <!-- What happens at PRO Max flowchart -->
+        <div style="font-size:13.5px; font-weight:800; text-transform:uppercase; letter-spacing:.8px; margin-bottom:12px; color:#ffd8a8;">
+          What Happens at PRO Max?
+        </div>
+        <div class="promax-flow">
+          <div class="flow-step">
+            <span class="flow-num">1</span>
+            <span class="flow-title">Learn the Concept</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="flow-num">2</span>
+            <span class="flow-title">Take the Challenge</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="flow-num">3</span>
+            <span class="flow-title">Solve Smarter</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="flow-num">4</span>
+            <span class="flow-title">Analyse Performance</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="flow-num">5</span>
+            <span class="flow-title">Keep Improving</span>
+          </div>
+        </div>
+
+        <!-- 6 Pillars of PRO Max -->
+        <div class="promax-pillars">
+          <div class="pillar-card">
+            <div class="pillar-ic">🧠</div>
+            <div class="pillar-text">
+              <h4>Higher-Order Thinking</h4>
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-ic">🎯</div>
+            <div class="pillar-text">
+              <h4>Competitive Practice</h4>
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-ic">🏅</div>
+            <div class="pillar-text">
+              <h4>Olympiad Preparation</h4>
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-ic">📊</div>
+            <div class="pillar-text">
+              <h4>Regular Assessments</h4>
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-ic">⚡</div>
+            <div class="pillar-text">
+              <h4>Speed &amp; Accuracy</h4>
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-ic">🚀</div>
+            <div class="pillar-text">
+              <h4>Problem-Solving Skills</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="promax-quote-box">
+          «Because some minds don’t just want to learn the answer — they want to discover the better way to reach it.»
+        </div>
+
+        <div style="margin-top:24px; text-align:center;">
+          <a href="promax.html" class="btn btn-orange" style="padding:12px 28px; font-size:15px; font-weight:700; display:inline-flex; align-items:center; gap:8px;">
+            Explore Complete PRO Max Programme <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💡 HOW WE TEACH -->
+  <section class="section" id="how-we-teach">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Active Learning Cycle</span>
+        <h2>💡 How We Teach</h2>
+        <p><strong>Our Classroom. Their Curiosity.</strong> We believe the best learning happens when students are actively involved.</p>
+      </div>
+
+      <div class="cycle-grid">
+        <!-- 1. ASK -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">🔍</span>
+            <span class="cycle-badge">Step 01</span>
+          </div>
+          <h4>ASK</h4>
+          <p>We encourage children to question fearlessly, nurture innate wonder, and challenge assumptions.</p>
+        </div>
+
+        <!-- 2. EXPLORE -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">🧪</span>
+            <span class="cycle-badge">Step 02</span>
+          </div>
+          <h4>EXPLORE</h4>
+          <p>We let them discover through direct hands-on experience, lab investigations, and observational projects.</p>
+        </div>
+
+        <!-- 3. UNDERSTAND -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">💡</span>
+            <span class="cycle-badge">Step 03</span>
+          </div>
+          <h4>UNDERSTAND</h4>
+          <p>We build rock-solid conceptual foundations before advancing into complex applications.</p>
+        </div>
+
+        <!-- 4. APPLY -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">🎯</span>
+            <span class="cycle-badge">Step 04</span>
+          </div>
+          <h4>APPLY</h4>
+          <p>We connect everyday classroom learning with real-life scenarios, practical problem solving, and community context.</p>
+        </div>
+
+        <!-- 5. THINK -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">🧠</span>
+            <span class="cycle-badge">Step 05</span>
+          </div>
+          <h4>THINK</h4>
+          <p>We develop logical reasoning, analytical rigor, and independent critical thinking habits.</p>
+        </div>
+
+        <!-- 6. CREATE -->
+        <div class="cycle-step-card">
+          <div class="cycle-top">
+            <span class="cycle-ic">🌟</span>
+            <span class="cycle-badge">Step 06</span>
+          </div>
+          <h4>CREATE</h4>
+          <p>We give ideas the freedom and guidance to evolve into tangible projects, inventions, and possibilities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📚 OUR CURRICULUM -->
+  <section class="section section-alt" id="curriculum">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Academic Framework</span>
+        <h2>📚 Our Curriculum</h2>
+        <p><strong>Strong Foundations. Meaningful Learning. Future-Ready Skills.</strong> Aligned with CBSE and national pedagogical standards.</p>
+      </div>
+
+      <div class="curriculum-pillars-grid">
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">📘</div>
+          <h4>Conceptual Learning</h4>
+          <p>Strong fundamentals before advanced learning, ensuring clarity without rote memorisation.</p>
+        </div>
+
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">🔬</div>
+          <h4>Experiential Learning</h4>
+          <p>Learning by doing, observing, experimenting, and discovering in state-of-the-art labs.</p>
+        </div>
+
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">🎯</div>
+          <h4>Competency-Based Learning</h4>
+          <p>Applying knowledge to solve novel problems rather than simply memorising information.</p>
+        </div>
+
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">💻</div>
+          <h4>Technology-Integrated Learning</h4>
+          <p>Using digital tools and smart classroom technologies to explore, create, and collaborate.</p>
+        </div>
+
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">🌐</div>
+          <h4>Interdisciplinary Learning</h4>
+          <p>Connecting different disciplines to understand the larger picture and solve real-world challenges.</p>
+        </div>
+
+        <div class="curr-pillar-card">
+          <div style="font-size:24px;">📈</div>
+          <h4>Continuous Assessment</h4>
+          <p>Constructive, timely feedback that diagnostic helps every learner identify strengths and move forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🚀 BEYOND THE TEXTBOOK -->
+  <section class="section" id="beyond">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Holistic Growth</span>
+        <h2>🚀 Beyond the Textbook</h2>
+        <p>Because true learning doesn’t stop when the textbook closes.</p>
+      </div>
+
+      <div class="beyond-pills-row">
+        <span class="beyond-pill">⚙️ STEAM &amp; Innovation</span>
+        <span class="beyond-pill">🤖 Robotics &amp; Coding</span>
+        <span class="beyond-pill">🎭 Hobby &amp; Subject Clubs</span>
+        <span class="beyond-pill">🏅 Olympiads &amp; Competitions</span>
+        <span class="beyond-pill">🔬 Science &amp; Social Projects</span>
+        <span class="beyond-pill">⚽ Sports &amp; Fitness</span>
+        <span class="beyond-pill">🎨 Performing &amp; Visual Arts</span>
+        <span class="beyond-pill">🤝 Student Leadership &amp; Cabinet</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ❤️ THE MAX LEARNING JOURNEY -->
+  <section class="section section-alt" id="journey">
+    <div class="container">
+      <div class="journey-banner">
+        <span class="eyebrow" style="color:var(--orange);">Student Pathway</span>
+        <h3>❤️ The Max Learning Journey</h3>
+        
+        <div class="journey-steps-chain">
+          <span class="journey-node">DISCOVER</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">EXPLORE</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">QUESTION</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">APPLY</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">THINK</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">EXCEL</span>
+          <span class="journey-sep">→</span>
+          <span class="journey-node">LEAD</span>
+        </div>
+
+        <div class="journey-story-callout">
+          “Every classroom has a lesson.<br>
+          Every child has a story.<br>
+          At Max, we make both meaningful.”
+          <div style="font-size:14px; font-weight:700; color:#fff; margin-top:14px; letter-spacing:1px;">
+            MAX INTERNATIONAL SCHOOL ASSANDH — LEARNING TODAY. LEADING TOMORROW.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🚀 YOUR FUTURE. YOUR EDGE. (MORE THAN A CAREER. BUILD YOUR COMPETITIVE EDGE.) -->
+  <section class="section" id="future-edge" style="background:#092344; color:#fff; padding:70px 0;">
+    <div class="container">
+      <div class="career-hero-edge" style="border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:45px; margin-bottom:50px;">
+        <span class="eyebrow" style="background:rgba(255,107,0,0.2); color:#ff9d54; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; display:inline-block; margin-bottom:14px;">Future Readiness</span>
+        <h2 style="color:#fff; font-size:36px; line-height:1.2; font-family:'Poppins',sans-serif; margin-bottom:8px;">🚀 YOUR FUTURE. YOUR EDGE.</h2>
+        <div style="font-size:18px; font-weight:700; color:#ffb076; margin-bottom:12px; letter-spacing:0.5px;">
+          Dream Big. Explore More. Get Ahead.
+        </div>
+        <p style="color:#b8d1ee; font-size:16px; max-width:820px; margin:0 auto 18px; line-height:1.7;">
+          The world of careers is changing faster than ever. At <strong>Max International School Assandh</strong>, we don't just help you choose a career — we help you build a competitive edge for the future.
+        </p>
+        <div style="display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:10px 22px; font-size:14.5px; font-weight:700; color:#ffd188; letter-spacing:1px;">
+          “MORE THAN A CAREER. BUILD YOUR COMPETITIVE EDGE.”
+        </div>
+      </div>
+
+      <!-- 2 COLUMNS: TALK TO UNIVERSITIES & BUILD YOUR COMPETITIVE EDGE -->
+      <div class="edge-grid-2col">
+        <!-- 🎓 TALK TO UNIVERSITIES -->
+        <div class="edge-card" id="universities" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:32px; backdrop-filter:blur(6px);">
+          <div style="font-size:32px; margin-bottom:10px;">🎓</div>
+          <h3 style="color:#fff; font-size:22px; margin-bottom:6px; font-family:'Poppins',sans-serif;">TALK TO UNIVERSITIES</h3>
+          <div style="color:#ff9d54; font-weight:700; font-size:14px; margin-bottom:14px;">Meet the World Beyond School</div>
+          <p style="color:#c5daf0; font-size:14px; line-height:1.6; margin-bottom:16px;">
+            Get direct exposure to leading universities and institutions through:
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">🏛️ University Fairs</span>
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">💬 University Interaction Sessions</span>
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">🚌 Campus Visits</span>
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">🎙️ Expert Talks</span>
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">📝 Admission Guidance</span>
+            <span style="background:rgba(255,255,255,0.1); color:#fff; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:20px;">🧭 Career Counselling</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.25); border-left:3px solid var(--orange); padding:12px 16px; border-radius:0 8px 8px 0; font-style:italic; color:#e0ecfc; font-size:13.5px;">
+            “Ask. Explore. Connect. Discover. Because the right conversation today can shape your tomorrow.”
+          </div>
+        </div>
+
+        <!-- 🏆 BUILD YOUR COMPETITIVE EDGE -->
+        <div class="edge-card" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:32px; backdrop-filter:blur(6px);">
+          <div style="font-size:32px; margin-bottom:10px;">🏆</div>
+          <h3 style="color:#fff; font-size:22px; margin-bottom:6px; font-family:'Poppins',sans-serif;">BUILD YOUR COMPETITIVE EDGE</h3>
+          <div style="color:#ff9d54; font-weight:700; font-size:14px; margin-bottom:14px;">Don't Just Prepare for Exams. Prepare to Stand Out.</div>
+          <p style="color:#c5daf0; font-size:14px; line-height:1.6; margin-bottom:16px;">
+            At Max, students get rich opportunities to develop beyond the textbook through:
+          </p>
+          <ul style="list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">🏅 Olympiads &amp; Competitions</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Challenge yourself. Compete. Excel.</span>
+            </li>
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">⚡ PRO Max</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Competitive exams &amp; future challenges.</span>
+            </li>
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">🤖 STEM &amp; Robotics</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Technologies shaping tomorrow.</span>
+            </li>
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">👑 Leadership &amp; Cabinet</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Lead, communicate &amp; take responsibility.</span>
+            </li>
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">⚽ Sports &amp; Performing Arts</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Discipline, teamwork &amp; excellence.</span>
+            </li>
+            <li style="background:rgba(255,255,255,0.07); padding:10px 12px; border-radius:8px;">
+              <strong style="display:block; color:#fff; font-size:13px; margin-bottom:2px;">🔬 Clubs &amp; Experiential</strong>
+              <span style="color:#a8c4e6; font-size:12px;">Curiosity into skills, ideas into action.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 🌐 EXPLORE THE WORLD OF CAREERS -->
+      <div style="margin-top:55px; text-align:center;">
+        <span class="eyebrow" style="color:#ff9d54;">Career Clusters</span>
+        <h3 style="color:#fff; font-size:26px; margin-bottom:6px; font-family:'Poppins',sans-serif;">🌐 EXPLORE THE WORLD OF CAREERS</h3>
+        <div style="font-size:15px; color:#d2e4f7; font-weight:600; margin-bottom:18px;">One School. Hundreds of Possibilities.</div>
+        
+        <div class="career-clusters-grid" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; max-width:980px; margin:0 auto 20px;">
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🩺 Medicine</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">⚙️ Engineering</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">⚖️ Law</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">📊 Management</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🎨 Design</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">💻 Technology &amp; AI</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🛡️ Defence</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🏛️ Civil Services</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">📈 Finance</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🔬 Research</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🚀 Entrepreneurship</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🎙️ Media</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🏆 Sports</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">🎭 Creative Arts</span>
+          <span style="background:#133c6e; color:#fff; padding:8px 16px; border-radius:30px; font-size:13.5px; font-weight:600; border:1px solid rgba(255,255,255,0.15);">✨ Emerging Careers</span>
+        </div>
+        <p style="color:#ffd8a8; font-size:15px; font-weight:600; font-style:italic;">
+          “Your career doesn't have to fit into a box.”
+        </p>
+      </div>
+
+      <!-- 💡 FUTURE SKILLS -->
+      <div style="margin-top:55px;">
+        <div style="text-align:center; margin-bottom:28px;">
+          <span class="eyebrow" style="color:#ff9d54;">Core Competencies</span>
+          <h3 style="color:#fff; font-size:26px; margin-bottom:6px; font-family:'Poppins',sans-serif;">💡 FUTURE SKILLS</h3>
+          <div style="font-size:15px; color:#d2e4f7; font-weight:600;">What Will Give You the Edge?</div>
+        </div>
+
+        <div class="skills-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">🗣️</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Communication</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">🧠</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Critical Thinking</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">⚡</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Problem Solving</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">🎨</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Creativity</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">🤝</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Collaboration</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">💻</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Digital Skills</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">👑</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Leadership</strong>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:24px; margin-bottom:6px;">🔄</div>
+            <strong style="display:block; color:#fff; font-size:14.5px;">Adaptability</strong>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:20px; font-size:14.5px; color:#ffd188; font-weight:600;">
+          “Because marks may open a door — but skills help you move ahead.”
+        </div>
+      </div>
+
+      <!-- 🧭 YOUR FUTURE JOURNEY FLOW -->
+      <div style="margin-top:55px; background:rgba(0,0,0,0.22); border-radius:16px; padding:35px; border:1px solid rgba(255,255,255,0.1);">
+        <div style="text-align:center; margin-bottom:24px;">
+          <span class="eyebrow" style="color:#ff9d54;">Pathway to Success</span>
+          <h3 style="color:#fff; font-size:26px; margin-bottom:4px; font-family:'Poppins',sans-serif;">🧭 YOUR FUTURE JOURNEY</h3>
+        </div>
+
+        <div class="future-journey-flow" style="display:grid; grid-template-columns:repeat(6, 1fr); gap:12px; text-align:center;">
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 01</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">DISCOVER</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Know your strengths &amp; interests</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 02</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">EXPLORE</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Discover careers, courses &amp; universities</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 03</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">EXPERIENCE</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Participate, compete &amp; create</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 04</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">PREPARE</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Build skills &amp; academic strength</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 05</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">CONNECT</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Meet experts, universities &amp; industry</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:16px 10px;">
+            <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; margin-bottom:4px;">Stage 06</div>
+            <strong style="display:block; color:#fff; font-size:14px; margin-bottom:6px;">ACHIEVE</strong>
+            <span style="color:#b8d1ee; font-size:12px; line-height:1.4; display:block;">Step confidently into your future</span>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:25px; border-top:1px dashed rgba(255,255,255,0.15); padding-top:20px;">
+          <div style="font-size:15px; font-weight:800; color:#fff; letter-spacing:1px; margin-bottom:6px;">
+            ✨ AT MAX, YOUR FUTURE IS NOT JUST A DESTINATION. IT'S A JOURNEY WE HELP YOU BUILD.
+          </div>
+          <div style="font-size:14px; color:#ffd188; font-weight:600;">
+            Dream it. Explore it. Prepare for it. Own it.
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 CAREER READINESS MODULES -->
+      <div style="margin-top:55px;">
+        <div style="text-align:center; margin-bottom:28px;">
+          <span class="eyebrow" style="color:#ff9d54;">Comprehensive Support</span>
+          <h3 style="color:#fff; font-size:26px; margin-bottom:4px; font-family:'Poppins',sans-serif;">🌟 Career &amp; Future Readiness Hub</h3>
+          <p style="color:#b8d1ee; font-size:14.5px;">Everything students need to transition smoothly from school to top universities and beyond.</p>
+        </div>
+
+        <div class="career-modules-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🎓</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">University Connect</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Fairs, university talks, and global admission interactions directly on campus.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🏆</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Competitive Edge</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Olympiads, PRO Max specialized coaching, and national entrance preparation.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🌍</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Career Explorer</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Interactive career clusters mapping modern subjects to new-age fields.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">💬</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Talk to an Expert</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Dedicated academic counsellor and industry leader one-on-one sessions.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🧠</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Future Skills Lab</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Communication, executive leadership, AI literacy, and student entrepreneurship.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🏅</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Student Achievements</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Track records of competitive triumphs, Olympiad medals, and university selections.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">📅</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">Career Calendar</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Annual calendar of upcoming education fairs, workshops, and university visits.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:20px;">
+            <div style="font-size:24px; margin-bottom:8px;">🧭</div>
+            <h4 style="color:#fff; font-size:15px; margin-bottom:6px;">My Career Journey</h4>
+            <p style="color:#a8c4e6; font-size:12.5px; line-height:1.5; margin:0;">Personalized student pathway from initial interest exploration to university acceptance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YEARLY PLANNER -->
   <section class="section" id="planner">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Academic Calendar</span>
-        <h2>Our Yearly Planner</h2>
+        <h2>📅 Our Yearly Planner</h2>
         <p>A structured academic year that balances scholastic rigour with co-curricular growth — planned term by term.</p>
       </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="tlabel">Term 1 · April – September</div>
           <h4>Foundation &amp; Assessment</h4>
-          <p>New session orientation, unit tests, and the first co-curricular calendar of clubs and activities.</p>
+          <p>New session orientation, unit tests, diagnostic evaluations, and the first co-curricular calendar of clubs and activities.</p>
         </div>
         <div class="timeline-item">
           <div class="tlabel">Mid-Year · October</div>
           <h4>Half-Yearly Examinations</h4>
-          <p>Comprehensive assessment across all scholastic subjects, followed by parent-teacher meetings.</p>
+          <p>Comprehensive assessment across scholastic subjects, followed by in-depth parent-teacher analytical meetings.</p>
         </div>
         <div class="timeline-item">
           <div class="tlabel">Term 2 · November – February</div>
           <h4>Application &amp; Enrichment</h4>
-          <p>Project work, competitions, Pro-Max test series, and sports &amp; cultural events.</p>
+          <p>Inter-school competitions, PRO Max competitive test series, science exhibitions, and annual sports events.</p>
         </div>
         <div class="timeline-item">
           <div class="tlabel">Year-End · March</div>
           <h4>Annual Examinations &amp; Results</h4>
-          <p>Final assessments, annual day celebrations, and admissions open for the next academic year.</p>
+          <p>CBSE board exams for senior classes, annual scholastic evaluations, graduation ceremonies, and admissions for the new academic batch.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" id="curriculum">
+  <section class="section section-alt">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Curriculum</span>
-        <h2>An indigenously designed, CBSE-aligned curriculum</h2>
-        <p>Our curriculum is built in-house to give personalised attention to every child's physical, intellectual, emotional and social development — not just exam results.</p>
+        <span class="eyebrow">Academic Updates</span>
+        <h2>What’s new in academics</h2>
       </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="ic">&#128218;</div>
-          <h3>Scholastic Core</h3>
-          <p>NCERT-aligned coursework across languages, mathematics, science and social studies, mapped to CBSE guidelines.</p>
-        </div>
-        <div class="feature-card">
-          <div class="ic">&#129504;</div>
-          <h3>Critical Thinking</h3>
-          <p>Project-based learning and classroom discussion built to develop analysis, not just recall.</p>
-        </div>
-        <div class="feature-card">
-          <div class="ic">&#127908;</div>
-          <h3>Co-Scholastic Tracks</h3>
-          <p>Art, music, computer and physical education woven into the weekly timetable from the early years.</p>
-        </div>
-      </div>
+      <div class="feature-grid" data-cms-list="academics"></div>
     </div>
   </section>
-
-  <section class="section" id="pedagogy">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Teaching Approach</span>
-        <h2>Our Pedagogy</h2>
-        <p>Teachers here build classrooms where mistakes are welcome, questioning is encouraged, and every student gains a reputation as an effective learner.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="ic">&#128172;</div>
-          <h3>Discussion-Led Classrooms</h3>
-          <p>High student engagement and open questioning are treated as signs of a healthy classroom, not disruption.</p>
-        </div>
-        <div class="feature-card">
-          <div class="ic">&#128200;</div>
-          <h3>Multiple Intelligences</h3>
-          <p>Lessons are designed around the understanding that children learn differently — visually, verbally, kinesthetically and more.</p>
-        </div>
-        <div class="feature-card">
-          <div class="ic">&#128421;&#65039;</div>
-          <h3>Technology-Aided Learning</h3>
-          <p>Classroom management supported by IT and digital media, alongside traditional Gurukul-style mentorship.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section section-alt"><div class="container"><div class="section-head"><span class="eyebrow">Academic Updates</span><h2>What’s new in academics</h2></div><div class="feature-grid" data-cms-list></div></div></section>
   <footer id="contact-footer">
     <div class="container">
       <div class="foot-grid">
@@ -267,7 +849,7 @@
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>

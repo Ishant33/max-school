@@ -1,6 +1,294 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Faculty CMS | Max International School</title><link rel="stylesheet" href="cms/admin.css"></head>
-<body><header class="admin-head"><strong>Max International School <span>Faculty CMS</span></strong><button id="sign-out" hidden>Sign out</button></header>
-<main id="login-view" class="cms-login"><section class="auth-card"><h1>Faculty portal</h1><p>Sign in with your faculty account.</p><div id="login-message" class="alert error" hidden></div><form id="login-form"><label>Email<input type="email" id="email" required autocomplete="email"></label><label>Password<input type="password" id="password" required autocomplete="current-password"></label><button>Sign in</button></form></section></main>
-<div id="app-view" class="admin-layout" hidden><aside><p>Faculty dashboard</p><a href="#about" data-module="about" class="selected">About Us</a><a href="#academics" data-module="academics">Academics</a><a href="#admission" data-module="admission">Admission</a><a href="#career" data-module="career">Career</a><a href="#gallery" data-module="gallery">Gallery</a></aside><main><h1 id="module-title">About Us</h1><p class="muted">Create and publish content for the public website.</p><section class="editor"><h2 id="editor-title">Add item</h2><div id="app-message" class="alert error" hidden></div><form id="content-form"><input type="hidden" id="content-id"><label>Title<input id="content-title" required></label><label>Content<textarea id="content-body" rows="5"></textarea></label><label>Image URL <small>(optional)</small><input type="url" id="image-url"></label><label>Or upload image <small>(JPG, PNG, or WebP; max 5 MB)</small><input type="file" id="image-file" accept="image/jpeg,image/png,image/webp"></label><div class="form-row"><label>Display order<input type="number" id="sort-order" value="0"></label><label class="checkbox"><input type="checkbox" id="published" checked> Published</label></div><button>Save item</button><a href="#" id="cancel-edit" class="cancel" hidden>Cancel</a></form></section><section><h2>Saved items</h2><div id="content-list"><p class="empty">Loading…</p></div></section></main></div>
-<script src="assets/js/admin.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Dashboard — Max International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cms/admin.css">
+</head>
+<body>
+    <!-- Login View -->
+    <div id="login-view" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Max International School</h1>
+                <p>CMS Dashboard</p>
+            </div>
+            <div id="login-error" class="alert alert-error" hidden></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="email"
+                        required
+                        autocomplete="email"
+                        placeholder="admin@maxschool.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        required
+                        autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-spinner" hidden>●●●</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="dashboard" hidden>
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-brand">
+                <h1>Max International School</h1>
+                <span class="header-subtitle">CMS Dashboard</span>
+            </div>
+            <div class="header-actions">
+                <span id="user-email" class="user-email"></span>
+                <button id="change-password-btn" class="btn btn-secondary">Change Password</button>
+                <button id="sign-out-btn" class="btn btn-ghost">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#" data-module="hero" class="nav-item active">
+                        <span class="nav-icon">🏞️</span>
+                        <span class="nav-label">Homepage Slideshow</span>
+                    </a>
+                    <a href="#" data-module="images" class="nav-item">
+                        <span class="nav-icon">🖌️</span>
+                        <span class="nav-label">Site Photos</span>
+                    </a>
+                    <a href="#" data-module="enquiries" class="nav-item">
+                        <span class="nav-icon">📨</span>
+                        <span class="nav-label">Enquiries</span>
+                    </a>
+                    <hr class="nav-divider">
+                    <a href="#" data-module="about" class="nav-item">
+                        <span class="nav-icon">📄</span>
+                        <span class="nav-label">About Us</span>
+                    </a>
+                    <a href="#" data-module="academics" class="nav-item">
+                        <span class="nav-icon">📚</span>
+                        <span class="nav-label">Academics</span>
+                    </a>
+                    <a href="#" data-module="admission" class="nav-item">
+                        <span class="nav-icon">🎓</span>
+                        <span class="nav-label">Admission</span>
+                    </a>
+                    <a href="#" data-module="fees" class="nav-item">
+                        <span class="nav-icon">💰</span>
+                        <span class="nav-label">Fee Structure</span>
+                    </a>
+                    <a href="#" data-module="beyond" class="nav-item">
+                        <span class="nav-icon">🎨</span>
+                        <span class="nav-label">Beyond Activities</span>
+                    </a>
+                    <a href="#" data-module="promax" class="nav-item">
+                        <span class="nav-icon">⭐</span>
+                        <span class="nav-label">Pro Max</span>
+                    </a>
+                    <a href="#" data-module="career" class="nav-item">
+                        <span class="nav-icon">💼</span>
+                        <span class="nav-label">Career</span>
+                    </a>
+                    <a href="#" data-module="gallery" class="nav-item">
+                        <span class="nav-icon">🖼️</span>
+                        <span class="nav-label">Gallery</span>
+                    </a>
+                    <a href="#" data-module="newsletters" class="nav-item">
+                        <span class="nav-icon">📰</span>
+                        <span class="nav-label">E-Newsletter</span>
+                    </a>
+                    <a href="#" data-module="notifications" class="nav-item">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-label">Notifications</span>
+                    </a>
+                    <a href="#" data-module="disclosure" class="nav-item">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-label">Mandatory Disclosure</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="main-header">
+                    <div>
+                        <h2 id="module-title">Homepage Slideshow</h2>
+                        <p id="module-description" class="text-muted">Photos in the full-width slideshow at the top of the homepage</p>
+                    </div>
+                </div>
+
+                <div id="toast-container" class="toast-container"></div>
+
+                <!-- Editor Section -->
+                <section class="card editor-card">
+                    <div class="card-header">
+                        <h3 id="editor-title">Add Item</h3>
+                        <button id="cancel-edit-btn" class="btn btn-ghost btn-sm" hidden>Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <div id="editor-error" class="alert alert-error" hidden></div>
+                        <form id="content-form">
+                            <input type="hidden" id="edit-id">
+                            <input type="hidden" id="edit-module">
+
+                            <div class="form-group">
+                                <label for="item-title">Title *</label>
+                                <input type="text" id="item-title" required placeholder="Enter title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="item-body">Content</label>
+                                <textarea id="item-body" rows="4" placeholder="Enter description or content"></textarea>
+                            </div>
+
+                            <div class="form-row" id="image-fields">
+                                <div class="form-group">
+                                    <label for="item-image-url">Image URL</label>
+                                    <!-- Not type="url": an uploaded photo is stored as a site path
+                                         ("/backend/uploads/cms/x.jpg"), which a url input rejects.
+                                         That blocked the submit event, so saving an edited item with
+                                         an uploaded photo silently did nothing. -->
+                                    <input type="text" id="item-image-url" placeholder="https://... or upload below">
+                                </div>
+                                <div class="form-group">
+                                    <label for="item-image-file">
+                                        Or upload image
+                                        <span class="field-hint">JPG, PNG, WebP • Max 5 MB</span>
+                                    </label>
+                                    <input type="file" id="item-image-file" accept="image/jpeg,image/png,image/webp">
+                                    <div id="image-preview" class="file-preview" hidden></div>
+                                </div>
+                            </div>
+
+                            <div class="form-row" id="newsletter-fields" hidden>
+                                <div class="form-group">
+                                    <label for="item-link-url">Link URL or PDF</label>
+                                    <!-- Text, not url: an uploaded PDF is stored as a site path. -->
+                                    <input type="text" id="item-link-url" placeholder="https://... or upload below">
+                                </div>
+                                <div class="form-group">
+                                    <label for="item-pdf-file">
+                                        Or upload PDF
+                                        <span class="field-hint">Max 10 MB</span>
+                                    </label>
+                                    <input type="file" id="item-pdf-file" accept="application/pdf">
+                                    <div id="pdf-preview" class="file-preview" hidden></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="cover-field" hidden>
+                                <label for="item-cover-url">Cover Image URL</label>
+                                <input type="url" id="item-cover-url" placeholder="https://...">
+                            </div>
+
+                            <div class="form-group" id="badge-field" hidden>
+                                <label for="item-badge">Badge Text</label>
+                                <input type="text" id="item-badge" placeholder="e.g., Open, Limited Seats">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group form-group-narrow">
+                                    <label for="item-sort">Display Order</label>
+                                    <input type="number" id="item-sort" value="0" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="item-published" checked>
+                                        <span>Published</span>
+                                    </label>
+                                </div>
+                                <div class="form-group" id="featured-field" hidden>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="item-featured">
+                                        <span>Show in homepage banner</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-text">Save Item</span>
+                                    <span class="btn-spinner" hidden>●●●</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Items List -->
+                <section class="card">
+                    <div class="card-header">
+                        <h3 id="list-title">Published Items</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="items-list" class="items-grid">
+                            <div class="loading-state">Loading items...</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal" hidden>
+        <div class="modal-overlay"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="modal-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="password-error" class="alert alert-error" hidden></div>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Current Password *</label>
+                        <input type="password" id="current-password" required autocomplete="current-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password *</label>
+                        <input type="password" id="new-password" required minlength="8" autocomplete="new-password">
+                        <small class="field-hint">Minimum 8 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm New Password *</label>
+                        <input type="password" id="confirm-password" required autocomplete="new-password">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost modal-cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">Update Password</span>
+                            <span class="btn-spinner" hidden>●●●</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Versioned script URLs ensure CMS fixes are picked up immediately even
+         when the server sends the normal one-week JavaScript cache headers. -->
+    <script src="assets/js/admin-disclosure.js?v=20260825"></script>
+    <script src="assets/js/admin-fees.js?v=20260910"></script>
+    <script src="assets/js/admin-images.js?v=20260825"></script>
+    <script src="assets/js/admin-enquiries.js?v=20260825"></script>
+    <script src="assets/js/admin.js?v=20260825"></script>
+</body>
+</html>

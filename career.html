@@ -27,6 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+     replaced photo is in place before the browser requests the original. -->
+<script src="assets/js/site-images.js"></script>
 </head>
 <body data-cms-module="career">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -82,9 +85,12 @@
           <li>
             <a href="academics.html">Academics <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="academics.html#planner">Yearly Planner</a>
+              <a href="academics.html#wings">Three Wings (Junior, Primary, Senior)</a>
+              <a href="promax.html">PRO Max Classes</a>
+              <a href="academics.html#how-we-teach">How We Teach</a>
               <a href="academics.html#curriculum">Curriculum</a>
-              <a href="academics.html#pedagogy">Pedagogy</a>
+              <a href="academics.html#beyond">Beyond Textbook</a>
+              <a href="academics.html#planner">Yearly Planner</a>
             </div>
           </li>
           <li>
@@ -101,13 +107,14 @@
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li class="active"><a href="career.html">Career</a></li>
@@ -125,16 +132,273 @@
 
   <section id="main-content" tabindex="-1" class="page-hero">
     <div class="container">
-      <span class="breadcrumb">Home <b>›</b> Career</span>
-      <h1>Careers at Max International</h1>
+      <span class="breadcrumb">Home <b>›</b> Career &amp; Future Readiness</span>
+      <h1>Your Future. Your Edge.</h1>
+      <p style="color:#d4e3f5; font-size:17px; max-width:700px; margin-top:8px;">More Than a Career. Build Your Competitive Edge.</p>
     </div>
   </section>
 
-  <section class="section" id="vacancies">
+  <!-- In-page Navigation -->
+  <nav class="jumpnav">
+    <div class="container">
+      <a href="#future-edge">🚀 Your Edge</a>
+      <a href="#university-connect">🎓 University Connect</a>
+      <a href="#competitive-edge">🏆 Competitive Edge</a>
+      <a href="#career-explorer">🌐 Career Explorer</a>
+      <a href="#future-skills">💡 Future Skills</a>
+      <a href="#pathway">🧭 Future Journey</a>
+      <a href="#modules">🌟 Career Hub</a>
+      <a href="#vacancies">💼 Faculty Openings</a>
+    </div>
+  </nav>
+
+  <!-- 🚀 YOUR FUTURE. YOUR EDGE. HERO SPOTLIGHT -->
+  <section class="section" id="future-edge">
+    <div class="container">
+      <div class="career-hero-edge">
+        <span class="eyebrow" style="color:var(--orange);">Future-Ready Vision</span>
+        <h2>🚀 YOUR FUTURE. YOUR EDGE.</h2>
+        <div class="lead-phrase">Dream Big. Explore More. Get Ahead.</div>
+        <p>The world of careers is changing faster than ever. At <strong>Max International School Assandh</strong>, we don't just help you choose a career — we help you build a <strong>competitive edge for the future</strong>.</p>
+      </div>
+
+      <!-- 2-Col Grid: 🎓 TALK TO UNIVERSITIES & 🏆 BUILD YOUR COMPETITIVE EDGE -->
+      <div class="edge-grid-2col">
+        <!-- 🎓 TALK TO UNIVERSITIES -->
+        <div class="edge-card" id="university-connect">
+          <span class="tag" style="background:#eaf2fb; color:var(--blue); align-self:flex-start;">Higher Education Exposure</span>
+          <h3>🎓 TALK TO UNIVERSITIES</h3>
+          <div class="edge-sub">Meet the World Beyond School</div>
+          <p>Get direct exposure to leading national and international universities and premier institutions through structured engagements:</p>
+          
+          <ul class="edge-items-list">
+            <li><strong>University Fairs:</strong> Direct one-on-one interactions with university admission deans.</li>
+            <li><strong>Interaction Sessions:</strong> Tailored presentations on emerging degree courses and scholarships.</li>
+            <li><strong>Campus Visits:</strong> Field visits to top higher education and research campuses.</li>
+            <li><strong>Expert Talks:</strong> Industry practitioners and academic thought leaders sharing real perspectives.</li>
+            <li><strong>Admission Guidance:</strong> Portfolio building, SOP review, and timeline management.</li>
+            <li><strong>Career Counselling:</strong> Psychometric profiling and personalized student mapping.</li>
+          </ul>
+
+          <div class="edge-closing-tag">
+            Ask. Explore. Connect. Discover.<br>
+            <strong>Because the right conversation today can shape your tomorrow.</strong>
+          </div>
+        </div>
+
+        <!-- 🏆 BUILD YOUR COMPETITIVE EDGE -->
+        <div class="edge-card" id="competitive-edge">
+          <span class="tag" style="background:#fff2e6; color:var(--orange); align-self:flex-start;">Beyond the Textbook</span>
+          <h3>🏆 BUILD YOUR COMPETITIVE EDGE</h3>
+          <div class="edge-sub">Don't Just Prepare for Exams. Prepare to Stand Out.</div>
+          <p>At Max, students get continuous opportunities to develop real-world capabilities and portfolio distinction:</p>
+          
+          <ul class="edge-items-list">
+            <li><strong>Olympiads &amp; Competitions:</strong> Challenge yourself. Compete at national and global levels. Excel.</li>
+            <li><strong>PRO Max Classes:</strong> Prepare for competitive examinations, aptitude tests, and future academic milestones.</li>
+            <li><strong>STEM, Robotics &amp; Technology:</strong> Explore artificial intelligence, coding, and technologies shaping tomorrow.</li>
+            <li><strong>Leadership &amp; Student Cabinet:</strong> Learn to lead teams, communicate with impact, and take ownership.</li>
+            <li><strong>Sports &amp; Performing Arts:</strong> Discover discipline, grit, teamwork, and excellence beyond academics.</li>
+            <li><strong>Clubs &amp; Experiential Learning:</strong> Turn curiosity into skills and innovative ideas into action.</li>
+          </ul>
+
+          <div class="edge-closing-tag">
+            Stand apart from the crowd.<br>
+            <strong>Build distinction that admissions officers and industries value.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌐 EXPLORE THE WORLD OF CAREERS -->
+  <section class="section section-alt" id="career-explorer">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Endless Horizons</span>
+        <h2>🌐 Explore the World of Careers</h2>
+        <p><strong>One School. Hundreds of Possibilities.</strong> Your career doesn't have to fit into a traditional box.</p>
+      </div>
+
+      <div class="career-clusters-grid">
+        <div class="career-cluster-item">🩺 Medicine</div>
+        <div class="career-cluster-item">⚙️ Engineering</div>
+        <div class="career-cluster-item">⚖️ Law</div>
+        <div class="career-cluster-item">📊 Management</div>
+        <div class="career-cluster-item">🎨 Design</div>
+        <div class="career-cluster-item">💻 Technology &amp; AI</div>
+        <div class="career-cluster-item">🛡️ Defence &amp; NDA</div>
+        <div class="career-cluster-item">🏛️ Civil Services</div>
+        <div class="career-cluster-item">📈 Finance &amp; Banking</div>
+        <div class="career-cluster-item">🔬 Scientific Research</div>
+        <div class="career-cluster-item">🚀 Entrepreneurship</div>
+        <div class="career-cluster-item">🎥 Media &amp; Film</div>
+        <div class="career-cluster-item">🏆 Sports &amp; Athletics</div>
+        <div class="career-cluster-item">🎭 Creative Arts</div>
+        <div class="career-cluster-item">✨ Emerging Careers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💡 FUTURE SKILLS -->
+  <section class="section" id="future-skills">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Skills for Tomorrow</span>
+        <h2>💡 Future Skills</h2>
+        <p><strong>What will give you the edge?</strong> Because marks may open a door — but skills help you move ahead.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-box">
+          <span class="sk-icon">🗣️</span>
+          <h4>Communication</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">🧠</span>
+          <h4>Critical Thinking</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">🧩</span>
+          <h4>Problem Solving</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">🎨</span>
+          <h4>Creativity</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">🤝</span>
+          <h4>Collaboration</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">💻</span>
+          <h4>Digital &amp; AI Skills</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">⭐</span>
+          <h4>Leadership</h4>
+        </div>
+        <div class="skill-box">
+          <span class="sk-icon">🔄</span>
+          <h4>Adaptability</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🧭 YOUR FUTURE JOURNEY -->
+  <section class="section section-alt" id="pathway">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Step-by-Step Pathway</span>
+        <h2>🧭 Your Future Journey</h2>
+        <p>A structured roadmap guiding every Max student from self-discovery to global achievement.</p>
+      </div>
+
+      <div class="future-journey-flow">
+        <div class="fj-step">
+          <span class="fj-num">STEP 01</span>
+          <h4>DISCOVER</h4>
+          <p>Know your strengths, natural talents &amp; interests.</p>
+        </div>
+        <div class="fj-step">
+          <span class="fj-num">STEP 02</span>
+          <h4>EXPLORE</h4>
+          <p>Discover diverse careers, higher education courses &amp; universities.</p>
+        </div>
+        <div class="fj-step">
+          <span class="fj-num">STEP 03</span>
+          <h4>EXPERIENCE</h4>
+          <p>Participate in labs, Olympiads, teams &amp; creative projects.</p>
+        </div>
+        <div class="fj-step">
+          <span class="fj-num">STEP 04</span>
+          <h4>PREPARE</h4>
+          <p>Build 21st-century skills, academic rigour &amp; test mastery.</p>
+        </div>
+        <div class="fj-step">
+          <span class="fj-num">STEP 05</span>
+          <h4>CONNECT</h4>
+          <p>Engage with industry leaders, counsellors &amp; university faculties.</p>
+        </div>
+        <div class="fj-step">
+          <span class="fj-num">STEP 06</span>
+          <h4>ACHIEVE</h4>
+          <p>Step confidently into your chosen college and future life.</p>
+        </div>
+      </div>
+
+      <div class="journey-banner" style="margin-top:20px;">
+        <span class="eyebrow" style="color:var(--orange);">Your Future Awaits</span>
+        <h3>✨ At Max, Your Future Is Not Just a Destination.</h3>
+        <p style="font-size:18px; color:#dce9f8; max-width:720px; margin:0 auto 16px;">It's a journey we actively help you build.</p>
+        <div style="font-size:16px; font-weight:800; color:#ffd499; letter-spacing:1px;">
+          DREAM IT. EXPLORE IT. PREPARE FOR IT. OWN IT.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌟 CAREER & COMPETITIVE MODULES -->
+  <section class="section" id="modules">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Comprehensive Ecosystem</span>
+        <h2>🌟 Career &amp; Future Readiness Hub</h2>
+        <p>Specialized programs and platforms dedicated to student readiness.</p>
+      </div>
+
+      <div class="career-modules-grid">
+        <div class="cmod-card">
+          <div class="ic">🎓</div>
+          <h4>University Connect</h4>
+          <p>Annual university fairs, direct admissions talks, and college transition guidance.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">🏆</div>
+          <h4>Competitive Edge</h4>
+          <p>National Olympiads, PRO Max test series, NDA coaching, and NTSE/JEE prep.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">🌍</div>
+          <h4>Career Explorer</h4>
+          <p>Interactive career clusters, stream selection guidance, and aptitude mapping.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">💬</div>
+          <h4>Talk to an Expert</h4>
+          <p>One-on-one sessions with certified counsellors, alumni, and industry mentors.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">🧠</div>
+          <h4>Future Skills Lab</h4>
+          <p>Hands-on workshops in public speaking, leadership, design thinking, and coding.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">🏅</div>
+          <h4>Student Achievements</h4>
+          <p>Celebrating student triumphs in state/national competitions and university offers.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">📅</div>
+          <h4>Career Calendar</h4>
+          <p>Upcoming higher-ed webinars, scholarship deadlines, and university workshops.</p>
+        </div>
+        <div class="cmod-card">
+          <div class="ic">🧭</div>
+          <h4>My Career Journey</h4>
+          <p>Personalized pathways tailored from initial curiosity to university enrolment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING & STAFF OPPORTUNITIES -->
+  <section class="section section-alt" id="vacancies">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Join Our Team</span>
-        <h2>Vacant Positions</h2>
+        <h2>Vacant Positions at Max</h2>
         <p>We're always looking for passionate educators and staff who share our commitment to balanced, values-driven education.</p>
       </div>
       <div class="job-row">
@@ -157,7 +421,7 @@
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Why Work With Us</span>
@@ -214,7 +478,7 @@
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>

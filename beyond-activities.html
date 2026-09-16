@@ -27,6 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+     replaced photo is in place before the browser requests the original. -->
+<script src="assets/js/site-images.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -82,9 +85,12 @@
           <li>
             <a href="academics.html">Academics <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="academics.html#planner">Yearly Planner</a>
+              <a href="academics.html#wings">Three Wings (Junior, Primary, Senior)</a>
+              <a href="promax.html">PRO Max Classes</a>
+              <a href="academics.html#how-we-teach">How We Teach</a>
               <a href="academics.html#curriculum">Curriculum</a>
-              <a href="academics.html#pedagogy">Pedagogy</a>
+              <a href="academics.html#beyond">Beyond Textbook</a>
+              <a href="academics.html#planner">Yearly Planner</a>
             </div>
           </li>
           <li class="active">
@@ -101,13 +107,14 @@
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li><a href="career.html">Career</a></li>
@@ -256,7 +263,7 @@
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>

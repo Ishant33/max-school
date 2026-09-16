@@ -38,16 +38,19 @@ function e($value): string {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
 
-/* Numbered three-column table, matching the layout the static page used.
-   Rows are numbered by position so reordering renumbers automatically; a row
-   may override that with an explicit 'sno' (CBSE uses 11.1 in section B). */
+/* PDF Icon SVG helper */
+function pdf_icon_svg(): string {
+    return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM8.5 13.5h1.75a1.25 1.25 0 0 1 0 2.5H8.5v-2.5zm0-1.5H6.5v7h2v-2h1.75a2.75 2.75 0 0 0 0-5.5H8.5v.5zm4.5 7h-1.5v-7h2.2a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5H13v-2.5v2.5zm0-5.5v4h.7a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H13zm5-1.5h3v1.5h-1.5v1.2h1.2v1.5h-1.2v2.8H18v-7z"/></svg>';
+}
+
+/* Numbered three-column table, matching DPS Karnal layout with S.NO., INFORMATION, DETAILS / DOWNLOAD */
 function disclosure_numbered_table(array $rows, string $colHead, string $valHead, bool $asPdf): void {
     if (!$rows) {
         echo '<p class="disclosure-empty">Details available at the school office.</p>';
         return;
     }
-    echo '<div class="disclosure-table-wrap"><table class="disclosure-table document-table"><thead><tr>'
-       . '<th>S. No.</th><th>' . e($colHead) . '</th><th>' . e($valHead) . '</th>'
+    echo '<div class="disclosure-table-wrap"><table class="disclosure-table"><thead><tr>'
+       . '<th style="width:75px; text-align:center;">S.NO.</th><th>' . e($colHead) . '</th><th style="width:200px; text-align:center;">' . e($valHead) . '</th>'
        . '</tr></thead><tbody>';
     $n = 0;
     foreach ($rows as $row) {
@@ -56,10 +59,10 @@ function disclosure_numbered_table(array $rows, string $colHead, string $valHead
         $name  = $row['title'] ?? $row['label'] ?? '';
         $value = $row['description'] ?? $row['value'] ?? '';
         $pdf   = $row['pdf_url'] ?? '';
-        echo '<tr><td>' . e($sno) . '</td><td>' . e($name) . '</td><td>';
+        echo '<tr><td style="text-align:center; font-weight:600;">' . e($sno) . '</td><td>' . e($name) . '</td><td style="text-align:center;">';
         if ($asPdf) {
             echo $pdf !== ''
-                ? '<a class="document-action" href="' . e($pdf) . '" target="_blank" rel="noopener">View PDF</a>'
+                ? '<a class="document-action" href="' . e($pdf) . '" target="_blank" rel="noopener">' . pdf_icon_svg() . '<span>View PDF</span></a>'
                 : '<span class="document-office">At school office</span>';
         } else {
             echo e($value);
@@ -69,20 +72,24 @@ function disclosure_numbered_table(array $rows, string $colHead, string $valHead
     echo '</tbody></table></div>';
 }
 
-// Renders a label/value table; adds a PDF link column only if any row has one.
+// Renders General Information table matching DPS Karnal Part A layout
 function disclosure_table(array $rows): void {
     if (!$rows) {
         echo '<p class="disclosure-empty">Details available at the school office.</p>';
         return;
     }
-    echo '<div class="disclosure-table-wrap"><table class="disclosure-table"><tbody>';
+    echo '<div class="disclosure-table-wrap"><table class="disclosure-table"><thead><tr>'
+       . '<th style="width:75px; text-align:center;">S.NO.</th><th style="width:36%;">INFORMATION</th><th>DETAILS</th>'
+       . '</tr></thead><tbody>';
+    $n = 0;
     foreach ($rows as $row) {
+        $n++;
         $label = $row['label'] ?? '';
         $value = $row['value'] ?? '';
         $pdf   = $row['pdf_url'] ?? '';
-        echo '<tr><th scope="row">' . e($label) . '</th><td>' . e($value);
+        echo '<tr><td style="text-align:center; font-weight:600;">' . $n . '</td><td style="font-weight:600;">' . e($label) . '</td><td>' . e($value);
         if ($pdf !== '') {
-            echo ' <a class="disclosure-pdf" href="' . e($pdf) . '" target="_blank" rel="noopener">View PDF</a>';
+            echo ' <a class="document-action" style="margin-left:10px;" href="' . e($pdf) . '" target="_blank" rel="noopener">' . pdf_icon_svg() . '<span>View PDF</span></a>';
         }
         echo '</td></tr>';
     }
@@ -118,6 +125,9 @@ function disclosure_table(array $rows): void {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+       replaced photo is in place before the browser requests the original. -->
+  <script src="assets/js/site-images.js"></script>
 </head>
 <body>
   <div class="topbar">
@@ -170,9 +180,12 @@ function disclosure_table(array $rows): void {
           <li>
             <a href="academics.html">Academics <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="academics.html#planner">Yearly Planner</a>
+              <a href="academics.html#wings">Three Wings (Junior, Primary, Senior)</a>
+              <a href="promax.html">PRO Max Classes</a>
+              <a href="academics.html#how-we-teach">How We Teach</a>
               <a href="academics.html#curriculum">Curriculum</a>
-              <a href="academics.html#pedagogy">Pedagogy</a>
+              <a href="academics.html#beyond">Beyond Textbook</a>
+              <a href="academics.html#planner">Yearly Planner</a>
             </div>
           </li>
           <li>
@@ -189,13 +202,14 @@ function disclosure_table(array $rows): void {
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li><a href="career.html">Career</a></li>
@@ -211,34 +225,541 @@ function disclosure_table(array $rows): void {
     </div>
   </header>
 
-  <section class="disclosure-hero">
+  <?php
+  // Prepare Part A mapping
+  $generalMap = [];
+  if (!empty($disclosure['general'])) {
+      foreach ($disclosure['general'] as $g) {
+          $k = strtolower(trim((string)($g['label'] ?? '')));
+          $generalMap[$k] = trim((string)($g['value'] ?? ''));
+      }
+  }
+  $schoolName = $generalMap['school name'] ?? 'MAX INTERNATIONAL SCHOOL';
+  $affilNo    = $generalMap['affiliation no.(if applicable)'] ?? $generalMap['affiliation no'] ?? '531608';
+  $schoolCode = $generalMap['school code (if applicable)'] ?? $generalMap['school code'] ?? '41608';
+  $address    = $generalMap['address'] ?? $generalMap['complete address with pin code'] ?? 'SAFIDON ROAD, ASSANDH, DISTRICT KARNAL, HARYANA - 132039';
+  $principal  = $generalMap['principal name'] ?? $generalMap['principal name & qualification:'] ?? 'MS. SONIKA RAI, M.A., B.Ed.';
+  $email      = $generalMap['school email id'] ?? 'principal@maxinternationalschool.com';
+  $contact    = $generalMap['school contact number'] ?? $generalMap['contact details (landline/mobile)'] ?? '9050294300, 9050248300';
+
+  // Prepare Part B documents
+  $primaryDocTitles = [
+      1 => 'COPIES OF AFFILIATION/UPGRADATION LETTER AND RECENT EXTENSION OF AFFILIATION, IF ANY',
+      2 => 'COPIES OF SOCIETIES/TRUST/COMPANY REGISTRATION/RENEWAL CERTIFICATE, AS APPLICABLE',
+      3 => 'COPY OF NO OBJECTION CERTIFICATE (NOC) ISSUED, IF APPLICABLE, BY THE STATE GOVT./UT',
+      4 => "COPIES OF RECOGNITION CERTIFICATE UNDER RTE ACT, 2009, AND IT'S RENEWAL IF APPLICABLE",
+      5 => 'COPY OF VALID BUILDING SAFETY CERTIFICATE AS PER THE NATIONAL BUILDING CODE',
+      6 => 'COPY OF VALID FIRE SAFETY CERTIFICATE ISSUED BY THE COMPETENT AUTHORITY',
+      7 => 'COPY OF THE DEO CERTIFICATE SUBMITTED BY THE SCHOOL FOR AFFILIATION/UPGRADATION/EXTENSION OF AFFILIATIONOR SELF CERTIFICATION BY SCHOOL',
+      8 => 'COPIES OF VALID DRINKING WATER, HEALTH AND SANITATION CERTIFICATES AND WATER TESTING REPORT',
+  ];
+  $primaryDocPdfs = [
+      1 => 'backend/uploads/disclosure/b/1.pdf',
+      2 => 'backend/uploads/disclosure/b/2.pdf',
+      3 => 'backend/uploads/disclosure/b/3.pdf',
+      4 => 'backend/uploads/disclosure/b/4.pdf',
+      5 => 'backend/uploads/disclosure/b/5.pdf',
+      6 => 'backend/uploads/disclosure/b/6.pdf',
+      7 => 'backend/uploads/disclosure/b/7.pdf',
+      8 => 'backend/uploads/disclosure/b/8.pdf',
+  ];
+  $additionalDocs = [];
+  if (!empty($disclosure['documents'])) {
+      foreach ($disclosure['documents'] as $d) {
+          $id  = (int)($d['id'] ?? 0);
+          $t   = trim((string)($d['title'] ?? ''));
+          $pdf = trim((string)($d['pdf_url'] ?? ''));
+          if ($id >= 1 && $id <= 8 && $pdf !== '') {
+              $primaryDocPdfs[$id] = $pdf;
+          } elseif ($pdf !== '') {
+              $additionalDocs[] = ['title' => $t, 'pdf' => $pdf];
+          }
+      }
+  }
+
+  // Prepare Part C academics
+  $academicPdfs = [
+      1 => 'backend/uploads/disclosure/c/1.pdf',
+      2 => 'backend/uploads/disclosure/c/2.pdf',
+      3 => 'backend/uploads/disclosure/c/3.pdf',
+      4 => 'backend/uploads/disclosure/c/4.pdf',
+  ];
+  if (!empty($disclosure['academics'])) {
+      foreach ($disclosure['academics'] as $a) {
+          $id  = (int)($a['id'] ?? 0);
+          $pdf = trim((string)($a['pdf_url'] ?? ''));
+          if ($id >= 1 && $id <= 4 && $pdf !== '') {
+              $academicPdfs[$id] = $pdf;
+          }
+      }
+  }
+
+  $resultX = [
+      ['sno' => '1', 'year' => '2021-22', 'registered' => '70', 'passed' => '65', 'pct' => '92.86%', 'pdf' => 'backend/uploads/disclosure/c/5.pdf'],
+      ['sno' => '2', 'year' => '2022-23', 'registered' => '81', 'passed' => '74', 'pct' => '91.36%', 'pdf' => 'backend/uploads/disclosure/c/6.pdf'],
+      ['sno' => '3', 'year' => '2023-24', 'registered' => '99', 'passed' => '89', 'pct' => '89.90%', 'pdf' => 'backend/uploads/disclosure/c/7.pdf'],
+  ];
+  $resultXII = [
+      ['sno' => '1', 'year' => '2021-22', 'registered' => '74', 'passed' => '66', 'pct' => '89.19%', 'pdf' => 'backend/uploads/disclosure/c/8.pdf'],
+      ['sno' => '2', 'year' => '2022-23', 'registered' => '103', 'passed' => '94', 'pct' => '91.26%', 'pdf' => 'backend/uploads/disclosure/c/9.pdf'],
+      ['sno' => '3', 'year' => '2023-24', 'registered' => '94', 'passed' => '88', 'pct' => '93.62%', 'pdf' => 'backend/uploads/disclosure/c/10.pdf'],
+  ];
+
+  // Prepare Part D staff
+  $staffMap = [];
+  if (!empty($disclosure['staff'])) {
+      foreach ($disclosure['staff'] as $st) {
+          $k = strtolower(trim((string)($st['label'] ?? '')));
+          $staffMap[$k] = trim((string)($st['value'] ?? ''));
+      }
+  }
+  $principalCount  = $staffMap['principal'] ?? '1';
+  $totalTeachers   = $staffMap['total no. of teachers'] ?? '54';
+  $pgtCount        = $staffMap['pgt'] ?? '16';
+  $tgtCount        = $staffMap['tgt'] ?? '15';
+  $prtCount        = $staffMap['prt'] ?? '23';
+  $ratio           = $staffMap['teacher student ratio'] ?? $staffMap['teachers section ratio'] ?? '1:1.5';
+  $specialEducator = $staffMap['special educator'] ?? 'Ms. Neetu (B.A., Diploma in Special Education)';
+  $counsellor      = $staffMap['wellness teacher'] ?? $staffMap['counsellor & wellness teacher'] ?? 'Ms. Sonia (M.A. Hindi, Pol. Science, NTT, B.Ed.)';
+  ?>
+
+  <main class="cbse-disclosure-page">
     <div class="container">
-      <span class="eyebrow">CBSE Compliance</span>
-      <h1>Mandatory Public Disclosure</h1>
-      <p>Statutory information and records for Max International School, Assandh.</p>
-      <?php if ($disclosure['updated'] !== ''): ?><span class="disclosure-updated">Academic session: <?= e($disclosure['updated']) ?></span><?php endif; ?>
-    </div>
-  </section>
 
-  <nav class="disclosure-nav" aria-label="Disclosure sections"><div class="container">
-    <a href="#general">A. General</a><a href="#documents">B. Documents</a><a href="#academics">C. Academics</a><a href="#staff">D. Staff</a><a href="#infrastructure">E. Infrastructure</a>
-  </div></nav>
+      <div class="cbse-toolbar">
+        <div class="cbse-toolbar-note">
+          Official CBSE Appendix-IX Revised Format | Mandatory Public Disclosure
+        </div>
+        <button type="button" class="cbse-print-btn" onclick="window.print()">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          <span>Print / Save PDF</span>
+        </button>
+      </div>
 
-  <main class="disclosure-main">
-    <div class="container">
-      <div class="disclosure-intro"><span class="eyebrow">Transparency</span><h2>Information for parents and visitors</h2><p>The following information is published in accordance with CBSE requirements. Records that require physical inspection are available at the school office during working hours.</p></div>
+      <div class="cbse-disclosure-doc">
+        <!-- CBSE Official Appendix IX Header -->
+        <header class="cbse-header">
+          <div class="cbse-header-top">
+            <div class="cbse-emblem-left">
+              <img src="assets/img/national-emblem.png" alt="State Emblem of India">
+            </div>
+            <div class="cbse-header-titles">
+              <div class="cbse-title-hi">केन्द्रीय माध्यमिक शिक्षा बोर्ड</div>
+              <div class="cbse-sub-hi">( मानव संसाधन विकास मंत्रालय, भारत सरकार के अधीन एक स्वायत्त संगठन )</div>
+              <div class="cbse-title-en">CENTRAL BOARD OF SECONDARY EDUCATION</div>
+              <div class="cbse-sub-en">(An Autonomous Organisation under the Ministry of Human Resource Development, Govt. of India)</div>
+            </div>
+            <div class="cbse-emblem-right">
+              <img src="assets/img/cbse-logo.png" alt="CBSE Emblem">
+            </div>
+          </div>
+          <div class="cbse-appendix-meta">
+            APPENDIX - IX<br>REVISED FORMAT
+          </div>
+        </header>
 
-      <section class="disclosure-section" id="general"><div class="disclosure-heading"><b>A</b><div><h2>General Information</h2><p>Basic school and affiliation details.</p></div></div><?php disclosure_table($disclosure['general']); ?></section>
+        <h1 class="cbse-main-title">MANDATORY PUBLIC DISCLOSURE</h1>
 
-      <section class="disclosure-section" id="documents"><div class="disclosure-heading"><b>B</b><div><h2>Documents and Information</h2><p>Statutory certificates maintained by the school.</p></div></div><?php disclosure_numbered_table($disclosure['documents'], 'Documents / Information', 'Upload Documents', true); ?></section>
+        <!-- A: GENERAL INFORMATION -->
+        <div class="cbse-section-title">A: GENERAL INFORMATION:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">SL NO.</th>
+                <th style="width:44%;">INFORMATION</th>
+                <th>DETAILS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sno">1</td>
+                <td class="col-info">NAME OF THE SCHOOL</td>
+                <td><?= e(strtoupper($schoolName)) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">2</td>
+                <td class="col-info">AFFILIATION NO.(IF APPLICABLE)</td>
+                <td><?= e($affilNo) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">3</td>
+                <td class="col-info">SCHOOL CODE (IF APPLICABLE)</td>
+                <td><?= e($schoolCode) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">4</td>
+                <td class="col-info">COMPLETE ADDRESS WITH PIN CODE</td>
+                <td><?= e(strtoupper($address)) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">5</td>
+                <td class="col-info">PRINCIPAL NAME &amp; QUALIFICATION:</td>
+                <td><?= e(strtoupper($principal)) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">6</td>
+                <td class="col-info">SCHOOL EMAIL ID</td>
+                <td><?= e($email) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">7</td>
+                <td class="col-info">CONTACT DETAILS (LANDLINE/MOBILE)</td>
+                <td><?= e($contact) ?></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <section class="disclosure-section" id="academics"><div class="disclosure-heading"><b>C</b><div><h2>Result and Academics</h2><p>Academic records and school committees.</p></div></div><?php disclosure_numbered_table($disclosure['academics'], 'Documents / Information', 'Upload Documents', true); ?></section>
+        <!-- B: DOCUMENTS AND INFORMATION -->
+        <div class="cbse-section-title">B: DOCUMENTS AND INFORMATION:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">SL NO.</th>
+                <th>DOCUMENTS/INFORMATION</th>
+                <th class="col-center" style="width:210px;">UPLOAD DOCUMENTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php for ($i = 1; $i <= 8; $i++): ?>
+              <tr>
+                <td class="col-sno"><?= $i ?></td>
+                <td><?= e($primaryDocTitles[$i]) ?></td>
+                <td class="col-center">
+                  <?php if (!empty($primaryDocPdfs[$i])): ?>
+                    <a class="cbse-link-btn" href="<?= e($primaryDocPdfs[$i]) ?>" target="_blank" rel="noopener">
+                      <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                    </a>
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif; ?>
+                </td>
+              </tr>
+              <?php endfor; ?>
+            </tbody>
+          </table>
+        </div>
 
-      <section class="disclosure-section" id="staff"><div class="disclosure-heading"><b>D</b><div><h2>Staff and Teaching</h2><p>Teaching and student-support details.</p></div></div><?php disclosure_numbered_table($disclosure['staff'], 'Information', 'Details', false); ?></section>
+        <!-- Statutory Note -->
+        <div class="cbse-note-box">
+          <strong>NOTE:</strong> THE SCHOOLS NEEDS TO UPLOAD THE SELF ATTESTED COPIES OF ABOVE LISTED DOCUMETNS BY CHAIRMAN/MANAGER/SECRETARY AND PRINCIPAL. IN CASE, IT IS NOTICED AT LATER STAGE THAT UPLOADED DOCUMENTS ARE NOT GENUINE THEN SCHOOL SHALL BE LIABLE FOR ACTION AS PER NORMS.
+        </div>
 
-      <section class="disclosure-section" id="infrastructure"><div class="disclosure-heading"><b>E</b><div><h2>School Infrastructure</h2><p>Learning, wellbeing and activity facilities.</p></div></div><div class="infrastructure-list"><?php foreach ($disclosure['infrastructure'] as $item): ?><span><?= e($item) ?></span><?php endforeach; ?></div></section>
+        <?php if (!empty($additionalDocs)): ?>
+        <div class="cbse-sub-section-title">ADDITIONAL STATUTORY / RELEVANT DOCUMENTS:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S.NO.</th>
+                <th>DOCUMENTS/INFORMATION</th>
+                <th class="col-center" style="width:210px;">UPLOAD DOCUMENTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $adIndex = 0; foreach ($additionalDocs as $ad): $adIndex++; ?>
+              <tr>
+                <td class="col-sno"><?= $adIndex ?></td>
+                <td><?= e(strtoupper($ad['title'])) ?></td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($ad['pdf']) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                  </a>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+        <?php endif; ?>
 
-      <aside class="disclosure-help"><strong>Need assistance?</strong><span>For inspection of records or clarification, please contact the school office during working hours.</span><a class="btn btn-navy" href="contact-us.html">Contact the school</a></aside>
+        <!-- C: RESULT AND ACADEMICS -->
+        <div class="cbse-section-title">C: RESULT AND ACADEMICS:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S.NO.</th>
+                <th>DOCUMENTS/INFORMATION</th>
+                <th class="col-center" style="width:210px;">UPLOAD DOCUMENTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sno">1</td>
+                <td>FEE STRUCTURE OF THE SCHOOL</td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($academicPdfs[1]) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sno">2</td>
+                <td>ANNUAL ACADEMIC CALANDER.</td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($academicPdfs[2]) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sno">3</td>
+                <td>LIST OF SCHOOL MANAGEMENT COMMITTEE (SMC)</td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($academicPdfs[3]) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sno">4</td>
+                <td>LIST OF PARENTS TEACHERS ASSOCIATION (PTA) MEMBERS</td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($academicPdfs[4]) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sno">5</td>
+                <td>LAST THREE-YEAR RESULT OF THE BOARD EXAMINATION (AS PER APPLICABLILITY)</td>
+                <td class="col-center" style="font-weight:700;">AS DETAILED BELOW</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cbse-sub-section-title">RESULT CLASS: X</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S.NO.</th>
+                <th class="col-center">YEAR</th>
+                <th class="col-center">NO. OF REGISTERED STUDENTS</th>
+                <th class="col-center">NO. OF STUDETNS PASSED</th>
+                <th class="col-center">PASS PERCENTAGE</th>
+                <th class="col-center" style="width:160px;">REMARKS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($resultX as $rx): ?>
+              <tr>
+                <td class="col-sno"><?= e($rx['sno']) ?></td>
+                <td class="col-center" style="font-weight:700;"><?= e($rx['year']) ?></td>
+                <td class="col-center"><?= e($rx['registered']) ?></td>
+                <td class="col-center"><?= e($rx['passed']) ?></td>
+                <td class="col-center" style="font-weight:700;"><?= e($rx['pct']) ?></td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW PDF</span>
+                  </a>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cbse-sub-section-title">RESULT CLASS: XII</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S.NO.</th>
+                <th class="col-center">YEAR</th>
+                <th class="col-center">NO. OF REGISTERED STUDENTS</th>
+                <th class="col-center">NO. OF STUDETNS PASSED</th>
+                <th class="col-center">PASS PERCENTAGE</th>
+                <th class="col-center" style="width:160px;">REMARKS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($resultXII as $rx): ?>
+              <tr>
+                <td class="col-sno"><?= e($rx['sno']) ?></td>
+                <td class="col-center" style="font-weight:700;"><?= e($rx['year']) ?></td>
+                <td class="col-center"><?= e($rx['registered']) ?></td>
+                <td class="col-center"><?= e($rx['passed']) ?></td>
+                <td class="col-center" style="font-weight:700;"><?= e($rx['pct']) ?></td>
+                <td class="col-center">
+                  <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
+                    <?= pdf_icon_svg() ?><span>VIEW PDF</span>
+                  </a>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- D: STAFF (TEACHING) -->
+        <div class="cbse-section-title">D: STAFF (TEACHING):</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S. No.</th>
+                <th>INFORMATION</th>
+                <th class="col-center" style="width:180px;">NUMBER/STRENGTH</th>
+                <th>NAME AND QUALIFICATIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sno">1.</td>
+                <td class="col-info">PRINCIPAL</td>
+                <td class="col-center"><?= e($principalCount) ?></td>
+                <td><?= e(strtoupper($principal)) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">2.</td>
+                <td class="col-info">VICE PRINCIPAL</td>
+                <td class="col-center">0</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td class="col-sno">3.</td>
+                <td class="col-info">HEADMISTRESS/HEADMASTER</td>
+                <td class="col-center">-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td class="col-sno">4.</td>
+                <td class="col-info">TOTAL NO. OF TEACHERS</td>
+                <td class="col-center"><?= e($totalTeachers) ?></td>
+                <td>
+                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-link-btn">
+                    <?= pdf_icon_svg() ?><span>UPLOAD LIST/DETAILS</span>
+                  </a>
+                </td>
+              </tr>
+              <tr class="sub-level">
+                <td></td>
+                <td class="indent-sub">▪ PGT</td>
+                <td class="col-center"><?= e($pgtCount) ?></td>
+                <td>
+                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
+                    NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
+                  </a>
+                </td>
+              </tr>
+              <tr class="sub-level">
+                <td></td>
+                <td class="indent-sub">▪ TGT</td>
+                <td class="col-center"><?= e($tgtCount) ?></td>
+                <td>
+                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
+                    NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
+                  </a>
+                </td>
+              </tr>
+              <tr class="sub-level">
+                <td></td>
+                <td class="indent-sub">▪ PRT</td>
+                <td class="col-center"><?= e($prtCount) ?></td>
+                <td>
+                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
+                    NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sno">5.</td>
+                <td class="col-info">TEACHERS SECTION RATIO</td>
+                <td class="col-center"><?= e($ratio) ?></td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td class="col-sno">6.</td>
+                <td class="col-info">DETAILS OF SPECIAL EDUCATOR</td>
+                <td class="col-center">1</td>
+                <td><?= e(strtoupper($specialEducator)) ?></td>
+              </tr>
+              <tr>
+                <td class="col-sno">7.</td>
+                <td class="col-info">DETAILS OF COUNSELLOR &amp; WELLNESS TEACHER</td>
+                <td class="col-center">1</td>
+                <td><?= e(strtoupper($counsellor)) ?></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- E: SCHOOL INFRASTRUCTURE -->
+        <div class="cbse-section-title">E: SCHOOL INFRASTRUCTURE:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S. No.</th>
+                <th style="width:55%;">INFORMATION</th>
+                <th>DETAILS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sno">1.</td>
+                <td class="col-info">TOTAL CAMPUS AREA OF THE SCHOOL (IN SQR MTR)</td>
+                <td>10117 SQ MTR (2.5 ACRES)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">2.</td>
+                <td class="col-info">NO. AND SIZE OF THE CLASSSROOM (IN SQR MTR)</td>
+                <td>42 CLASSROOMS (55 SQ MTR EACH)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">3.</td>
+                <td class="col-info">NO. AND SIZE OF LABORATORIES INCLUDING COMPUTER LABS (IN SQR MTR)</td>
+                <td>5 LABORATORIES (PHYSICS, CHEMISTRY, BIOLOGY, COMPOSITE SCIENCE, COMPUTER LAB - 75 SQ MTR EACH)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">4.</td>
+                <td class="col-info">NO. AND SIZE OF LIBRARY (IN SQR MTR)</td>
+                <td>1 LIBRARY (120 SQ MTR)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">5.</td>
+                <td class="col-info">INTERNET FACILITY (YES/NO)</td>
+                <td>YES (HIGH-SPEED BROADBAND &amp; WI-FI ACROSS CAMPUS)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">6.</td>
+                <td class="col-info">NO. OF GIRLS TOILETS</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td class="col-sno">7.</td>
+                <td class="col-info">NO. OF BOYS TOILETS</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td class="col-sno">8.</td>
+                <td class="col-info">NO. OF CWSN TOILETS</td>
+                <td>2 (BARRIER-FREE TOILETS FOR CHILDREN WITH SPECIAL NEEDS)</td>
+              </tr>
+              <tr>
+                <td class="col-sno">9.</td>
+                <td class="col-info">LINK OF YOU TUBE VIDEO OF THE INSPECTION OF SCHOOL COVERING THE INFRASTRUCTURE OPF THE SCHOOL</td>
+                <td>
+                  <a href="https://www.youtube.com/@maxinternationalschool2041" target="_blank" rel="noopener" class="cbse-text-link">
+                    PROVIDE LINK (WATCH VIDEO)
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cbse-doc-footer">
+          <span>Max International School, Safidon Road, Assandh, Karnal (HR)</span>
+          <span>CBSE Appendix-IX Mandatory Public Disclosure</span>
+        </div>
+
+      </div>
     </div>
   </main>
 
@@ -285,7 +806,7 @@ function disclosure_table(array $rows): void {
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>

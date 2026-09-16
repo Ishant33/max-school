@@ -27,6 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+     replaced photo is in place before the browser requests the original. -->
+<script src="assets/js/site-images.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -101,13 +104,14 @@
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li><a href="career.html">Career</a></li>
@@ -158,7 +162,10 @@
           <span class="eyebrow">Feedback / Enquiry</span>
           <h2>Send Us a Message</h2>
         </div>
-        <div class="form-box">
+        <div class="form-box" id="enquiry-form">
+          <!-- Shown after a redirect back from backend/form_submit.php, which
+               appends ?enquiry=sent|invalid|error. Hidden until then. -->
+          <div id="enquiry-banner" class="form-banner" role="status" hidden></div>
           <form method="post" action="backend/form_submit.php">
             <label>Full Name</label>
             <input type="text" name="name" placeholder="Your name" required>
@@ -175,6 +182,12 @@
             </select>
             <label>Message</label>
             <textarea name="message" placeholder="Tell us how we can help..."></textarea>
+            <!-- Honeypot: hidden from people, tempting to bots. A filled value
+                 makes form_submit.php silently discard the submission. -->
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <button type="submit" class="btn btn-orange" style="margin-top:20px; width:100%; justify-content:center;">Submit Enquiry</button>
           </form>
         </div>
@@ -238,7 +251,7 @@
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>
@@ -274,5 +287,28 @@
   </div>
 <script src="assets/js/menu.js"></script>
 <script src="assets/js/chatbot.js"></script>
+<script>
+  // Turn the ?enquiry= flag left by form_submit.php into a visible banner, then
+  // strip it from the URL so a refresh does not show the message a second time.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var status = params.get('enquiry');
+    if (!status) return;
+    var banner = document.getElementById('enquiry-banner');
+    if (!banner) return;
+    var messages = {
+      sent: ['ok', 'Thank you — your enquiry has reached us. We will be in touch soon.'],
+      invalid: ['error', 'Please add your name and phone number so we can reply.'],
+      error: ['error', 'Something went wrong saving your enquiry. Please try again or call us.']
+    };
+    var chosen = messages[status] || messages.error;
+    banner.classList.add(chosen[0] === 'ok' ? 'is-ok' : 'is-error');
+    banner.textContent = chosen[1];
+    banner.hidden = false;
+    if (window.history.replaceState) {
+      window.history.replaceState({}, '', window.location.pathname + '#enquiry-form');
+    }
+  })();
+</script>
 </body>
 </html>

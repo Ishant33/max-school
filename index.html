@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://www.maxinternationalschool.com/">
 <link rel="icon" href="assets/img/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/logo.png">
-<meta name="theme-color" content="#0B2E59">
+<meta name="theme-color" content="#0B2347">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Max International School">
 <meta property="og:title" content="Home — Max International School">
@@ -25,11 +25,18 @@
 <!-- meta:end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Kaushan+Script&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Applies photo swaps made in the CMS. Loaded here, not deferred, so a
+     replaced photo is in place before the browser requests the original. -->
+<script src="assets/js/site-images.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <!-- ==========================================================================
+       TOP BAR
+       ========================================================================== -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
@@ -53,6 +60,10 @@
       </div>
     </div>
   </div>
+
+  <!-- ==========================================================================
+       MAIN NAVIGATION
+       ========================================================================== -->
   <header class="main-nav">
     <div class="container nav-inner">
       <a href="index.html" class="logo-wrap">
@@ -82,9 +93,12 @@
           <li>
             <a href="academics.html">Academics <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="academics.html#planner">Yearly Planner</a>
+              <a href="academics.html#wings">Three Wings (Junior, Primary, Senior)</a>
+              <a href="promax.html">PRO Max Classes</a>
+              <a href="academics.html#how-we-teach">How We Teach</a>
               <a href="academics.html#curriculum">Curriculum</a>
-              <a href="academics.html#pedagogy">Pedagogy</a>
+              <a href="academics.html#beyond">Beyond Textbook</a>
+              <a href="academics.html#planner">Yearly Planner</a>
             </div>
           </li>
           <li>
@@ -101,13 +115,14 @@
               <a href="gallery.html#notif">Events &amp; Notifications</a>
             </div>
           </li>
-          <li><a href="admission.html#promax">Pro Max</a></li>
+          <li><a href="promax.html">Pro Max</a></li>
           <li>
             <a href="admission.html">Admission <span class="car">▾</span></a>
             <div class="dropdown">
-              <a href="admission.html#requisites">Requisites &amp; Procedure</a>
-              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#process">Admission Process</a>
               <a href="admission.html#apply">Apply Now</a>
+              <a href="admission.html#fees">Fee Structure</a>
+              <a href="admission.html#refund-policy">Refund Policy</a>
             </div>
           </li>
           <li><a href="career.html">Career</a></li>
@@ -116,210 +131,654 @@
         </ul>
       </nav>
       <div class="nav-cta">
-        <a href="#" class="login-pill">Log In <span class="car">▾</span></a>
-        <a href="admission.html" class="btn btn-orange">Apply Now</a>
+        <a href="admin.html" class="login-pill">Log In</a>
+        <a href="admission.html#apply" class="gc-btn-pill">
+          <span>Apply Now</span>
+          <span class="btn-arrow-circle">→</span>
+        </a>
         <div class="burger"><span></span><span></span><span></span></div>
       </div>
     </div>
   </header>
 
-  <section id="main-content" tabindex="-1" class="campus-photo-section" aria-label="Max International School campus">
+  <!-- ==========================================================================
+       HERO SECTION WITH DYNAMIC FLOATING MOSAIC GRID
+       ========================================================================== -->
+  <section id="main-content" tabindex="-1" class="gc-hero" aria-label="Welcome to Max International School">
     <div class="container">
-      <div class="campus-photo-wrap">
-        <video autoplay muted loop playsinline preload="metadata"
-               poster="assets/img/school-building-1.jpg"
-               aria-label="Max International School campus video">
-          <source src="assets/video/titlevideoresized-fast.mp4" type="video/mp4">
-          Your browser does not support the campus video.
-        </video>
-        <div class="campus-photo-caption">
-          <span class="eyebrow">Our Campus</span>
-          <h2>Welcome to Max International School</h2>
+      <div class="gc-hero-headline-wrap">
+        <div class="gc-hero-tag">🌟 Affiliated to CBSE, New Delhi · Assandh, Karnal</div>
+        <h1 class="gc-hero-title">
+          Building Character. <br>Inspiring <span class="hl">Excellence.</span>
+        </h1>
+        <p class="gc-hero-subtitle">
+          Max International School blends traditional Gurukul discipline with modern pedagogy — balanced education, hidden talents unlocked, cutting-edge labs, and quality learning for every child.
+        </p>
+        <div class="gc-hero-cta-group">
+          <a href="admission.html" class="gc-btn-pill" style="font-size: 16px; padding: 14px 32px;">
+            <span>Apply for 2026–27 Batch</span>
+            <span class="btn-arrow-circle">→</span>
+          </a>
+          <a href="#campus-tour" class="gc-btn-secondary">
+            <span>Take a Virtual Tour</span>
+            <span>👁️</span>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="hero" id="home" hidden aria-hidden="true">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">Affiliated to CBSE, New Delhi · Assandh, Karnal</span>
-        <h1>Building Character. <span class="hl">Inspiring Excellence.</span></h1>
-        <p class="lead">Max International School blends traditional Gurukul discipline with modern pedagogy — balanced education, hidden talents unlocked, and quality learning for every child.</p>
-        <div class="hero-actions">
-          <a href="admission.html" class="btn btn-orange">Apply for 2026–27 Batch</a>
-          <a href="about-us.html#infra" class="btn btn-outline">Take a Virtual Tour</a>
-        </div>
-        <div class="hero-stats">
-          <div><b>2019</b><span>Serving Assandh Since</span></div>
-          <div><b>CBSE</b><span>New Delhi Affiliated</span></div>
-          <div><b>360°</b><span>Campus Virtual Tour</span></div>
-          <div><b>Max</b><span>Junior Wing Too</span></div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <span class="tag">Admissions Open</span>
-        <h4>Max Ultimate Scholarship Test 2026</h4>
-        <p>Scholarships up to 90%, in association with Physics Wallah Vidyapeeth. Limited seats for the 2026–27 batch.</p>
-        <div class="mini-row">
-          <div class="mini"><b>90%</b><span>Max Scholarship</span></div>
-          <div class="mini"><b>3</b><span>Test Dates</span></div>
-          <div class="mini"><b>K–12</b><span>All Grades</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="arch-divider">
-      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
-        <path d="M0,60 L0,30 Q50,0 100,30 T200,30 T300,30 T400,30 T500,30 T600,30 T700,30 T800,30 T900,30 T1000,30 T1100,30 T1200,30 L1200,60 Z" fill="#FBF9F5"/>
-      </svg>
-    </div>
-  </section>
-
-  <section class="section" id="whymax">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow why-max-eyebrow">Why Max International</span>
-        <h2>An education that builds character, not just marks</h2>
-        <p>Three commitments guide everything we do on campus — rooted in Gurukul values, delivered through modern classrooms.</p>
-      </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="num">01</div>
-          <h3>Balanced Education</h3>
-          <p>We pair traditional Gurukul discipline and ethics with contemporary teaching methods — so students grow academically while staying rooted in strong character and values.</p>
-        </div>
-        <div class="why-card">
-          <div class="num">02</div>
-          <h3>Hidden Talents, Unleashed</h3>
-          <p>Clubs, mentorship and a wide range of activities give every child room to explore sport, art and academics beyond the textbook — and discover what they're genuinely good at.</p>
-        </div>
-        <div class="why-card">
-          <div class="num">03</div>
-          <h3>Quality, Personalised Learning</h3>
-          <p>An experienced faculty and an indigenously designed curriculum give each student the personal attention needed to build critical thinking and a lasting love of learning.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt school-showcase" id="about">
-    <div class="container about-wrap">
-      <div class="about-imgrow">
-        <div class="ph"><img src="assets/img/school-building-1.jpg" alt="Max International School campus" loading="lazy" decoding="async"></div>
-        <div class="ph"><img src="assets/img/School%20Images/Computer%20lab.jpg" alt="Students learning in the computer lab" loading="lazy" decoding="async"></div>
-      </div>
-      <div class="about-text school-focus">
-        <div class="badge-row"><span>CBSE Affiliated</span><span>Since 2019</span></div>
-        <h2>A place to learn, explore and grow</h2>
-        <div class="focus-copy">
-          <p>At Max International School, every learner is encouraged to build confidence, curiosity and strong values through meaningful classroom experiences.</p>
-          <div class="focus-points">
-            <span>Modern learning spaces</span>
-            <span>Individual attention</span>
-            <span>Sports, arts &amp; activities</span>
-            <span>Safe, supportive campus</span>
+      <!-- Floating Mosaic Cards (Grand Columbus Style) -->
+      <div class="gc-mosaic-grid">
+        <!-- Col 1 -->
+        <div class="gc-mosaic-col">
+          <div class="gc-mosaic-card">
+            <img src="assets/img/school-building-1.jpg" alt="Max International School Campus Building" fetchpriority="high">
+            <div class="card-caption">
+              <h4>Inspire a child’s future.</h4>
+            </div>
+          </div>
+          <div class="gc-card-navy">
+            <h3>100%</h3>
+            <p>CBSE-Affiliated Comprehensive Curriculum</p>
           </div>
         </div>
-        <p>Max International School is run as a non-profit institution with charitable status — every rupee generated is reinvested into better infrastructure, stronger academics and richer extracurricular facilities.</p>
-        <p>Deserving children receive generous financial assistance, in line with our objective of value-added, mass-accessible education. Our indigenously designed curriculum offers personalised attention to each child's physical, intellectual, emotional and social development.</p>
-        <ul class="about-list">
-          <li>Financial aid for deserving students</li>
-          <li>Indigenous, personalised curriculum</li>
-          <li>Stress-free learning environment</li>
-          <li>Modern labs &amp; Gurukul discipline</li>
-        </ul>
-        <a href="about-us.html" class="btn btn-navy" style="margin-top:24px;">Read Full Story</a>
+
+        <!-- Col 2 -->
+        <div class="gc-mosaic-col">
+          <div class="gc-mosaic-card">
+            <img src="assets/img/School%20Images/MAX%20Students.jpg" alt="Max International School Students">
+            <div class="card-caption">
+              <h4>Joyful, values-based learning environment.</h4>
+            </div>
+          </div>
+          <div class="gc-card-teal">
+            <h3>50+</h3>
+            <p>Dedicated educators nurturing young minds every day</p>
+          </div>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="gc-mosaic-col">
+          <div class="gc-card-orange">
+            <h3>90%</h3>
+            <p>Max Ultimate Scholarship in assoc. with Physics Wallah</p>
+          </div>
+          <div class="gc-mosaic-card">
+            <img src="assets/img/School%20Images/Computer%20lab.jpg" alt="Students in Computer Lab">
+            <div class="card-caption">
+              <h4>Future-Ready STEM &amp; Digital Hubs</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 4 -->
+        <div class="gc-mosaic-col">
+          <div class="gc-mosaic-card">
+            <img src="assets/img/School%20Images/Student%20playing%20in%20Playground.jpg" alt="Students on School Playground">
+            <div class="card-caption">
+              <h4>Sports, Skating &amp; Gurukul Discipline</h4>
+            </div>
+          </div>
+          <div class="gc-mosaic-card">
+            <img src="assets/img/School%20Images/student%20doing%20Painting.jpg" alt="Student Painting in Art Class">
+            <div class="card-caption">
+              <h4>Arts, Music &amp; Creative Discovery</h4>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="leadership">
+  <!-- ==========================================================================
+       RUNNING MARQUEE TICKER (GRAND COLUMBUS STYLE)
+       ========================================================================== -->
+  <section class="gc-marquee-section" aria-label="Highlights ticker">
+    <div class="gc-marquee-track">
+      <div class="gc-marquee-content">
+        <span>Guiding Every Learner to their True North</span><span class="star">✦</span>
+        <span>Gurukul Discipline with Modern Pedagogy</span><span class="star">✦</span>
+        <span>Admissions Open for 2026–27 Batch</span><span class="star">✦</span>
+        <span>In-House Pro-Max NEET, JEE &amp; NDA Coaching</span><span class="star">✦</span>
+        <span>Excellence in Academics &amp; Sports</span><span class="star">✦</span>
+      </div>
+      <div class="gc-marquee-content">
+        <span>Guiding Every Learner to their True North</span><span class="star">✦</span>
+        <span>Gurukul Discipline with Modern Pedagogy</span><span class="star">✦</span>
+        <span>Admissions Open for 2026–27 Batch</span><span class="star">✦</span>
+        <span>In-House Pro-Max NEET, JEE &amp; NDA Coaching</span><span class="star">✦</span>
+        <span>Excellence in Academics &amp; Sports</span><span class="star">✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       "WHY MAX?" & ANIMATED LIVE COUNTERS SECTION
+       ========================================================================== -->
+  <section class="gc-about-section" id="whymax">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Meet Our Team</span>
-        <h2>Visionary leadership behind Max International</h2>
-      </div>
-      <div class="leader-grid">
-        <a class="leader-card" href="about-us.html#chairman" aria-label="Read the Chairman's message">
-          <div class="leader-photo"><img src="assets/img/Faculty%20images/Chairman.jpg" alt="CA Mukesh Bansal, Chairman" loading="lazy" decoding="async"></div>
-          <div class="leader-info"><h4>CA Mukesh Bansal</h4><span>Chairman</span></div>
-        </a>
-        <a class="leader-card" href="about-us.html#secretary" aria-label="Read the Secretary's message">
-          <div class="leader-photo"><img src="assets/img/Faculty%20images/secretary.jpg" alt="Mr. Kapil Gupta, Secretary" loading="lazy" decoding="async"></div>
-          <div class="leader-info"><h4>Mr. Kapil Gupta</h4><span>Secretary</span></div>
-        </a>
-        <a class="leader-card leader-card--principal" href="about-us.html#principal" aria-label="Read the Principal's message">
-          <div class="leader-photo"><img src="assets/img/Faculty%20images/principal.jpg" alt="Ms. Sonika Rai, Principal" loading="lazy" decoding="async"></div>
-          <div class="leader-info"><h4>Ms. Sonika Rai</h4><span>Principal</span></div>
-        </a>
+      <div class="gc-split-grid">
+        <!-- Left: Philosophy & Live Animated Counters -->
+        <div>
+          <span class="gc-section-subhead">Why Max International</span>
+          <h2 class="gc-section-title">Where Education builds character, not just marks</h2>
+          <p class="gc-lead-text">
+            A school where every child is known by name, stretched well beyond the syllabus, and prepared for the world they will step into.
+            <br><br>
+            Max International School is run as a non-profit institution with charitable status — every rupee generated is reinvested into better infrastructure, stronger academics, and richer extracurricular facilities.
+          </p>
+
+          <!-- 4 Interactive Counters -->
+          <div class="gc-counter-grid">
+            <div class="gc-counter-box">
+              <div class="gc-counter-number">
+                <span class="gc-counter-val" data-target="1200">0</span>
+                <span class="plus">+</span>
+              </div>
+              <div class="gc-counter-label">Students nurtured with academic &amp; co-curricular brilliance</div>
+            </div>
+
+            <div class="gc-counter-box">
+              <div class="gc-counter-number">
+                <span class="gc-counter-val" data-target="100">0</span>
+                <span class="plus">%</span>
+              </div>
+              <div class="gc-counter-label">CBSE Board Exam pass rate &amp; distinguished honors</div>
+            </div>
+
+            <div class="gc-counter-box">
+              <div class="gc-counter-number">
+                <span class="gc-counter-val" data-target="15">0</span>
+                <span class="plus">+</span>
+              </div>
+              <div class="gc-counter-label">Clubs, sports &amp; holistic self-development activities</div>
+            </div>
+
+            <div class="gc-counter-box">
+              <div class="gc-counter-number">
+                <span class="gc-counter-val" data-target="5">0</span>
+                <span class="plus">+</span>
+                <span style="font-size: 15px; margin-left: 4px; color: var(--navy); font-weight: 700;">Acres</span>
+              </div>
+              <div class="gc-counter-label">Eco-friendly campus with modern smart facilities</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3 Progressive Steps -->
+        <div class="gc-steps-wrap">
+          <div class="gc-step-card">
+            <div class="gc-step-num">01</div>
+            <div class="gc-step-content">
+              <h4>Where Every Child Matters</h4>
+              <p>Every child is unique. At Max International School, we celebrate individuality while nurturing a sense of belonging. Our teachers strive to understand every learner, identify their strengths and provide opportunities for them to grow at their own pace.</p>
+              <a href="about-us.html#philosophy" class="gc-step-link">Learn more <span>→</span></a>
+            </div>
+          </div>
+
+          <div class="gc-step-card">
+            <div class="gc-step-num">02</div>
+            <div class="gc-step-content">
+              <h4>Beyond Academics</h4>
+              <p>Education comes alive when children learn by doing. Our students are encouraged to participate in sports, performing arts, clubs, competitions, community initiatives, leadership programmes and experiential learning activities.</p>
+              <a href="beyond-activities.html" class="gc-step-link">Learn more <span>→</span></a>
+            </div>
+          </div>
+
+          <div class="gc-step-card">
+            <div class="gc-step-num">03</div>
+            <div class="gc-step-content">
+              <h4>Preparing Learners for Tomorrow</h4>
+              <p>The world is changing rapidly. We therefore focus on developing future-ready skills, digital literacy, problem-solving abilities, collaboration and adaptability, while keeping our students firmly rooted in values and culture.</p>
+              <a href="about-us.html#mission" class="gc-step-link">Learn more <span>→</span></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section testi-strip">
+  <!-- ==========================================================================
+       "WHAT SETS MAX APART" (6-CARD FEATURE GRID)
+       ========================================================================== -->
+  <section class="gc-features-section" id="features">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" style="color:var(--orange-light)">Parents' Views</span>
-        <h2>What our school community says</h2>
-        <p>A few words from parents who've watched their children grow with us.</p>
+      <div class="gc-features-head">
+        <span class="gc-section-subhead">Why Choose Max</span>
+        <h2 class="gc-section-title">What Sets Max International Apart</h2>
+        <p>A warm, inclusive school culture centered on individual attention, robust moral values, and modern pedagogy. Every classroom is a sanctuary of trust, and every mentor a partner in your child's journey.</p>
       </div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <div class="quote-mark">"</div>
-          <p>I have never seen such an amazing teaching and learning environment.</p>
-          <div class="who"><div class="av">CP</div><div><b>Mr. Charan Pal</b><span>Parent</span></div></div>
+
+      <div class="gc-features-grid">
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">📚</div>
+          <h4>CBSE Excellence, Global Edge</h4>
+          <p>Uncompromising academic rigor based on NCERT curriculum, enhanced with modern interactive learning and international perspectives.</p>
         </div>
-        <div class="testi-card">
-          <div class="quote-mark">"</div>
-          <p>We are fully satisfied with the school's safety standards.</p>
-          <div class="who"><div class="av">GS</div><div><b>Mr. Gurjant Singh</b><span>Parent</span></div></div>
+
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">🎯</div>
+          <h4>Pro-Max In-House Coaching</h4>
+          <p>Targeted training for NEET, JEE, and NDA led by expert faculty in association with Physics Wallah Vidyapeeth.</p>
         </div>
-        <div class="testi-card">
-          <div class="quote-mark">"</div>
-          <p>Highly learned and experienced teachers with ultra-modern infrastructure.</p>
-          <div class="who"><div class="av">JS</div><div><b>Mr. Jasbir Singh</b><span>Parent</span></div></div>
+
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">🔬</div>
+          <h4>State-of-the-Art Labs</h4>
+          <p>Advanced Physics, Chemistry, Biology, and Computer hubs where concepts leap from textbooks into real hands-on discovery.</p>
+        </div>
+
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">🏅</div>
+          <h4>Sports, Skating &amp; Yoga</h4>
+          <p>Full-fledged playgrounds, dedicated rink for roller skating, daily yoga, athletics, and chess fostering mental &amp; physical grit.</p>
+        </div>
+
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">🤝</div>
+          <h4>Personalized Mentorship</h4>
+          <p>Every student is known by name. Fostering confidence and empathy without burdensome academic anxiety.</p>
+        </div>
+
+        <div class="gc-feature-card">
+          <div class="gc-feature-icon">🌱</div>
+          <h4>Value-Driven &amp; Charitable</h4>
+          <p>Run by a non-profit trust where revenue is reinvested into campus facilities, alongside scholarships reaching up to 90%.</p>
+        </div>
+      </div>
+
+      <div class="gc-center-cta">
+        <a href="admission.html" class="gc-btn-pill" style="background: var(--orange);">
+          <span>Schedule a Campus Visit</span>
+          <span class="btn-arrow-circle">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       "21ST CENTURY READY" ACADEMIC WINGS
+       ========================================================================== -->
+  <section class="gc-academics-section" id="academics">
+    <div class="container">
+      <div class="gc-academics-grid">
+        <!-- Left: Image with floating badge -->
+        <div class="gc-academics-image-wrap">
+          <img src="assets/img/School%20Images/Library.jpg" alt="Students in the school library" loading="lazy" decoding="async">
+          <div class="gc-academics-floating-badge">
+            <h5>CBSE Affiliated</h5>
+            <span>Complete K–12 Comprehensive Wings</span>
+          </div>
+        </div>
+
+        <!-- Right: 4 Academic Stages -->
+        <div>
+          <span class="gc-section-subhead">Academics</span>
+          <h2 class="gc-section-title">21st Century Ready Education</h2>
+          <p class="gc-lead-text" style="margin-bottom: 20px;">
+            Education at Max International School instills critical thinking, moral integrity, and curiosity. We prepare students not just to succeed in tests, but to excel in life.
+          </p>
+
+          <div class="gc-wings-list">
+            <div class="gc-wing-item active">
+              <div class="gc-wing-header">
+                <h4>Foundational Wing</h4>
+                <span class="gc-wing-tag">Nursery – Grade 2</span>
+              </div>
+              <p>Where curiosity ignites! Play-based, experiential learning designed to build solid numeracy, language confidence, and essential social skills.</p>
+            </div>
+
+            <div class="gc-wing-item">
+              <div class="gc-wing-header">
+                <h4>Preparatory Wing</h4>
+                <span class="gc-wing-tag">Grade 3 – Grade 5</span>
+              </div>
+              <p>Building confidence and conceptual clarity. Encourages active exploration, creative thinking, inquiry, and collaborative activities.</p>
+            </div>
+
+            <div class="gc-wing-item">
+              <div class="gc-wing-header">
+                <h4>Middle Wing</h4>
+                <span class="gc-wing-tag">Grade 6 – Grade 8</span>
+              </div>
+              <p>Molding independent thinkers through hands-on science experiments, mathematics labs, leadership exercises, and problem-solving projects.</p>
+            </div>
+
+            <div class="gc-wing-item">
+              <div class="gc-wing-header">
+                <h4>Secondary &amp; Senior Secondary (Pro-Max)</h4>
+                <span class="gc-wing-tag">Grade 9 – Grade 12</span>
+              </div>
+              <p>Rigorous CBSE board exam excellence paired with in-school coaching for competitive entrances (NEET / JEE / NDA) to unlock career dreams.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ==========================================================================
+       "START YOUR JOURNEY" ADMISSIONS FLOW (WATERMARKED 01-04)
+       ========================================================================== -->
+  <section class="gc-admissions-section" id="admission">
+    <div class="container">
+      <div class="gc-admissions-head">
+        <span class="gc-section-subhead">Admissions 2026–2027</span>
+        <h2 class="gc-section-title">Start Your Child’s Journey with Us</h2>
+        <p>Ensuring your child embarks on their educational journey with a clear, transparent, and supportive admissions process.</p>
+      </div>
+
+      <div class="gc-admissions-grid">
+        <div class="gc-admission-card">
+          <div>
+            <div class="gc-admission-watermark">01</div>
+            <h3>Admission Policy</h3>
+            <p>MIS maintains a clear, merit-guided, and transparent admission policy. Class seats are intentionally limited to preserve small student-to-mentor ratios.</p>
+          </div>
+          <a href="admission.html#process" class="gc-admission-link">Learn more <span>→</span></a>
+        </div>
+
+        <div class="gc-admission-card">
+          <div>
+            <div class="gc-admission-watermark">02</div>
+            <h3>Registration &amp; Tour</h3>
+            <p>Submit an enquiry online or visit our Assandh campus. Our experienced counselors walk you through the facilities, teachers, and curriculum.</p>
+          </div>
+          <a href="admission.html#apply" class="gc-admission-link">Apply online <span>→</span></a>
+        </div>
+
+        <div class="gc-admission-card">
+          <div>
+            <div class="gc-admission-watermark">03</div>
+            <h3>Required Documents</h3>
+            <ul>
+              <li>Student’s Birth Certificate (Photocopy)</li>
+              <li>Aadhaar Cards (Student &amp; Parents)</li>
+              <li>Previous Class Final Marksheet</li>
+              <li>Original Transfer Certificate / SLC (with SRN)</li>
+              <li>Passport-sized Photographs</li>
+            </ul>
+          </div>
+          <a href="admission.html#requisites" class="gc-admission-link">View checklist <span>→</span></a>
+        </div>
+
+        <div class="gc-admission-card">
+          <div>
+            <div class="gc-admission-watermark">04</div>
+            <h3>Transparent Fees</h3>
+            <p>We uphold a genuine, non-profit, and value-driven fee structure with zero hidden levies. Generous scholarships up to 90% available via MUST 2026.</p>
+          </div>
+          <a href="admission.html#fees" class="gc-admission-link">Fee structure <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       360° VIRTUAL CAMPUS TOUR BANNER
+       ========================================================================== -->
+  <section class="gc-virtual-tour-section" id="campus-tour">
+    <div class="container">
+      <div class="gc-tour-content">
+        <div class="gc-pulse-play-wrap">
+          <a href="about-us.html#infra" class="gc-pulse-play-btn" aria-label="Open 360 degree virtual tour">▶</a>
+        </div>
+        <h2 class="gc-section-title">Discover Our Campus Virtually</h2>
+        <p>Step inside Max International School and explore our smart classrooms, science labs, and vibrant sports grounds right from your home.</p>
+        <a href="about-us.html#infra" class="gc-btn-pill" style="font-size: 16px; padding: 14px 32px;">
+          <span>Take A 360° Virtual Tour</span>
+          <span class="btn-arrow-circle">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       "THE MAX GUILD" LEADERSHIP SHOWCASE
+       ========================================================================== -->
+  <section class="gc-guild-section" id="leadership">
+    <div class="container">
+      <div class="gc-guild-head">
+        <span class="gc-section-subhead">Faculty &amp; Leadership</span>
+        <h2 class="gc-section-title">Visionary Leadership Behind Max International</h2>
+        <p>A dedicated team of visionary mentors united by passion, pedagogical excellence, and genuine care for every student.</p>
+      </div>
+
+      <div class="gc-guild-grid">
+        <div class="gc-leader-card">
+          <div class="gc-leader-img-box">
+            <img src="assets/img/Faculty%20images/Chairman.jpg" alt="CA Mukesh Bansal, Chairman" loading="lazy" decoding="async">
+          </div>
+          <div class="gc-leader-info">
+            <h4>CA Mukesh Bansal</h4>
+            <span class="designation">Chairman</span>
+          </div>
+        </div>
+
+        <div class="gc-leader-card">
+          <div class="gc-leader-img-box">
+            <img src="assets/img/Faculty%20images/secretary.jpg" alt="Mr. Kapil Gupta, Secretary" loading="lazy" decoding="async">
+          </div>
+          <div class="gc-leader-info">
+            <h4>Mr. Kapil Gupta</h4>
+            <span class="designation">Secretary</span>
+          </div>
+        </div>
+
+        <div class="gc-leader-card">
+          <div class="gc-leader-img-box">
+            <img src="assets/img/Faculty%20images/principal.jpg" alt="Ms. Sonika Rai, Principal" loading="lazy" decoding="async">
+          </div>
+          <div class="gc-leader-info">
+            <h4>Ms. Sonika Rai</h4>
+            <span class="designation">Principal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       "WHERE LEARNING MEETS LIVING" CAMPUS LIFE GALLERY
+       ========================================================================== -->
+  <section class="gc-gallery-section">
+    <div class="container">
+      <div style="text-align: center; max-width: 680px; margin: 0 auto;">
+        <span class="gc-section-subhead">Campus Life</span>
+        <h2 class="gc-section-title">Where Learning Meets Living</h2>
+        <p style="color: var(--muted);">From spiritual morning assemblies to chess battles, science discoveries, and yoga workouts—every day shapes confidence and character.</p>
+      </div>
+
+      <div class="gc-gallery-grid">
+        <div class="gc-gallery-item">
+          <img src="assets/img/School%20Images/Hawan.jpg" alt="Students participating in morning assembly" loading="lazy" decoding="async">
+          <div class="gc-gallery-overlay">
+            <span>Gurukul Heritage &amp; Values</span>
+          </div>
+        </div>
+
+        <div class="gc-gallery-item">
+          <img src="assets/img/School%20Images/Chess.jpg" alt="Students playing chess" loading="lazy" decoding="async">
+          <div class="gc-gallery-overlay">
+            <span>Strategic Chess &amp; Mind Sports</span>
+          </div>
+        </div>
+
+        <div class="gc-gallery-item">
+          <img src="assets/img/School%20Images/Yoga.jpg" alt="Students in yoga session" loading="lazy" decoding="async">
+          <div class="gc-gallery-overlay">
+            <span>Yoga &amp; Mindful Living</span>
+          </div>
+        </div>
+
+        <div class="gc-gallery-item">
+          <img src="assets/img/School%20Images/Science%20lab.jpg" alt="Students carrying out experiment in science lab" loading="lazy" decoding="async">
+          <div class="gc-gallery-overlay">
+            <span>Hands-on Science Labs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       QUICK ADMISSION & NEWSLETTER ENQUIRY FORM
+       ========================================================================== -->
+  <section class="gc-connect-section">
+    <div class="container">
+      <div class="gc-connect-box">
+        <div class="gc-connect-form-side">
+          <h2>Stay Connected with Our School Community</h2>
+          <p>Receive admission notifications, academic updates, and event highlights directly from our admissions team.</p>
+
+          <form id="gcEnquiryForm">
+            <div class="gc-form-grid">
+              <div class="gc-form-group">
+                <label class="gc-form-label" for="parentName">Parent's Full Name</label>
+                <input class="gc-input" type="text" id="parentName" placeholder="e.g. Rajesh Sharma" required>
+              </div>
+
+              <div class="gc-form-group">
+                <label class="gc-form-label" for="parentPhone">Mobile Number</label>
+                <input class="gc-input" type="tel" id="parentPhone" placeholder="e.g. 9876543210" required>
+              </div>
+
+              <div class="gc-form-group">
+                <label class="gc-form-label" for="studentClass">Grade / Class Applying For</label>
+                <input class="gc-input" type="text" id="studentClass" placeholder="e.g. Grade 6 or Kindergarten" required>
+              </div>
+
+              <div class="gc-form-group">
+                <label class="gc-form-label" for="academicYear">Academic Year</label>
+                <input class="gc-input" type="text" id="academicYear" value="2026–2027" readonly style="opacity: 0.85;">
+              </div>
+
+              <div class="gc-form-group full">
+                <button type="submit" class="gc-submit-btn">Submit Admission Enquiry</button>
+              </div>
+            </div>
+          </form>
+
+          <div id="gcFormFeedback" style="display: none; margin-top: 18px; padding: 12px 18px; background: rgba(1, 158, 137, 0.25); border-left: 4px solid var(--teal); border-radius: 6px; font-size: 14px;">
+            ✅ Thank you! Your enquiry has been recorded. Our admissions counselor will contact you shortly.
+          </div>
+        </div>
+
+        <div class="gc-connect-img-side">
+          <img src="assets/img/School%20Images/Students.jpg" alt="Max International School Students" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PARENT TESTIMONIALS
+       ========================================================================== -->
+  <section class="gc-testimonials-section" id="testimonials">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <span class="gc-section-subhead">Testimonials</span>
+        <h2 class="gc-section-title">What Our Parents Say</h2>
+        <p style="color: var(--muted);">Real words from families who have experienced our nurturing environment firsthand.</p>
+      </div>
+
+      <div class="gc-testi-grid">
+        <div class="gc-testi-card">
+          <div>
+            <div class="gc-testi-stars">★★★★★</div>
+            <p class="gc-testi-text">"I have never seen such an amazing teaching and learning environment. The teachers know each student's pulse."</p>
+          </div>
+          <div class="gc-testi-author">
+            <div class="gc-testi-avatar">CP</div>
+            <div>
+              <div class="gc-testi-name">Mr. Charan Pal</div>
+              <div class="gc-testi-role">Parent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gc-testi-card">
+          <div>
+            <div class="gc-testi-stars">★★★★★</div>
+            <p class="gc-testi-text">"We are fully satisfied with the school's safety standards, moral ethics, and academic progress of our children."</p>
+          </div>
+          <div class="gc-testi-author">
+            <div class="gc-testi-avatar">GS</div>
+            <div>
+              <div class="gc-testi-name">Mr. Gurjant Singh</div>
+              <div class="gc-testi-role">Parent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gc-testi-card">
+          <div>
+            <div class="gc-testi-stars">★★★★★</div>
+            <p class="gc-testi-text">"Highly learned and experienced teachers with ultra-modern infrastructure and caring mentors. Best decision for my child."</p>
+          </div>
+          <div class="gc-testi-author">
+            <div class="gc-testi-avatar">JS</div>
+            <div>
+              <div class="gc-testi-name">Mr. Jasbir Singh</div>
+              <div class="gc-testi-role">Parent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CMS NEWSLETTERS SECTION (HOOK PRESERVED)
+       ========================================================================== -->
   <section class="section section-alt" id="newsletters">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" style="text-align: center; margin-bottom: 40px;">
         <span class="eyebrow">Stay Updated</span>
         <h2>Recent Newsletters</h2>
-        <p>Termly round-ups of academics, achievements and campus life.</p>
+        <p style="margin: 0 auto;">Termly round-ups of academics, achievements and campus life.</p>
       </div>
       <div class="feature-grid" data-cms-list="newsletters" data-cms-limit="3"></div>
-      <div style="text-align:center; margin-top:28px;">
+      <div style="text-align:center; margin-top:32px;">
         <a href="gallery.html#newsletter" class="btn btn-navy">View all newsletters</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="admission-cta">
+  <!-- ==========================================================================
+       ADMISSION CTA BAND
+       ========================================================================== -->
+  <section class="section" id="admission-cta" style="padding: 40px 0;">
     <div class="container">
-      <div class="cta-band">
-        <div>
-          <h3>Admissions open for 2026–2027 batch</h3>
-          <p>Register for the Max Ultimate Scholarship Test and get a chance to win a scholarship of up to 90%, in association with Physics Wallah Vidyapeeth.</p>
+      <div class="cta-band" style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); border-radius: var(--radius-xl); padding: 46px 40px; color: #fff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+        <div style="max-width: 650px;">
+          <h3 style="color: #fff; font-size: 28px; margin-bottom: 10px;">Admissions open for 2026–2027 batch</h3>
+          <p style="color: #c5d7f2; font-size: 15px; margin: 0;">Register for the Max Ultimate Scholarship Test and get a chance to win a scholarship of up to 90%, in association with Physics Wallah Vidyapeeth.</p>
         </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="admission.html" class="btn btn-navy">Apply Now</a>
-          <a href="admission.html#fees" class="btn btn-outline" style="border-color:rgba(255,255,255,.7)">Fee Structure</a>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="admission.html" class="gc-btn-pill">
+            <span>Apply Now</span>
+            <span class="btn-arrow-circle">→</span>
+          </a>
+          <a href="admission.html#fees" class="btn btn-outline" style="border-color:rgba(255,255,255,.55)">Fee Structure</a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
   <footer id="contact-footer">
     <div class="container">
       <div class="foot-grid">
         <div>
-          <div class="foot-logo">
-            <img src="assets/img/logo.png" alt="Max International School">
+          <div class="foot-logo" style="margin-bottom: 18px;">
+            <img src="assets/img/logo.png" alt="Max International School" style="height: 52px; width: auto;">
           </div>
-          <p style="font-size:13.5px; color:#9fb8d6; max-width:260px;">Affiliated to CBSE, New Delhi. A stress-free environment for students and educators to draw out the best in every child.</p>
-          <div class="foot-social">
+          <p style="font-size:13.5px; color:#9fb8d6; max-width:280px; line-height: 1.7;">
+            Affiliated to CBSE, New Delhi. A stress-free environment for students and educators to draw out the best in every child.
+          </p>
+          <div class="foot-social" style="display: flex; gap: 10px; margin-top: 18px;">
             <a href="https://www.facebook.com/maxinternationalschoolassandh" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
               <img src="assets/img/social-facebook.png" alt="Facebook" loading="lazy" decoding="async">
             </a>
@@ -328,6 +787,9 @@
             </a>
             <a href="https://www.youtube.com/@maxinternationalschool2041" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
               <img src="assets/img/social-youtube.png" alt="YouTube" loading="lazy" decoding="async">
+            </a>
+            <a href="https://wa.me/919050294300" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/social-whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
             </a>
           </div>
         </div>
@@ -354,7 +816,7 @@
           <h5>Life @ Max</h5>
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
-            <li><a href="admission.html#promax">Pro-Max Competitive Classes</a></li>
+            <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
             <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>
@@ -374,6 +836,7 @@
       </div>
     </div>
   </footer>
+
   <div class="fixed-social-bar" aria-label="Quick social links">
     <a href="https://www.facebook.com/maxinternationalschoolassandh" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
       <img src="assets/img/social-facebook.png" alt="Facebook" loading="lazy" decoding="async">
@@ -388,9 +851,10 @@
       <img src="assets/img/social-whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>
   </div>
-<script src="assets/js/menu.js"></script>
-<script src="assets/js/cms-content.js"></script>
-<script src="assets/js/notification-banner.js"></script>
-<script src="assets/js/chatbot.js"></script>
+
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/cms-content.js"></script>
+  <script src="assets/js/notification-banner.js"></script>
+  <script src="assets/js/chatbot.js"></script>
 </body>
 </html>
