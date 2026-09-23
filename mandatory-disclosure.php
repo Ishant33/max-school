@@ -9,6 +9,7 @@ $defaults = [
 
 $disclosure = null;
 $jsonFile = __DIR__ . '/backend/disclosure_data.json';
+clearstatcache(true, $jsonFile);
 if (is_readable($jsonFile)) {
     $disclosure = json_decode((string) file_get_contents($jsonFile), true);
 }
@@ -226,24 +227,40 @@ function disclosure_table(array $rows): void {
   </header>
 
   <?php
-  // Prepare Part A mapping
+  $academicSession = trim((string)($disclosure['updated'] ?? '2026-27'));
+
+  // Prepare Part A: General Information
+  $standardGeneralKeys = [
+      'school name', 'affiliation no.(if applicable)', 'affiliation no',
+      'school code (if applicable)', 'school code', 'complete address with pin code',
+      'address', 'principal name & qualification:', 'principal name',
+      'school email id', 'email', 'contact details (landline/mobile)',
+      'school contact number', 'contact'
+  ];
   $generalMap = [];
+  $extraGeneral = [];
   if (!empty($disclosure['general'])) {
       foreach ($disclosure['general'] as $g) {
-          $k = strtolower(trim((string)($g['label'] ?? '')));
-          $generalMap[$k] = trim((string)($g['value'] ?? ''));
+          $lbl = trim((string)($g['label'] ?? ''));
+          $val = trim((string)($g['value'] ?? ''));
+          $k = strtolower($lbl);
+          if ($lbl === '' && $val === '') continue;
+          $generalMap[$k] = $val;
+          if (!in_array($k, $standardGeneralKeys, true)) {
+              $extraGeneral[] = ['label' => $lbl, 'value' => $val];
+          }
       }
   }
   $schoolName = $generalMap['school name'] ?? 'MAX INTERNATIONAL SCHOOL';
-  $affilNo    = $generalMap['affiliation no.(if applicable)'] ?? $generalMap['affiliation no'] ?? '531608';
-  $schoolCode = $generalMap['school code (if applicable)'] ?? $generalMap['school code'] ?? '41608';
+  $affilNo    = $generalMap['affiliation no.(if applicable)'] ?? $generalMap['affiliation no'] ?? '';
+  $schoolCode = $generalMap['school code (if applicable)'] ?? $generalMap['school code'] ?? '';
   $address    = $generalMap['address'] ?? $generalMap['complete address with pin code'] ?? 'SAFIDON ROAD, ASSANDH, DISTRICT KARNAL, HARYANA - 132039';
   $principal  = $generalMap['principal name'] ?? $generalMap['principal name & qualification:'] ?? 'MS. SONIKA RAI, M.A., B.Ed.';
-  $email      = $generalMap['school email id'] ?? 'principal@maxinternationalschool.com';
+  $email      = $generalMap['school email id'] ?? $generalMap['email'] ?? 'principal@maxinternationalschool.com';
   $contact    = $generalMap['school contact number'] ?? $generalMap['contact details (landline/mobile)'] ?? '9050294300, 9050248300';
 
-  // Prepare Part B documents
-  $primaryDocTitles = [
+  // Prepare Part B: Documents and Information
+  $defaultDocTitles = [
       1 => 'COPIES OF AFFILIATION/UPGRADATION LETTER AND RECENT EXTENSION OF AFFILIATION, IF ANY',
       2 => 'COPIES OF SOCIETIES/TRUST/COMPANY REGISTRATION/RENEWAL CERTIFICATE, AS APPLICABLE',
       3 => 'COPY OF NO OBJECTION CERTIFICATE (NOC) ISSUED, IF APPLICABLE, BY THE STATE GOVT./UT',
@@ -253,7 +270,7 @@ function disclosure_table(array $rows): void {
       7 => 'COPY OF THE DEO CERTIFICATE SUBMITTED BY THE SCHOOL FOR AFFILIATION/UPGRADATION/EXTENSION OF AFFILIATIONOR SELF CERTIFICATION BY SCHOOL',
       8 => 'COPIES OF VALID DRINKING WATER, HEALTH AND SANITATION CERTIFICATES AND WATER TESTING REPORT',
   ];
-  $primaryDocPdfs = [
+  $defaultDocPdfs = [
       1 => 'backend/uploads/disclosure/b/1.pdf',
       2 => 'backend/uploads/disclosure/b/2.pdf',
       3 => 'backend/uploads/disclosure/b/3.pdf',
@@ -263,64 +280,140 @@ function disclosure_table(array $rows): void {
       7 => 'backend/uploads/disclosure/b/7.pdf',
       8 => 'backend/uploads/disclosure/b/8.pdf',
   ];
+  $allDocs = !empty($disclosure['documents']) ? $disclosure['documents'] : [];
+  $primaryDocs = [];
   $additionalDocs = [];
-  if (!empty($disclosure['documents'])) {
-      foreach ($disclosure['documents'] as $d) {
-          $id  = (int)($d['id'] ?? 0);
-          $t   = trim((string)($d['title'] ?? ''));
-          $pdf = trim((string)($d['pdf_url'] ?? ''));
-          if ($id >= 1 && $id <= 8 && $pdf !== '') {
-              $primaryDocPdfs[$id] = $pdf;
-          } elseif ($pdf !== '') {
-              $additionalDocs[] = ['title' => $t, 'pdf' => $pdf];
-          }
+  if (!empty($allDocs)) {
+      $docIdx = 0;
+      foreach ($allDocs as $d) {
+          $docIdx++;
+          $id    = (int)($d['id'] ?? 0);
+          $title = trim((string)($d['title'] ?? ''));
+          $pdf   = trim((string)($d['pdf_url'] ?? ''));
+          $desc  = trim((string)($d['description'] ?? ''));
+          $sno   = trim((string)($d['sno'] ?? ''));
+          $primaryDocs[] = [
+              'id'          => $id,
+              'sno'         => (is_numeric($sno) || $sno === '') ? (string)$docIdx : $sno,
+              'title'       => $title !== '' ? $title : ('Document #' . $docIdx),
+              'description' => $desc,
+              'pdf_url'     => $pdf,
+          ];
+      }
+  } else {
+      for ($i = 1; $i <= 8; $i++) {
+          $primaryDocs[] = [
+              'id'          => $i,
+              'sno'         => (string)$i,
+              'title'       => $defaultDocTitles[$i],
+              'pdf_url'     => $defaultDocPdfs[$i],
+              'description' => '',
+          ];
       }
   }
 
-  // Prepare Part C academics
-  $academicPdfs = [
+  // Prepare Part C: Results and Academics
+  $defaultAcademicTitles = [
+      1 => 'FEE STRUCTURE OF THE SCHOOL',
+      2 => 'ANNUAL ACADEMIC CALANDER.',
+      3 => 'LIST OF SCHOOL MANAGEMENT COMMITTEE (SMC)',
+      4 => 'LIST OF PARENTS TEACHERS ASSOCIATION (PTA) MEMBERS',
+  ];
+  $defaultAcademicPdfs = [
       1 => 'backend/uploads/disclosure/c/1.pdf',
       2 => 'backend/uploads/disclosure/c/2.pdf',
       3 => 'backend/uploads/disclosure/c/3.pdf',
       4 => 'backend/uploads/disclosure/c/4.pdf',
   ];
-  if (!empty($disclosure['academics'])) {
-      foreach ($disclosure['academics'] as $a) {
-          $id  = (int)($a['id'] ?? 0);
-          $pdf = trim((string)($a['pdf_url'] ?? ''));
-          if ($id >= 1 && $id <= 4 && $pdf !== '') {
-              $academicPdfs[$id] = $pdf;
+  $allAcademics = !empty($disclosure['academics']) ? $disclosure['academics'] : [];
+  $primaryAcademics = [];
+  $additionalAcademics = [];
+  if (!empty($allAcademics)) {
+      $acIdx = 0;
+      foreach ($allAcademics as $a) {
+          $acIdx++;
+          $id    = (int)($a['id'] ?? 0);
+          $label = trim((string)($a['label'] ?? ''));
+          $val   = trim((string)($a['value'] ?? ''));
+          $pdf   = trim((string)($a['pdf_url'] ?? ''));
+          $sno   = trim((string)($a['sno'] ?? ''));
+          $primaryAcademics[] = [
+              'id'      => $id,
+              'sno'     => (is_numeric($sno) || $sno === '') ? (string)$acIdx : $sno,
+              'title'   => $label !== '' ? $label : ('Academic Notice #' . $acIdx),
+              'value'   => $val,
+              'pdf_url' => $pdf,
+          ];
+      }
+  } else {
+      for ($i = 1; $i <= 4; $i++) {
+          $primaryAcademics[] = [
+              'id'      => $i,
+              'sno'     => (string)$i,
+              'title'   => $defaultAcademicTitles[$i],
+              'pdf_url' => $defaultAcademicPdfs[$i],
+              'value'   => '',
+          ];
+      }
+  }
+
+  $resultX = !empty($disclosure['results_x']) ? $disclosure['results_x'] : [
+      ['sno' => '1', 'year' => '2021-22', 'registered' => '70', 'passed' => '65', 'pct' => '92.86%', 'pdf' => $resultsPdfs['x_2022']],
+      ['sno' => '2', 'year' => '2022-23', 'registered' => '81', 'passed' => '74', 'pct' => '91.36%', 'pdf' => $resultsPdfs['x_2023']],
+      ['sno' => '3', 'year' => '2023-24', 'registered' => '99', 'passed' => '89', 'pct' => '89.90%', 'pdf' => $resultsPdfs['x_2024']],
+  ];
+  $resultXII = !empty($disclosure['results_xii']) ? $disclosure['results_xii'] : [
+      ['sno' => '1', 'year' => '2021-22', 'registered' => '74', 'passed' => '66', 'pct' => '89.19%', 'pdf' => $resultsPdfs['xii_2022']],
+      ['sno' => '2', 'year' => '2022-23', 'registered' => '103', 'passed' => '94', 'pct' => '91.26%', 'pdf' => $resultsPdfs['xii_2023']],
+      ['sno' => '3', 'year' => '2023-24', 'registered' => '94', 'passed' => '88', 'pct' => '93.62%', 'pdf' => $resultsPdfs['xii_2024']],
+  ];
+
+  // Prepare Part D: Staff (Teaching)
+  $standardStaffKeys = [
+      'principal', 'vice principal', 'headmistress/headmaster', 'headmaster', 'headmistress',
+      'total no. of teachers', 'total teachers', 'pgt', 'tgt', 'prt', 'ntt', 'pet',
+      'teacher student ratio', 'teachers section ratio', 'special educator',
+      'wellness teacher', 'counsellor & wellness teacher', 'counsellor'
+  ];
+  $staffMap = [];
+  $extraStaff = [];
+  if (!empty($disclosure['staff'])) {
+      foreach ($disclosure['staff'] as $st) {
+          $lbl = trim((string)($st['label'] ?? ''));
+          $val = trim((string)($st['value'] ?? ''));
+          $k = strtolower($lbl);
+          if ($lbl === '' && $val === '') continue;
+          $staffMap[$k] = $val;
+          if (!in_array($k, $standardStaffKeys, true)) {
+              $extraStaff[] = ['label' => $lbl, 'value' => $val];
           }
       }
   }
-
-  $resultX = [
-      ['sno' => '1', 'year' => '2021-22', 'registered' => '70', 'passed' => '65', 'pct' => '92.86%', 'pdf' => 'backend/uploads/disclosure/c/5.pdf'],
-      ['sno' => '2', 'year' => '2022-23', 'registered' => '81', 'passed' => '74', 'pct' => '91.36%', 'pdf' => 'backend/uploads/disclosure/c/6.pdf'],
-      ['sno' => '3', 'year' => '2023-24', 'registered' => '99', 'passed' => '89', 'pct' => '89.90%', 'pdf' => 'backend/uploads/disclosure/c/7.pdf'],
-  ];
-  $resultXII = [
-      ['sno' => '1', 'year' => '2021-22', 'registered' => '74', 'passed' => '66', 'pct' => '89.19%', 'pdf' => 'backend/uploads/disclosure/c/8.pdf'],
-      ['sno' => '2', 'year' => '2022-23', 'registered' => '103', 'passed' => '94', 'pct' => '91.26%', 'pdf' => 'backend/uploads/disclosure/c/9.pdf'],
-      ['sno' => '3', 'year' => '2023-24', 'registered' => '94', 'passed' => '88', 'pct' => '93.62%', 'pdf' => 'backend/uploads/disclosure/c/10.pdf'],
-  ];
-
-  // Prepare Part D staff
-  $staffMap = [];
-  if (!empty($disclosure['staff'])) {
-      foreach ($disclosure['staff'] as $st) {
-          $k = strtolower(trim((string)($st['label'] ?? '')));
-          $staffMap[$k] = trim((string)($st['value'] ?? ''));
-      }
-  }
   $principalCount  = $staffMap['principal'] ?? '1';
-  $totalTeachers   = $staffMap['total no. of teachers'] ?? '54';
+  $vicePrincipal   = $staffMap['vice principal'] ?? '0';
+  $headmaster      = $staffMap['headmistress/headmaster'] ?? $staffMap['headmaster'] ?? $staffMap['headmistress'] ?? '-';
+  $totalTeachers   = $staffMap['total no. of teachers'] ?? $staffMap['total teachers'] ?? '54';
   $pgtCount        = $staffMap['pgt'] ?? '16';
   $tgtCount        = $staffMap['tgt'] ?? '15';
   $prtCount        = $staffMap['prt'] ?? '23';
+  $nttCount        = $staffMap['ntt'] ?? '6';
+  $petCount        = $staffMap['pet'] ?? '2';
   $ratio           = $staffMap['teacher student ratio'] ?? $staffMap['teachers section ratio'] ?? '1:1.5';
   $specialEducator = $staffMap['special educator'] ?? 'Ms. Neetu (B.A., Diploma in Special Education)';
-  $counsellor      = $staffMap['wellness teacher'] ?? $staffMap['counsellor & wellness teacher'] ?? 'Ms. Sonia (M.A. Hindi, Pol. Science, NTT, B.Ed.)';
+  $counsellor      = $staffMap['wellness teacher'] ?? $staffMap['counsellor & wellness teacher'] ?? $staffMap['counsellor'] ?? 'Ms. Sonia (M.A. Hindi, Pol. Science, NTT, B.Ed.)';
+
+  // Dynamic Staff Details PDF URL (from doc id 9 or title 'Staff Detail')
+  $staffListPdf = 'backend/uploads/disclosure/b/9.pdf';
+  if (!empty($disclosure['documents'])) {
+      foreach ($disclosure['documents'] as $d) {
+          if ((int)($d['id'] ?? 0) === 9 || stripos($d['title'] ?? '', 'Staff Detail') !== false) {
+              if (!empty($d['pdf_url'])) {
+                  $staffListPdf = $d['pdf_url'];
+                  break;
+              }
+          }
+      }
+  }
   ?>
 
   <main class="cbse-disclosure-page">
@@ -328,16 +421,14 @@ function disclosure_table(array $rows): void {
 
       <div class="cbse-toolbar">
         <div class="cbse-toolbar-note">
-          Official CBSE Appendix-IX Revised Format | Mandatory Public Disclosure
+          Official CBSE Mandatory Public Disclosure
+          <span class="cbse-session-badge">Session <?= e($academicSession) ?></span>
         </div>
-        <button type="button" class="cbse-print-btn" onclick="window.print()">
-          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
-          <span>Print / Save PDF</span>
-        </button>
+    
       </div>
 
       <div class="cbse-disclosure-doc">
-        <!-- CBSE Official Appendix IX Header -->
+        <!-- CBSE Official Header -->
         <header class="cbse-header">
           <div class="cbse-header-top">
             <div class="cbse-emblem-left">
@@ -352,9 +443,6 @@ function disclosure_table(array $rows): void {
             <div class="cbse-emblem-right">
               <img src="assets/img/cbse-logo.png" alt="CBSE Emblem">
             </div>
-          </div>
-          <div class="cbse-appendix-meta">
-            APPENDIX - IX<br>REVISED FORMAT
           </div>
         </header>
 
@@ -372,41 +460,32 @@ function disclosure_table(array $rows): void {
               </tr>
             </thead>
             <tbody>
+              <?php
+              $defaultGeneral = array_values(array_filter([
+                  ['label' => 'NAME OF THE SCHOOL', 'value' => $schoolName],
+                  $affilNo !== '' ? ['label' => 'AFFILIATION NO.(IF APPLICABLE)', 'value' => $affilNo] : null,
+                  $schoolCode !== '' ? ['label' => 'SCHOOL CODE (IF APPLICABLE)', 'value' => $schoolCode] : null,
+                  ['label' => 'COMPLETE ADDRESS WITH PIN CODE', 'value' => $address],
+                  ['label' => 'PRINCIPAL NAME & QUALIFICATION:', 'value' => $principal],
+                  ['label' => 'SCHOOL EMAIL ID', 'value' => $email],
+                  ['label' => 'CONTACT DETAILS (LANDLINE/MOBILE)', 'value' => $contact],
+              ]));
+              $generalRows = !empty($disclosure['general']) ? $disclosure['general'] : $defaultGeneral;
+              $gIndex = 0;
+              foreach ($generalRows as $gr):
+                  $gLbl = trim((string)($gr['label'] ?? ''));
+                  $gVal = trim((string)($gr['value'] ?? ''));
+                  if ($gLbl === '' && $gVal === '') continue;
+                  $gIndex++;
+                  $isEmailOrUrl = stripos($gLbl, 'email') !== false || filter_var($gVal, FILTER_VALIDATE_URL) || filter_var($gVal, FILTER_VALIDATE_EMAIL);
+                  $dispVal = $isEmailOrUrl ? $gVal : strtoupper($gVal);
+              ?>
               <tr>
-                <td class="col-sno">1</td>
-                <td class="col-info">NAME OF THE SCHOOL</td>
-                <td><?= e(strtoupper($schoolName)) ?></td>
+                <td class="col-sno"><?= $gIndex ?></td>
+                <td class="col-info"><?= e(strtoupper($gLbl)) ?></td>
+                <td><?= e($dispVal) ?></td>
               </tr>
-              <tr>
-                <td class="col-sno">2</td>
-                <td class="col-info">AFFILIATION NO.(IF APPLICABLE)</td>
-                <td><?= e($affilNo) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">3</td>
-                <td class="col-info">SCHOOL CODE (IF APPLICABLE)</td>
-                <td><?= e($schoolCode) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">4</td>
-                <td class="col-info">COMPLETE ADDRESS WITH PIN CODE</td>
-                <td><?= e(strtoupper($address)) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">5</td>
-                <td class="col-info">PRINCIPAL NAME &amp; QUALIFICATION:</td>
-                <td><?= e(strtoupper($principal)) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">6</td>
-                <td class="col-info">SCHOOL EMAIL ID</td>
-                <td><?= e($email) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">7</td>
-                <td class="col-info">CONTACT DETAILS (LANDLINE/MOBILE)</td>
-                <td><?= e($contact) ?></td>
-              </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -423,57 +502,29 @@ function disclosure_table(array $rows): void {
               </tr>
             </thead>
             <tbody>
-              <?php for ($i = 1; $i <= 8; $i++): ?>
+              <?php $pdIndex = 0; foreach ($primaryDocs as $pd): $pdIndex++; ?>
               <tr>
-                <td class="col-sno"><?= $i ?></td>
-                <td><?= e($primaryDocTitles[$i]) ?></td>
+                <td class="col-sno"><?= !empty($pd['sno']) ? e($pd['sno']) : $pdIndex ?></td>
+                <td>
+                  <?= e(strtoupper($pd['title'])) ?>
+                  <?php if (!empty($pd['description'])): ?>
+                    <div style="font-size:11.5px;color:#64748b;margin-top:2px;font-weight:normal;"><?= e($pd['description']) ?></div>
+                  <?php endif; ?>
+                </td>
                 <td class="col-center">
-                  <?php if (!empty($primaryDocPdfs[$i])): ?>
-                    <a class="cbse-link-btn" href="<?= e($primaryDocPdfs[$i]) ?>" target="_blank" rel="noopener">
+                  <?php if (!empty($pd['pdf_url'])): ?>
+                    <a class="cbse-link-btn" href="<?= e($pd['pdf_url']) ?>" target="_blank" rel="noopener">
                       <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
                     </a>
                   <?php else: ?>
-                    <span>-</span>
+                    <span class="cbse-office-text">Available at school office</span>
                   <?php endif; ?>
-                </td>
-              </tr>
-              <?php endfor; ?>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Statutory Note -->
-        <div class="cbse-note-box">
-          <strong>NOTE:</strong> THE SCHOOLS NEEDS TO UPLOAD THE SELF ATTESTED COPIES OF ABOVE LISTED DOCUMETNS BY CHAIRMAN/MANAGER/SECRETARY AND PRINCIPAL. IN CASE, IT IS NOTICED AT LATER STAGE THAT UPLOADED DOCUMENTS ARE NOT GENUINE THEN SCHOOL SHALL BE LIABLE FOR ACTION AS PER NORMS.
-        </div>
-
-        <?php if (!empty($additionalDocs)): ?>
-        <div class="cbse-sub-section-title">ADDITIONAL STATUTORY / RELEVANT DOCUMENTS:</div>
-        <div class="cbse-table-wrap">
-          <table class="cbse-table">
-            <thead>
-              <tr>
-                <th class="col-sno">S.NO.</th>
-                <th>DOCUMENTS/INFORMATION</th>
-                <th class="col-center" style="width:210px;">UPLOAD DOCUMENTS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $adIndex = 0; foreach ($additionalDocs as $ad): $adIndex++; ?>
-              <tr>
-                <td class="col-sno"><?= $adIndex ?></td>
-                <td><?= e(strtoupper($ad['title'])) ?></td>
-                <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($ad['pdf']) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
-                  </a>
                 </td>
               </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
         </div>
-        <?php endif; ?>
 
         <!-- C: RESULT AND ACADEMICS -->
         <div class="cbse-section-title">C: RESULT AND ACADEMICS:</div>
@@ -487,50 +538,71 @@ function disclosure_table(array $rows): void {
               </tr>
             </thead>
             <tbody>
+              <?php $paIndex = 0; foreach ($primaryAcademics as $pa): $paIndex++; ?>
               <tr>
-                <td class="col-sno">1</td>
-                <td>FEE STRUCTURE OF THE SCHOOL</td>
+                <td class="col-sno"><?= !empty($pa['sno']) ? e($pa['sno']) : $paIndex ?></td>
+                <td>
+                  <?= e(strtoupper($pa['title'])) ?>
+                  <?php if (!empty($pa['value'])): ?>
+                    <div style="font-size:11.5px;color:#64748b;margin-top:2px;font-weight:normal;"><?= e($pa['value']) ?></div>
+                  <?php endif; ?>
+                </td>
                 <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($academicPdfs[1]) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
-                  </a>
+                  <?php if (!empty($pa['pdf_url'])): ?>
+                    <a class="cbse-link-btn" href="<?= e($pa['pdf_url']) ?>" target="_blank" rel="noopener">
+                      <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                    </a>
+                  <?php else: ?>
+                    <span class="cbse-office-text">Available at school office</span>
+                  <?php endif; ?>
                 </td>
               </tr>
+              <?php endforeach; ?>
               <tr>
-                <td class="col-sno">2</td>
-                <td>ANNUAL ACADEMIC CALANDER.</td>
-                <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($academicPdfs[2]) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sno">3</td>
-                <td>LIST OF SCHOOL MANAGEMENT COMMITTEE (SMC)</td>
-                <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($academicPdfs[3]) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sno">4</td>
-                <td>LIST OF PARENTS TEACHERS ASSOCIATION (PTA) MEMBERS</td>
-                <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($academicPdfs[4]) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sno">5</td>
+                <td class="col-sno"><?= count($primaryAcademics) + 1 ?></td>
                 <td>LAST THREE-YEAR RESULT OF THE BOARD EXAMINATION (AS PER APPLICABLILITY)</td>
                 <td class="col-center" style="font-weight:700;">AS DETAILED BELOW</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <?php if (!empty($additionalAcademics)): ?>
+        <div class="cbse-sub-section-title">ADDITIONAL ACADEMIC DOCUMENTS &amp; INFORMATION:</div>
+        <div class="cbse-table-wrap">
+          <table class="cbse-table">
+            <thead>
+              <tr>
+                <th class="col-sno">S.NO.</th>
+                <th>DOCUMENTS/INFORMATION</th>
+                <th class="col-center" style="width:210px;">UPLOAD DOCUMENTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $aacIndex = 0; foreach ($additionalAcademics as $aac): $aacIndex++; ?>
+              <tr>
+                <td class="col-sno"><?= !empty($aac['sno']) ? e($aac['sno']) : $aacIndex ?></td>
+                <td>
+                  <?= e(strtoupper($aac['title'])) ?>
+                  <?php if (!empty($aac['value'])): ?>
+                    <div style="font-size:11.5px;color:#64748b;margin-top:2px;font-weight:normal;"><?= e($aac['value']) ?></div>
+                  <?php endif; ?>
+                </td>
+                <td class="col-center">
+                  <?php if (!empty($aac['pdf_url'])): ?>
+                    <a class="cbse-link-btn" href="<?= e($aac['pdf_url']) ?>" target="_blank" rel="noopener">
+                      <?= pdf_icon_svg() ?><span>VIEW DOCUMENT</span>
+                    </a>
+                  <?php else: ?>
+                    <span class="cbse-office-text">Available at school office</span>
+                  <?php endif; ?>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+        <?php endif; ?>
 
         <div class="cbse-sub-section-title">RESULT CLASS: X</div>
         <div class="cbse-table-wrap">
@@ -554,9 +626,13 @@ function disclosure_table(array $rows): void {
                 <td class="col-center"><?= e($rx['passed']) ?></td>
                 <td class="col-center" style="font-weight:700;"><?= e($rx['pct']) ?></td>
                 <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW PDF</span>
-                  </a>
+                  <?php if (!empty($rx['pdf'])): ?>
+                    <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
+                      <?= pdf_icon_svg() ?><span>VIEW PDF</span>
+                    </a>
+                  <?php else: ?>
+                    <span class="cbse-office-text">-</span>
+                  <?php endif; ?>
                 </td>
               </tr>
               <?php endforeach; ?>
@@ -586,9 +662,13 @@ function disclosure_table(array $rows): void {
                 <td class="col-center"><?= e($rx['passed']) ?></td>
                 <td class="col-center" style="font-weight:700;"><?= e($rx['pct']) ?></td>
                 <td class="col-center">
-                  <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
-                    <?= pdf_icon_svg() ?><span>VIEW PDF</span>
-                  </a>
+                  <?php if (!empty($rx['pdf'])): ?>
+                    <a class="cbse-link-btn" href="<?= e($rx['pdf']) ?>" target="_blank" rel="noopener">
+                      <?= pdf_icon_svg() ?><span>VIEW PDF</span>
+                    </a>
+                  <?php else: ?>
+                    <span class="cbse-office-text">-</span>
+                  <?php endif; ?>
                 </td>
               </tr>
               <?php endforeach; ?>
@@ -609,87 +689,117 @@ function disclosure_table(array $rows): void {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="col-sno">1.</td>
-                <td class="col-info">PRINCIPAL</td>
-                <td class="col-center"><?= e($principalCount) ?></td>
-                <td><?= e(strtoupper($principal)) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">2.</td>
-                <td class="col-info">VICE PRINCIPAL</td>
-                <td class="col-center">0</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="col-sno">3.</td>
-                <td class="col-info">HEADMISTRESS/HEADMASTER</td>
-                <td class="col-center">-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="col-sno">4.</td>
-                <td class="col-info">TOTAL NO. OF TEACHERS</td>
-                <td class="col-center"><?= e($totalTeachers) ?></td>
-                <td>
-                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-link-btn">
-                    <?= pdf_icon_svg() ?><span>UPLOAD LIST/DETAILS</span>
-                  </a>
-                </td>
-              </tr>
+              <?php
+              $staffItems = !empty($disclosure['staff']) ? $disclosure['staff'] : [
+                  ['label' => 'Principal', 'value' => $principalCount],
+                  ['label' => 'Vice Principal', 'value' => $vicePrincipal],
+                  ['label' => 'Headmistress/Headmaster', 'value' => $headmaster],
+                  ['label' => 'Total No. of Teachers', 'value' => $totalTeachers],
+                  ['label' => 'PGT', 'value' => $pgtCount],
+                  ['label' => 'TGT', 'value' => $tgtCount],
+                  ['label' => 'PRT', 'value' => $prtCount],
+                  ['label' => 'NTT', 'value' => $nttCount],
+                  ['label' => 'PET', 'value' => $petCount],
+                  ['label' => 'Teachers Section Ratio', 'value' => $ratio],
+                  ['label' => 'Details of Special Educator', 'value' => $specialEducator],
+                  ['label' => 'Details of Counsellor & Wellness Teacher', 'value' => $counsellor],
+              ];
+
+              $sNoCount = 0;
+              foreach ($staffItems as $st):
+                  $sLbl = trim((string)($st['label'] ?? ''));
+                  $sVal = trim((string)($st['value'] ?? ''));
+                  if ($sLbl === '' && $sVal === '') continue;
+                  $k = strtolower($sLbl);
+
+                  $isSubLevel = in_array($k, ['pgt', 'tgt', 'prt', 'ntt', 'pet'], true) || strpos($sLbl, '▪') === 0;
+
+                  if ($isSubLevel) {
+                      $subName = ltrim($sLbl, '▪ ');
+              ?>
               <tr class="sub-level">
                 <td></td>
-                <td class="indent-sub">▪ PGT</td>
-                <td class="col-center"><?= e($pgtCount) ?></td>
+                <td class="indent-sub">▪ <?= e(strtoupper($subName)) ?></td>
+                <td class="col-center"><?= e($sVal) ?></td>
                 <td>
-                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
+                  <a href="<?= e($staffListPdf) ?>" target="_blank" rel="noopener" class="cbse-text-link">
                     NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
                   </a>
                 </td>
               </tr>
-              <tr class="sub-level">
-                <td></td>
-                <td class="indent-sub">▪ TGT</td>
-                <td class="col-center"><?= e($tgtCount) ?></td>
+              <?php
+                  } else {
+                      $sNoCount++;
+                      $colStrength = '-';
+                      $colDetails = '-';
+
+                      if ($k === 'principal') {
+                          $colStrength = ($sVal !== '' && $sVal !== '0') ? $sVal : '1';
+                          $colDetails = strtoupper($principal);
+                      } elseif ($k === 'vice principal') {
+                          $colStrength = $sVal;
+                          $colDetails = ($sVal !== '0' && $sVal !== '-') ? $sVal : '-';
+                      } elseif (strpos($k, 'headmaster') !== false || strpos($k, 'headmistress') !== false) {
+                          $colStrength = $sVal;
+                          $colDetails = ($sVal !== '-') ? $sVal : '-';
+                      } elseif (strpos($k, 'total') !== false && strpos($k, 'teacher') !== false) {
+                          $colStrength = $sVal;
+                          $colDetails = 'LINK_BTN';
+                      } elseif (strpos($k, 'ratio') !== false) {
+                          $colStrength = $sVal;
+                          $colDetails = '-';
+                      } elseif (strpos($k, 'special educator') !== false) {
+                          $colStrength = '1';
+                          $colDetails = strtoupper($sVal);
+                      } elseif (strpos($k, 'counsellor') !== false || strpos($k, 'wellness') !== false) {
+                          $colStrength = '1';
+                          $colDetails = strtoupper($sVal);
+                      } else {
+                          if (is_numeric($sVal)) {
+                              $colStrength = $sVal;
+                              $colDetails = '-';
+                          } else {
+                              $colStrength = '-';
+                              $colDetails = strtoupper($sVal);
+                          }
+                      }
+              ?>
+              <tr>
+                <td class="col-sno"><?= $sNoCount ?>.</td>
+                <td class="col-info"><?= e(strtoupper($sLbl)) ?></td>
+                <td class="col-center"><?= e($colStrength) ?></td>
                 <td>
-                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
-                    NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
-                  </a>
+                  <?php if ($colDetails === 'LINK_BTN'): ?>
+                    <a href="<?= e($staffListPdf) ?>" target="_blank" rel="noopener" class="cbse-link-btn">
+                      <?= pdf_icon_svg() ?><span>UPLOAD LIST/DETAILS</span>
+                    </a>
+                  <?php else: ?>
+                    <?= e($colDetails) ?>
+                  <?php endif; ?>
                 </td>
               </tr>
-              <tr class="sub-level">
-                <td></td>
-                <td class="indent-sub">▪ PRT</td>
-                <td class="col-center"><?= e($prtCount) ?></td>
-                <td>
-                  <a href="backend/uploads/disclosure/b/9.pdf" target="_blank" rel="noopener" class="cbse-text-link">
-                    NAME-DESIGNATION -QUALIFICATION (PROVIDE LINK)
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sno">5.</td>
-                <td class="col-info">TEACHERS SECTION RATIO</td>
-                <td class="col-center"><?= e($ratio) ?></td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td class="col-sno">6.</td>
-                <td class="col-info">DETAILS OF SPECIAL EDUCATOR</td>
-                <td class="col-center">1</td>
-                <td><?= e(strtoupper($specialEducator)) ?></td>
-              </tr>
-              <tr>
-                <td class="col-sno">7.</td>
-                <td class="col-info">DETAILS OF COUNSELLOR &amp; WELLNESS TEACHER</td>
-                <td class="col-center">1</td>
-                <td><?= e(strtoupper($counsellor)) ?></td>
-              </tr>
+              <?php
+                  }
+              endforeach;
+              ?>
             </tbody>
           </table>
         </div>
 
         <!-- E: SCHOOL INFRASTRUCTURE -->
+        <?php
+        $infraSpecs = !empty($disclosure['infrastructure_specs']) ? $disclosure['infrastructure_specs'] : [
+            ['sno' => '1.', 'label' => 'TOTAL CAMPUS AREA OF THE SCHOOL (IN SQR MTR)', 'value' => '10117 SQ MTR (2.5 ACRES)'],
+            ['sno' => '2.', 'label' => 'NO. AND SIZE OF THE CLASSSROOM (IN SQR MTR)', 'value' => '42 CLASSROOMS (55 SQ MTR EACH)'],
+            ['sno' => '3.', 'label' => 'NO. AND SIZE OF LABORATORIES INCLUDING COMPUTER LABS (IN SQR MTR)', 'value' => '5 LABORATORIES (PHYSICS, CHEMISTRY, BIOLOGY, COMPOSITE SCIENCE, COMPUTER LAB - 75 SQ MTR EACH)'],
+            ['sno' => '4.', 'label' => 'NO. AND SIZE OF LIBRARY (IN SQR MTR)', 'value' => '1 LIBRARY (120 SQ MTR)'],
+            ['sno' => '5.', 'label' => 'INTERNET FACILITY (YES/NO)', 'value' => 'YES (HIGH-SPEED BROADBAND & WI-FI ACROSS CAMPUS)'],
+            ['sno' => '6.', 'label' => 'NO. OF GIRLS TOILETS', 'value' => '16'],
+            ['sno' => '7.', 'label' => 'NO. OF BOYS TOILETS', 'value' => '16'],
+            ['sno' => '8.', 'label' => 'NO. OF CWSN TOILETS', 'value' => '2 (BARRIER-FREE TOILETS FOR CHILDREN WITH SPECIAL NEEDS)'],
+            ['sno' => '9.', 'label' => 'LINK OF YOU TUBE VIDEO OF THE INSPECTION OF SCHOOL COVERING THE INFRASTRUCTURE OPF THE SCHOOL', 'value' => 'https://www.youtube.com/@maxinternationalschool2041'],
+        ];
+        ?>
         <div class="cbse-section-title">E: SCHOOL INFRASTRUCTURE:</div>
         <div class="cbse-table-wrap">
           <table class="cbse-table">
@@ -701,62 +811,32 @@ function disclosure_table(array $rows): void {
               </tr>
             </thead>
             <tbody>
+              <?php $isIdx = 0; foreach ($infraSpecs as $ispec): $isIdx++; ?>
               <tr>
-                <td class="col-sno">1.</td>
-                <td class="col-info">TOTAL CAMPUS AREA OF THE SCHOOL (IN SQR MTR)</td>
-                <td>10117 SQ MTR (2.5 ACRES)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">2.</td>
-                <td class="col-info">NO. AND SIZE OF THE CLASSSROOM (IN SQR MTR)</td>
-                <td>42 CLASSROOMS (55 SQ MTR EACH)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">3.</td>
-                <td class="col-info">NO. AND SIZE OF LABORATORIES INCLUDING COMPUTER LABS (IN SQR MTR)</td>
-                <td>5 LABORATORIES (PHYSICS, CHEMISTRY, BIOLOGY, COMPOSITE SCIENCE, COMPUTER LAB - 75 SQ MTR EACH)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">4.</td>
-                <td class="col-info">NO. AND SIZE OF LIBRARY (IN SQR MTR)</td>
-                <td>1 LIBRARY (120 SQ MTR)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">5.</td>
-                <td class="col-info">INTERNET FACILITY (YES/NO)</td>
-                <td>YES (HIGH-SPEED BROADBAND &amp; WI-FI ACROSS CAMPUS)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">6.</td>
-                <td class="col-info">NO. OF GIRLS TOILETS</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td class="col-sno">7.</td>
-                <td class="col-info">NO. OF BOYS TOILETS</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td class="col-sno">8.</td>
-                <td class="col-info">NO. OF CWSN TOILETS</td>
-                <td>2 (BARRIER-FREE TOILETS FOR CHILDREN WITH SPECIAL NEEDS)</td>
-              </tr>
-              <tr>
-                <td class="col-sno">9.</td>
-                <td class="col-info">LINK OF YOU TUBE VIDEO OF THE INSPECTION OF SCHOOL COVERING THE INFRASTRUCTURE OPF THE SCHOOL</td>
+                <td class="col-sno"><?= e(!empty($ispec['sno']) ? $ispec['sno'] : ($isIdx . '.')) ?></td>
+                <td class="col-info"><?= e(strtoupper($ispec['label'] ?? '')) ?></td>
                 <td>
-                  <a href="https://www.youtube.com/@maxinternationalschool2041" target="_blank" rel="noopener" class="cbse-text-link">
-                    PROVIDE LINK (WATCH VIDEO)
-                  </a>
+                  <?php
+                  $specVal = trim((string)($ispec['value'] ?? ''));
+                  $isUrl = filter_var($specVal, FILTER_VALIDATE_URL) || stripos($ispec['label'] ?? '', 'video') !== false || stripos($ispec['label'] ?? '', 'youtube') !== false;
+                  if ($isUrl && !empty($specVal)): ?>
+                    <a href="<?= e($specVal) ?>" target="_blank" rel="noopener" class="cbse-text-link">
+                      PROVIDE LINK (WATCH VIDEO)
+                    </a>
+                  <?php else: ?>
+                    <?= e($specVal) ?>
+                  <?php endif; ?>
                 </td>
               </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
 
+
         <div class="cbse-doc-footer">
           <span>Max International School, Safidon Road, Assandh, Karnal (HR)</span>
-          <span>CBSE Appendix-IX Mandatory Public Disclosure</span>
+          <span>CBSE Mandatory Public Disclosure</span>
         </div>
 
       </div>
