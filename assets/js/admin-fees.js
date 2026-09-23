@@ -365,7 +365,7 @@
                 </div>
                 <div class="form-group">
                     <label for="sch-desc">Scholarship Details</label>
-                    <textarea id="sch-desc" rows="3" placeholder="Merit scholarships up to 90% in association with Physics Wallah Vidyapeeth...">${H.esc(data.scholarship_desc || '')}</textarea>
+                    <textarea id="sch-desc" rows="3" placeholder="Merit scholarships up to 100% in association with Physics Wallah Vidyapeeth...">${H.esc(data.scholarship_desc || '')}</textarea>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary btn-sm">

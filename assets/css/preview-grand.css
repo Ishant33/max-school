@@ -169,6 +169,26 @@ img {
   color: var(--gc-gold);
 }
 
+.gc-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.gc-topbar-right span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gc-topbar-right a {
+  color: #c5d7f2;
+}
+
+.gc-topbar-right a:hover {
+  color: var(--gc-gold);
+}
+
 .gc-topbar-social {
   display: flex;
   align-items: center;

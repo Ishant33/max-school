@@ -23,7 +23,7 @@
   --shadow-lg: 0 20px 45px rgba(11, 35, 71, 0.12);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; overflow-x:hidden;}
 /* Keyboard focus ring. :focus-visible so mouse clicks stay clean while tab
    navigation through the nav, dropdowns, burger and forms is always visible. */
 :focus-visible{outline:2.5px solid var(--teal); outline-offset:2px; border-radius:4px;}
@@ -85,8 +85,10 @@ ul{list-style:none;}
 /* Header spans wider than the 1180px body container: the 9-item nav row cannot
    fit alongside the logo and CTA at body width without shrinking type too far. */
 .topbar .container{display:flex; justify-content:space-between; align-items:center; min-height:44px; max-width:1340px;}
-.topbar-left{display:flex; gap:22px;}
-.topbar-left span{opacity:.9;}
+.topbar-left, .topbar-right{display:flex; gap:22px; align-items:center;}
+.topbar-left span, .topbar-right span{opacity:.9; display:inline-flex; align-items:center; gap:6px;}
+.topbar-left a, .topbar-right a{color:inherit; text-decoration:none; transition:color .2s ease;}
+.topbar-left a:hover, .topbar-right a:hover{color:#fff;}
 .topbar-social{display:flex; gap:12px;}
 .topbar-social a{
   display:inline-flex;
@@ -1036,9 +1038,9 @@ footer ul li a:hover{color:var(--orange-light);}
   background:var(--orange);
 }
 @media(max-width:780px){
-  .fixed-social-bar{right:12px; bottom:12px; gap:10px;}
-  .fixed-social-bar a{width:54px; height:54px; font-size:15px;}
-  .fixed-social-bar a img{width:33px; height:33px;}
+  .fixed-social-bar{right:12px; bottom:12px; gap:8px;}
+  .fixed-social-bar a{width:46px; height:46px; font-size:14px; box-shadow:0 6px 16px rgba(0,0,0,0.18);}
+  .fixed-social-bar a img{width:26px; height:26px;}
 }
 
 /* Nav collapses to the burger at 1259px: below this the 9-item row can no longer
@@ -1092,8 +1094,8 @@ footer ul li a:hover{color:var(--orange-light);}
 
 @media(max-width:980px){
   .container{padding-left:20px; padding-right:20px;}
-  .topbar .container{height:auto; min-height:36px; padding-top:7px; padding-bottom:7px; align-items:flex-start; flex-wrap:wrap; gap:8px;}
-  .topbar-left{gap:8px 14px; flex-wrap:wrap;}
+  .topbar .container{height:auto; min-height:36px; padding-top:7px; padding-bottom:7px; align-items:flex-start; flex-wrap:wrap; gap:8px 16px;}
+  .topbar-left, .topbar-right{gap:8px 14px; flex-wrap:wrap;}
   .topbar-social{display:flex;}
   .hero-grid{grid-template-columns:1fr;}
   .why-grid, .leader-grid, .testi-grid, .feature-grid{grid-template-columns:1fr;}
@@ -1145,7 +1147,7 @@ footer ul li a:hover{color:var(--orange-light);}
   .about-wrap > *, .split > *, .two-col > *, .contact-grid > *, .feature-grid > *, .why-grid > *, .leader-grid > *, .testi-grid > *{min-width:0;}
   img,video,iframe{max-width:100%;}
   .topbar{font-size:11px;}
-  .topbar-left span:last-child{display:none;}
+  .topbar .container{gap:6px 12px;}
   .why-max-eyebrow{font-size:16px; letter-spacing:1.8px;}
   .hero{padding:56px 0 104px;}
   .hero h1{font-size:30px;}
@@ -2970,7 +2972,7 @@ footer ul li a:hover{color:var(--orange-light);}
 .gc-feature-icon {
   width: 54px;
   height: 54px;
-  background: rgba(1, 158, 137, 0.15);
+  background: rgba(241, 121, 30, 0.12);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -3213,7 +3215,7 @@ footer ul li a:hover{color:var(--orange-light);}
   align-items: center;
   justify-content: center;
   font-size: 26px;
-  box-shadow: 0 0 0 0 rgba(1, 158, 137, 0.7);
+  box-shadow: 0 0 0 0 rgba(241, 121, 30, 0.7);
   animation: pulseGlow 2s infinite;
   margin: 0 auto;
   cursor: pointer;
@@ -3221,12 +3223,12 @@ footer ul li a:hover{color:var(--orange-light);}
 }
 .gc-pulse-play-btn:hover {
   transform: scale(1.1);
-  background: var(--orange);
+  background: var(--navy);
 }
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(1, 158, 137, 0.7); }
-  70% { box-shadow: 0 0 0 24px rgba(1, 158, 137, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(1, 158, 137, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(241, 121, 30, 0.7); }
+  70% { box-shadow: 0 0 0 24px rgba(241, 121, 30, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(241, 121, 30, 0); }
 }
 
 /* Leadership Guild */
@@ -3403,12 +3405,13 @@ footer ul li a:hover{color:var(--orange-light);}
   font-size: 14.5px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(1, 158, 137, 0.4);
+  box-shadow: 0 8px 20px rgba(241, 121, 30, 0.35);
   transition: all 0.25s ease;
   margin-top: 8px;
 }
 .gc-submit-btn:hover {
   background: var(--teal-hover);
+  box-shadow: 0 10px 24px rgba(241, 121, 30, 0.45);
   transform: translateY(-2px);
 }
 .gc-connect-img-side {
@@ -3545,5 +3548,37 @@ footer ul li a:hover{color:var(--orange-light);}
   .gc-gallery-grid { grid-template-columns: 1fr 1fr; }
   .gc-form-grid { grid-template-columns: 1fr; }
   .page-hero h1 { font-size: 30px; }
+}
+
+@media (max-width: 540px) {
+  .gc-hero { padding: 44px 0 50px; }
+  .gc-hero-title { font-size: 26px; }
+  .gc-hero-subtitle { font-size: 14.8px; line-height: 1.6; }
+  .gc-mosaic-grid { gap: 10px; }
+  .gc-card-navy, .gc-card-teal, .gc-card-orange { padding: 18px 14px; border-radius: 12px; }
+  .gc-card-navy h3, .gc-card-orange h3 { font-size: 28px; }
+  .gc-card-teal h3 { font-size: 22px; }
+  .gc-card-navy p, .gc-card-teal p, .gc-card-orange p { font-size: 12px; line-height: 1.35; }
+  .gc-mosaic-card { border-radius: 12px; }
+  .gc-mosaic-card .card-caption { padding: 10px; }
+  .gc-mosaic-card .card-caption h4 { font-size: 12.5px; }
+  .gc-section-title { font-size: 26px; }
+  .gc-lead-text { font-size: 14px; }
+  .gc-counter-grid { gap: 10px; }
+  .gc-counter-box { padding: 14px 12px; }
+  .gc-counter-number { font-size: 26px; }
+  .gc-step-card { padding: 16px; gap: 14px; }
+  .gc-step-num { width: 38px; height: 38px; font-size: 15px; }
+  .gc-admissions-grid { gap: 14px; }
+  .gc-admission-card { padding: 22px 18px; }
+  .gc-admission-watermark { font-size: 46px; margin-bottom: 10px; }
+  .gc-virtual-tour-section { padding: 70px 0; }
+  .gc-tour-content .gc-section-title { font-size: 28px; }
+  .gc-connect-form-side { padding: 28px 18px; }
+  .gc-connect-form-side h2 { font-size: 24px; }
+  .gc-gallery-grid { grid-template-columns: 1fr; }
+  .gc-gallery-item { height: 200px; }
+  .cta-band { padding: 28px 18px; }
+  .cta-band h3 { font-size: 21px; }
 }
 

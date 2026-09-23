@@ -9,7 +9,7 @@
     {
       id: 'fees', label: '💰 Fee Structure',
       keys: ['fee', 'fees', 'cost', 'price', 'charges', 'scholarship'],
-      ans: 'Please contact the school office for grade-wise fees.<br><br>🎓 The <b>Max Ultimate Scholarship Test</b> offers scholarships of up to 90% — in association with Physics Wallah Vidyapeeth.'
+      ans: 'Please contact the school office for grade-wise fees.<br><br>🎓 The <b>Max Ultimate Scholarship Test</b> offers scholarships of up to 100% — in association with Physics Wallah Vidyapeeth.'
     },
     {
       id: 'timing', label: '🕐 School Timings',
@@ -23,8 +23,8 @@
     },
     {
       id: 'promax', label: '🏆 Pro Max / Competitive',
-      keys: ['neet', 'jee', 'nda', 'competitive', 'coaching', 'promax', 'defense', 'defence'],
-      ans: 'Pro-Max offers competitive coaching alongside regular academics:<br>• <b>NEET / JEE Track</b> — test series &amp; mentorship<br>• <b>Defense Wing (NDA Prep)</b> — for NDA aspirants<br>• <b>Max Ultimate Scholarship Test</b> — scholarships up to 90%'
+      keys: ['neet', 'jee', 'competitive', 'coaching', 'promax'],
+      ans: 'Pro-Max offers competitive coaching alongside regular academics:<br>• <b>NEET / JEE Track</b> — test series &amp; mentorship<br>• <b>Max Ultimate Scholarship Test</b> — scholarships up to 100%'
     },
     {
       id: 'contact', label: '📍 Contact & Location',
