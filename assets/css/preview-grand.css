@@ -1,22 +1,27 @@
 /* ==========================================================================
    GRAND COLUMBUS STYLE DESIGN SYSTEM FOR MAX INTERNATIONAL SCHOOL
    Aesthetic: Premium Webflow-grade International School Layout
-   Colors: Deep Navy (#0B2347, #0F2346), Vibrant Teal (#019E89), 
-           Warm Gold/Orange (#F1791E, #FFBD59), Crisp White (#FFF), Soft Slate (#F8FAFC)
+   Colors: Official Logo Blue (#0973BB), Deep Contrast Navy (#073860), 
+           Vibrant Brand Orange (#F1791E, #FFBD59), Crisp White (#FFF), Soft Slate (#F8FAFC)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
 
 :root {
-  --gc-navy-dark: #07162c;
-  --gc-navy: #0b2347;
-  --gc-navy-surface: #0f2a54;
-  --gc-teal: #019e89;
-  --gc-teal-hover: #00b39b;
-  --gc-teal-light: rgba(1, 158, 137, 0.12);
+  --gc-navy-dark: #052a4a;
+  --gc-navy: #0973bb;
+  --gc-navy-surface: #0a4f82;
+  --gc-blue: #0973bb;
+  --gc-blue-hover: #075c96;
+  --gc-blue-light: rgba(9, 115, 187, 0.12);
+  --gc-heading: #073860;
+  --gc-teal: #f1791e;
+  --gc-teal-hover: #d96611;
+  --gc-teal-light: rgba(241, 121, 30, 0.12);
   --gc-gold: #ffbd59;
   --gc-orange: #f1791e;
   --gc-orange-hover: #d96611;
+  --gc-orange-light: rgba(241, 121, 30, 0.12);
   --gc-white: #ffffff;
   --gc-bg: #f8fafc;
   --gc-card-bg: #ffffff;
@@ -27,9 +32,9 @@
   --gc-radius-md: 14px;
   --gc-radius-lg: 22px;
   --gc-radius-xl: 30px;
-  --gc-shadow-sm: 0 4px 12px rgba(11, 35, 71, 0.05);
-  --gc-shadow-md: 0 10px 30px rgba(11, 35, 71, 0.08);
-  --gc-shadow-lg: 0 20px 45px rgba(11, 35, 71, 0.12);
+  --gc-shadow-sm: 0 4px 12px rgba(9, 115, 187, 0.06);
+  --gc-shadow-md: 0 10px 30px rgba(9, 115, 187, 0.09);
+  --gc-shadow-lg: 0 20px 45px rgba(7, 56, 96, 0.14);
   --gc-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -55,7 +60,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
-  color: var(--gc-navy);
+  color: var(--gc-heading);
   font-weight: 700;
   line-height: 1.25;
 }
@@ -83,7 +88,7 @@ img {
    PREVIEW BANNER (SWITCHER)
    ========================================================================== */
 .preview-indicator-bar {
-  background: linear-gradient(90deg, #07162c, #019e89);
+  background: linear-gradient(90deg, var(--gc-navy-dark), var(--gc-orange));
   color: #ffffff;
   padding: 10px 20px;
   font-size: 13px;
@@ -401,8 +406,8 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(1, 158, 137, 0.1);
-  color: var(--gc-teal);
+  background: var(--gc-orange-light);
+  color: var(--gc-orange);
   padding: 6px 18px;
   border-radius: 999px;
   font-size: 13px;
@@ -416,7 +421,7 @@ img {
   font-size: 52px;
   font-weight: 800;
   line-height: 1.15;
-  color: var(--gc-navy);
+  color: var(--gc-heading);
   margin-bottom: 20px;
   letter-spacing: -0.8px;
 }
@@ -518,7 +523,7 @@ img {
 
 /* Stat & Accent Cards in Mosaic */
 .gc-card-navy {
-  background: var(--gc-navy);
+  background: linear-gradient(135deg, #0973bb, #07568d);
   color: #ffffff;
   padding: 24px 20px;
   border-radius: var(--gc-radius-md);
@@ -542,7 +547,7 @@ img {
 }
 
 .gc-card-teal {
-  background: linear-gradient(135deg, #019e89, #0f6e61);
+  background: linear-gradient(135deg, #f58634, #d96611);
   color: #ffffff;
   padding: 24px 20px;
   border-radius: var(--gc-radius-md);
@@ -557,7 +562,7 @@ img {
 
 .gc-card-teal p {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.4;
 }
 
@@ -597,8 +602,9 @@ img {
 .gc-marquee-track {
   display: flex;
   width: fit-content;
-  animation: marqueeScroll 25s linear infinite;
+  animation: marqueeScroll 22s linear infinite;
   white-space: nowrap;
+  will-change: transform;
 }
 
 .gc-marquee-content {
@@ -640,19 +646,19 @@ img {
 }
 
 .gc-section-subhead {
-  color: var(--gc-teal);
-  font-size: 13px;
+  color: var(--gc-orange);
+  font-size: 15px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1.8px;
-  margin-bottom: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
   display: inline-block;
 }
 
 .gc-section-title {
   font-size: 40px;
   font-weight: 800;
-  color: var(--gc-navy);
+  color: var(--gc-heading);
   margin-bottom: 24px;
   line-height: 1.2;
 }
@@ -783,7 +789,7 @@ img {
    ========================================================================== */
 .gc-features-section {
   padding: 100px 0;
-  background: var(--gc-navy);
+  background: linear-gradient(180deg, #0973bb 0%, #064573 100%);
   color: #ffffff;
   position: relative;
 }
@@ -803,7 +809,7 @@ img {
 }
 
 .gc-features-head p {
-  color: #c5d7f2;
+  color: #e1eeff;
   font-size: 16px;
 }
 
@@ -815,36 +821,36 @@ img {
 }
 
 .gc-feature-card {
-  background: #102c54;
+  background: #053b63;
   padding: 36px 30px;
   border-radius: var(--gc-radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: var(--gc-transition);
 }
 
 .gc-feature-card:hover {
-  background: #15386b;
+  background: #042e4e;
   transform: translateY(-6px);
-  border-color: var(--gc-teal);
+  border-color: var(--gc-orange);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .gc-feature-icon {
   width: 60px;
   height: 60px;
-  background: rgba(1, 158, 137, 0.15);
+  background: rgba(241, 121, 30, 0.18);
   border-radius: var(--gc-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  color: var(--gc-teal);
+  color: var(--gc-orange);
   margin-bottom: 22px;
   transition: var(--gc-transition);
 }
 
 .gc-feature-card:hover .gc-feature-icon {
-  background: var(--gc-teal);
+  background: var(--gc-orange);
   color: #ffffff;
   transform: scale(1.08);
 }
@@ -1113,13 +1119,13 @@ img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--gc-teal);
+  background: var(--gc-orange);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  box-shadow: 0 0 0 0 rgba(1, 158, 137, 0.7);
+  box-shadow: 0 0 0 0 rgba(241, 121, 30, 0.7);
   animation: pulseGlow 2s infinite;
   margin: 0 auto;
   cursor: pointer;
@@ -1128,13 +1134,13 @@ img {
 
 .gc-pulse-play-btn:hover {
   transform: scale(1.1);
-  background: var(--gc-orange);
+  background: var(--gc-orange-hover);
 }
 
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(1, 158, 137, 0.7); }
-  70% { box-shadow: 0 0 0 24px rgba(1, 158, 137, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(1, 158, 137, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(241, 121, 30, 0.7); }
+  70% { box-shadow: 0 0 0 24px rgba(241, 121, 30, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(241, 121, 30, 0); }
 }
 
 /* ==========================================================================
@@ -1268,7 +1274,7 @@ img {
 }
 
 .gc-connect-box {
-  background: linear-gradient(135deg, #0b2347 0%, #07162c 100%);
+  background: linear-gradient(135deg, #0973bb 0%, #063960 100%);
   border-radius: var(--gc-radius-xl);
   overflow: hidden;
   display: grid;
@@ -1316,8 +1322,8 @@ img {
 }
 
 .gc-input {
-  background: #112c54;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #082d4d;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--gc-radius-sm);
   padding: 12px 14px;
   color: #ffffff;
@@ -1328,16 +1334,16 @@ img {
 }
 
 .gc-input:focus {
-  border-color: var(--gc-teal);
-  background: #15386b;
+  border-color: var(--gc-orange);
+  background: #0c3e69;
 }
 
 .gc-input::placeholder {
-  color: #7e9bbd;
+  color: #9cb9d8;
 }
 
 .gc-submit-btn {
-  background: var(--gc-teal);
+  background: var(--gc-orange);
   color: #ffffff;
   border: none;
   border-radius: 999px;
@@ -1345,14 +1351,15 @@ img {
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(1, 158, 137, 0.4);
+  box-shadow: 0 8px 20px rgba(241, 121, 30, 0.4);
   transition: var(--gc-transition);
   margin-top: 10px;
 }
 
 .gc-submit-btn:hover {
-  background: var(--gc-teal-hover);
+  background: var(--gc-orange-hover);
   transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(241, 121, 30, 0.5);
 }
 
 .gc-connect-img-side {

@@ -13,16 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const el = entry.target;
-          const target = parseInt(el.getAttribute('data-target'), 10);
+          const rawTarget = el.getAttribute('data-target') || '';
+          const target = parseFloat(rawTarget);
           if (!isNaN(target)) {
-            animateNumber(el, target, 1800);
+            animateNumber(el, target, 1800, rawTarget.includes('.'));
           }
           observer.unobserve(el);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15 });
 
     counterElements.forEach(el => counterObserver.observe(el));
+
+    // Safety timeout: trigger animation after 2.5s if observer didn't fire
+    setTimeout(() => {
+      counterElements.forEach(el => {
+        const rawTarget = el.getAttribute('data-target') || '';
+        const target = parseFloat(rawTarget);
+        if (!isNaN(target)) {
+          animateNumber(el, target, 1800, rawTarget.includes('.'));
+        }
+      });
+    }, 2500);
   } else {
     // Fallback for older browsers
     counterElements.forEach(el => {
@@ -30,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function animateNumber(element, target, duration) {
+  function animateNumber(element, target, duration, isDecimal = false) {
+    if (element.dataset.animated === 'true') return;
+    element.dataset.animated = 'true';
     let startTimestamp = null;
     const startValue = 0;
 
@@ -39,13 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       // Ease-out expo curve for smooth deceleration
       const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      const current = Math.floor(easeOut * (target - startValue) + startValue);
-      element.textContent = current.toLocaleString();
+      const current = easeOut * (target - startValue) + startValue;
+      element.textContent = isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString();
 
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        element.textContent = target.toLocaleString();
+        element.textContent = isDecimal ? target.toFixed(1) : target.toLocaleString();
       }
     }
 
@@ -95,32 +109,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const enquiryForm = document.getElementById('gcEnquiryForm');
   const formFeedback = document.getElementById('gcFormFeedback');
 
+  // Check URL query parameters for feedback after traditional POST redirect
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('enquiry') === 'sent' && formFeedback) {
+    formFeedback.style.display = 'block';
+    formFeedback.style.background = 'rgba(241, 121, 30, 0.2)';
+    formFeedback.style.borderLeftColor = 'var(--gc-orange, #f1791e)';
+    formFeedback.innerHTML = '✅ <strong>Thank you!</strong> Your admission enquiry has been successfully recorded. Our admissions counselor will contact you shortly.';
+    formFeedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   if (enquiryForm) {
     enquiryForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const submitBtn = enquiryForm.querySelector('.gc-submit-btn');
       const originalText = submitBtn.textContent;
 
-      submitBtn.textContent = 'Submitting...';
+      submitBtn.textContent = 'Submitting Enquiry...';
       submitBtn.disabled = true;
 
-      // Simulate instantaneous responsive feedback
-      setTimeout(() => {
-        enquiryForm.reset();
-        submitBtn.textContent = 'Submitted Successfully!';
-        submitBtn.style.background = '#019e89';
+      const formData = new FormData(enquiryForm);
+      formData.append('ajax', '1');
 
-        if (formFeedback) {
-          formFeedback.style.display = 'block';
-          formFeedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      fetch('backend/form_submit.php', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Network error ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        if (data.ok || data.status === 'sent') {
+          enquiryForm.reset();
+          submitBtn.textContent = 'Submitted Successfully! ✓';
+          submitBtn.style.background = 'var(--gc-orange, #f1791e)';
+
+          if (formFeedback) {
+            formFeedback.style.display = 'block';
+            formFeedback.style.background = 'rgba(241, 121, 30, 0.2)';
+            formFeedback.style.borderLeftColor = 'var(--gc-orange, #f1791e)';
+            formFeedback.innerHTML = '✅ <strong>Thank you!</strong> Your admission enquiry has been successfully recorded. Our admissions counselor will contact you shortly.';
+            formFeedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+          }, 5000);
+        } else {
+          throw new Error(data.message || 'Submission error');
         }
-
-        setTimeout(() => {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          submitBtn.style.background = '';
-        }, 4000);
-      }, 700);
+      })
+      .catch(err => {
+        console.warn('AJAX submit failed, falling back to standard submit:', err);
+        // Fallback: standard form submit so enquiry is never lost
+        enquiryForm.submit();
+      });
     });
   }
 });

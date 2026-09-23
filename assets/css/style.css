@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
 
 :root{
-  --navy:#0B2347;
-  --navy-deep:#07162C;
-  --navy-surface:#0F2A54;
-  --teal:#019E89;
-  --teal-hover:#00B39B;
-  --teal-light:rgba(1, 158, 137, 0.12);
-  --blue:#1C6FB0;
+  --navy:#073860;
+  --navy-deep:#052a4a;
+  --navy-surface:#0a4f82;
+  --blue:#0973bb;
+  --teal:#f1791e;
+  --teal-hover:#d96611;
+  --teal-light:rgba(241, 121, 30, 0.12);
   --sky:#E8F2FC;
   --orange:#F1791E;
   --orange-light:#FFBD59;
@@ -776,6 +776,52 @@ nav.menu > ul > li:hover .dropdown{opacity:1; visibility:visible; transform:tran
   font-size: 11px;
   color: #475569;
   font-weight: 600;
+}
+
+.cbse-office-text {
+  font-size: 11.5px;
+  color: #64748b;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.cbse-session-badge {
+  display: inline-block;
+  background-color: #0b2e59;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  letter-spacing: .5px;
+}
+
+.cbse-facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 24px;
+}
+
+.cbse-facility-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 4px solid #0b2e59;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  border-radius: 3px;
+}
+
+.cbse-facility-icon {
+  color: #16a34a;
+  font-weight: 800;
+  font-size: 13px;
 }
 
 /* Print Optimization */
