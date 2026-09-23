@@ -4,8 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home — Max International School</title>
+<script>
+  // Site Maintenance Gate (Password: school1234)
+  (function() {
+    var MAINTENANCE_ACTIVE = true;
+    if (!MAINTENANCE_ACTIVE) return;
+    var isAuthorized = document.cookie.indexOf('mis_access=authorized') !== -1 || localStorage.getItem('mis_access') === 'authorized';
+    if (!isAuthorized) {
+      window.location.replace('maintenance.html');
+    }
+  })();
+</script>
 <!-- meta:start -->
-<meta name="description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE and NDA coaching, and scholarships up to 90%.">
+<meta name="description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE coaching, and scholarships up to 100%.">
 <link rel="canonical" href="https://www.maxinternationalschool.com/">
 <link rel="icon" href="assets/img/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/logo.png">
@@ -13,14 +24,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Max International School">
 <meta property="og:title" content="Home — Max International School">
-<meta property="og:description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE and NDA coaching, and scholarships up to 90%.">
+<meta property="og:description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE coaching, and scholarships up to 100%.">
 <meta property="og:url" content="https://www.maxinternationalschool.com/">
 <meta property="og:image" content="https://www.maxinternationalschool.com/assets/img/school-building-1.jpg">
 <meta property="og:image:alt" content="Max International School campus, Assandh">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Home — Max International School">
-<meta name="twitter:description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE and NDA coaching, and scholarships up to 90%.">
+<meta name="twitter:description" content="Max International School, Assandh (Karnal) blends Gurukul discipline with modern pedagogy - CBSE curriculum, Pro-Max NEET/JEE coaching, and scholarships up to 100%.">
 <meta name="twitter:image" content="https://www.maxinternationalschool.com/assets/img/school-building-1.jpg">
 <!-- meta:end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,22 +52,10 @@
     <div class="container">
       <div class="topbar-left">
         <span>📍 Safidon Road, Assandh, Karnal (HR)</span>
-        <span>📞 <a href="tel:+919050294300">9050294300</a> · <a href="tel:+919050248300">9050248300</a></span>
-        <span>📱 <a href="tel:+919050294300">+91 90502 94300</a></span>
+        <span>📞 <a href="tel:+919050294300">+91 90502 94300</a></span>
       </div>
-      <div class="topbar-social">
-        <a href="https://www.facebook.com/maxinternationalschoolassandh" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/social-facebook.png" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/maxinternationalassandh?igsh=MWlybHdhb3M5c29iZg%3D%3D&utm_source=qr" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/social-instagram.png" alt="Instagram" loading="lazy" decoding="async">
-        </a>
-        <a href="https://www.youtube.com/@maxinternationalschool2041" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/social-youtube.png" alt="YouTube" loading="lazy" decoding="async">
-        </a>
-        <a href="https://wa.me/919050294300" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/social-whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
-        </a>
+      <div class="topbar-right">
+        <span>✉️ <a href="mailto:info@maxinternationalschool.com">info@maxinternationalschool.com</a></span>
       </div>
     </div>
   </div>
@@ -80,7 +79,7 @@
               <a href="about-us.html#mission">Mission</a>
               <a href="about-us.html#vision">Vision</a>
               <a href="about-us.html#chairman">Message from Chairperson</a>
-              <a href="about-us.html#secretary">Message from Secretary</a>
+              <a href="about-us.html#director">Message from Director</a>
               <a href="about-us.html#principal">Message from Principal</a>
               <div class="sub-head">Infrastructure</div>
               <a href="about-us.html#infra">360° View</a>
@@ -147,12 +146,12 @@
   <section id="main-content" tabindex="-1" class="gc-hero" aria-label="Welcome to Max International School">
     <div class="container">
       <div class="gc-hero-headline-wrap">
-        <div class="gc-hero-tag">🌟 Affiliated to CBSE, New Delhi</div>
         <h1 class="gc-hero-title">
-          Building Character. <br>Inspiring <span class="hl">Excellence.</span>
+          Building Character, <br>Inspiring <span class="hl">Excellence.</span>
         </h1>
         <p class="gc-hero-subtitle">
-          Max International School blends traditional Gurukul discipline with modern pedagogy — balanced education, hidden talents unlocked, cutting-edge labs, and quality learning for every child.
+          At Max International School, we believe education is about more than academics — it's about shaping strong character alongside sharp minds. Through value-based learning, dedicated mentorship, and a nurturing environment, we help every student grow into a confident, compassionate, and responsible individual.
+          <span style="display:block; margin-top:12px; font-weight:600; color:var(--navy);">We don't just prepare students for exams — we prepare them for life.</span>
         </p>
         <div class="gc-hero-cta-group" style="justify-content: center;">
           <a href="admission.html" class="gc-btn-pill" style="font-size: 16px; padding: 15px 36px;">
@@ -196,7 +195,7 @@
         <div class="gc-mosaic-col">
           <div class="gc-card-orange">
             <h3>100%</h3>
-            <p>Scholarships up to 100% in Sports &amp; Academics (Worth ₹1,11,000/-)</p>
+            <p>Up to 100% Scholarship</p>
           </div>
           <div class="gc-mosaic-card">
             <img src="assets/img/School%20Images/Computer%20lab.jpg" alt="Students in Computer Lab">
@@ -209,9 +208,9 @@
         <!-- Col 4 -->
         <div class="gc-mosaic-col">
           <div class="gc-mosaic-card">
-            <img src="assets/img/School%20Images/skating.jpg" alt="Students in Skating & Sports">
+            <img src="assets/img/School%20Images/skating.jpg" alt="Students in Sports">
             <div class="card-caption">
-              <h4>Sports, Skating &amp; Gurukul Discipline</h4>
+              <h4>Sports</h4>
             </div>
           </div>
           <div class="gc-mosaic-card">
@@ -235,8 +234,8 @@
         <span>Max International School Assandh</span><span class="star">✦</span>
         <span>Cutting-Edge Technology &amp; Smart Labs</span><span class="star">✦</span>
         <span>Merit &amp; Sports Scholarships Up to 100%</span><span class="star">✦</span>
-        <span>In-House Pro-Max NEET, JEE &amp; NDA Coaching</span><span class="star">✦</span>
-        <span>State-of-the-Art Labs &amp; Robotics</span><span class="star">✦</span>
+        <span>In-House Pro-Max NEET &amp; JEE Coaching</span><span class="star">✦</span>
+        <span>State-of-the-Art &amp; Technology</span><span class="star">✦</span>
         <span>Excellence in Academics, Sports &amp; Leadership</span><span class="star">✦</span>
       </div>
       <div class="gc-marquee-content">
@@ -244,8 +243,8 @@
         <span>Max International School Assandh</span><span class="star">✦</span>
         <span>Cutting-Edge Technology &amp; Smart Labs</span><span class="star">✦</span>
         <span>Merit &amp; Sports Scholarships Up to 100%</span><span class="star">✦</span>
-        <span>In-House Pro-Max NEET, JEE &amp; NDA Coaching</span><span class="star">✦</span>
-        <span>State-of-the-Art Labs &amp; Robotics</span><span class="star">✦</span>
+        <span>In-House Pro-Max NEET &amp; JEE Coaching</span><span class="star">✦</span>
+        <span>State-of-the-Art &amp; Technology</span><span class="star">✦</span>
         <span>Excellence in Academics, Sports &amp; Leadership</span><span class="star">✦</span>
       </div>
     </div>
@@ -259,8 +258,7 @@
       <div class="gc-split-grid">
         <!-- Left: Philosophy & Live Animated Counters -->
         <div>
-          <span class="gc-section-subhead">Why Max International</span>
-          <h2 class="gc-section-title">Where Education Builds Character</h2>
+          <h2 class="gc-section-title">Why Max International</h2>
           <p class="gc-lead-text">
             A school where every child is known by name, stretched well beyond the syllabus, and prepared for the world they will step into.
             <br><br>
@@ -358,19 +356,19 @@
         <div class="gc-feature-card">
           <div class="gc-feature-icon">🎯</div>
           <h4>Pro-Max In-House Coaching</h4>
-          <p>Targeted training for NEET, JEE, and NDA led by expert faculty in association with Physics Wallah Vidyapeeth.</p>
+          <p>Targeted training for NEET and JEE led by expert faculty in association with Physics Wallah Vidyapeeth.</p>
         </div>
 
         <div class="gc-feature-card">
           <div class="gc-feature-icon">🔬</div>
-          <h4>State-of-the-Art Labs &amp; Robotics</h4>
-          <p>Advanced Robotics, Computer, Physics, Chemistry, and Biology hubs where concepts leap from textbooks into real hands-on discovery and STEM innovation.</p>
+          <h4>State-of-the-Art &amp; Technology</h4>
+          <p>Advanced Physics, Chemistry, Biology, Computer and Robotics hubs where concepts leap from textbooks into real hands-on discovery and STEM innovation.</p>
         </div>
 
         <div class="gc-feature-card">
           <div class="gc-feature-icon">🏅</div>
           <h4>Sports, Music &amp; Art</h4>
-          <p>Full-fledged playgrounds, dedicated rink for roller skating, athletics, classical and instrumental music, and creative arts fostering mental, physical, and aesthetic excellence.</p>
+          <p>Where passion meets performance! Our expansive playfields, dedicated skating rink, classical music programs, and creative arts cultivate physical strength, mental clarity, and aesthetic appreciation in every student.</p>
         </div>
 
         <div class="gc-feature-card">
@@ -382,7 +380,7 @@
         <div class="gc-feature-card">
           <div class="gc-feature-icon">🌱</div>
           <h4>Value-Driven &amp; Charitable</h4>
-          <p>Run by a non-profit trust where revenue is reinvested into campus facilities, alongside scholarships reaching up to 90%.</p>
+          <p>Run by a non-profit trust where revenue is reinvested into campus facilities, alongside scholarships reaching up to 100%.</p>
         </div>
       </div>
 
@@ -421,14 +419,6 @@
           <div class="gc-wings-list">
             <div class="gc-wing-item active">
               <div class="gc-wing-header">
-                <h4>Foundational Wing — Max Blooming Era</h4>
-                <span class="gc-wing-tag">Nursery – UKG</span>
-              </div>
-              <p>Where curiosity ignites! Play-based, experiential learning designed to build solid numeracy, language confidence, curiosity, and essential social skills.</p>
-            </div>
-
-            <div class="gc-wing-item">
-              <div class="gc-wing-header">
                 <h4>Primary Wing</h4>
                 <span class="gc-wing-tag">Grade 1 – Grade 5</span>
               </div>
@@ -448,7 +438,7 @@
                 <h4>Secondary &amp; Senior Secondary</h4>
                 <span class="gc-wing-tag">Grade 9 – Grade 12</span>
               </div>
-              <p>Rigorous CBSE board exam excellence paired with in-school Pro-Max coaching for competitive entrances (NEET / JEE / NDA) to unlock career dreams.</p>
+              <p>Rigorous CBSE board exam excellence paired with in-school Pro-Max coaching for competitive entrances (NEET / JEE) to unlock career dreams.</p>
             </div>
           </div>
         </div>
@@ -559,11 +549,11 @@
 
         <div class="gc-leader-card">
           <div class="gc-leader-img-box">
-            <img src="assets/img/Faculty%20images/secretary.jpg" alt="Mr. Kapil Gupta, Secretary" loading="lazy" decoding="async">
+            <img src="assets/img/Faculty%20images/secretary.jpg" alt="Mr. Kapil Gupta, Director" loading="lazy" decoding="async">
           </div>
           <div class="gc-leader-info">
             <h4>Mr. Kapil Gupta</h4>
-            <span class="designation">Secretary</span>
+            <span class="designation">Director</span>
           </div>
         </div>
 
@@ -737,22 +727,6 @@
     </div>
   </section>
 
-  <!-- ==========================================================================
-       CMS NEWSLETTERS SECTION (HOOK PRESERVED)
-       ========================================================================== -->
-  <section class="section section-alt" id="newsletters">
-    <div class="container">
-      <div class="section-head" style="text-align: center; margin-bottom: 40px;">
-        <span class="eyebrow">Stay Updated</span>
-        <h2>Recent Newsletters</h2>
-        <p style="margin: 0 auto;">Termly round-ups of academics, achievements and campus life.</p>
-      </div>
-      <div class="feature-grid" data-cms-list="newsletters" data-cms-limit="3"></div>
-      <div style="text-align:center; margin-top:32px;">
-        <a href="gallery.html#newsletter" class="btn btn-navy">View all newsletters</a>
-      </div>
-    </div>
-  </section>
 
   <!-- ==========================================================================
        ADMISSION CTA BAND
@@ -762,7 +736,7 @@
       <div class="cta-band" style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); border-radius: var(--radius-xl); padding: 46px 40px; color: #fff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
         <div style="max-width: 650px;">
           <h3 style="color: #fff; font-size: 28px; margin-bottom: 10px;">Admissions open for 2026–2027 batch</h3>
-          <p style="color: #c5d7f2; font-size: 15px; margin: 0;">Register for the Max Ultimate Scholarship Test and get a chance to win a scholarship of up to 90%, in association with Physics Wallah Vidyapeeth.</p>
+          <p style="color: #c5d7f2; font-size: 15px; margin: 0;">Register for the Max Ultimate Scholarship Test and get a chance to win a scholarship of up to 100%, in association with Physics Wallah Vidyapeeth.</p>
         </div>
         <div style="display:flex; gap:14px; flex-wrap:wrap;">
           <a href="admission.html" class="gc-btn-pill">
@@ -808,7 +782,7 @@
           <ul>
             <li><a href="about-us.html">About Max International</a></li>
             <li><a href="about-us.html#chairman">Chairman's Message</a></li>
-            <li><a href="about-us.html#secretary">Secretary's Message</a></li>
+            <li><a href="about-us.html#director">Director's Message</a></li>
             <li><a href="about-us.html#principal">Principal's Message</a></li>
             <li><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
           </ul>
@@ -827,7 +801,6 @@
           <ul>
             <li><a href="beyond-activities.html">Achievements</a></li>
             <li><a href="promax.html">Pro-Max Competitive Classes</a></li>
-            <li><a href="beyond-activities.html">Defense Wing – NDA Prep</a></li>
             <li><a href="beyond-activities.html#sports">Sports &amp; Fitness</a></li>
           </ul>
         </div>
