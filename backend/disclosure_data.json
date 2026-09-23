@@ -1,0 +1,63 @@
+{
+    "updated": "2026-27",
+    "general": [
+        {"label":"School Name","value":"Max International School"},
+        {"label":"Complete Address with Pin Code","value":"SAFIDON ROAD, ASSANDH, KARNAL, HARYANA,, 132039"},
+        {"label":"Principal Name & Qualification:","value":"MS. SONIKA RAI, M.A., B.Ed."},
+        {"label":"School Email ID","value":"principal@maxinternationalschool.com"},
+        {"label":"Contact Details (Landline/Mobile)","value":"8950268752, 9050248300 , WhatsApp: +91 90502 94300"},
+        {"label":"Affiliation Board","value":"Central Board of Secondary Education (CBSE), New Delhi"}
+    ],
+    "documents": [
+        {"id":1,"title":"Copy of Affiliation / Upgradation Letter","description":"","pdf_url":"backend/uploads/disclosure/b/1.pdf"},
+        {"id":2,"title":"Copy of Society Registration","description":"","pdf_url":"backend/uploads/disclosure/b/2.pdf"},
+        {"id":3,"title":"Copy of No Objection Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/3.pdf"},
+        {"id":4,"title":"Copy of Recognition Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/4.pdf"},
+        {"id":5,"title":"Copy of Building Safety Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/5.pdf"},
+        {"id":6,"title":"Copy of Fire Safety Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/6.pdf"},
+        {"id":7,"title":"Copy of DEO Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/7.pdf"},
+        {"id":8,"title":"Copy of Health & Sanitation Certificate","description":"","pdf_url":"backend/uploads/disclosure/b/8.pdf"}
+    ],
+    "academics": [
+        {"id":1,"label":"Fee Structure","value":"","pdf_url":"backend/uploads/disclosure/c/1.pdf"},
+        {"id":2,"label":"Annual Academic Calendar","value":"","pdf_url":"backend/uploads/disclosure/c/2.pdf"},
+        {"id":3,"label":"List of SMC","value":"","pdf_url":"backend/uploads/disclosure/c/3.pdf"},
+        {"id":4,"label":"List of Parents Teachers Association (PTA)","value":"","pdf_url":"backend/uploads/disclosure/c/4.pdf"}
+    ],
+    "results_x": [
+        {"sno":"1","year":"2021-22","registered":"70","passed":"65","pct":"92.86%","pdf":"backend/uploads/disclosure/c/5.pdf"},
+        {"sno":"2","year":"2022-23","registered":"81","passed":"74","pct":"91.36%","pdf":"backend/uploads/disclosure/c/6.pdf"},
+        {"sno":"3","year":"2023-24","registered":"99","passed":"89","pct":"89.90%","pdf":"backend/uploads/disclosure/c/7.pdf"}
+    ],
+    "results_xii": [
+        {"sno":"1","year":"2021-22","registered":"74","passed":"66","pct":"89.19%","pdf":"backend/uploads/disclosure/c/8.pdf"},
+        {"sno":"2","year":"2022-23","registered":"103","passed":"94","pct":"91.26%","pdf":"backend/uploads/disclosure/c/9.pdf"},
+        {"sno":"3","year":"2023-24","registered":"94","passed":"88","pct":"93.62%","pdf":"backend/uploads/disclosure/c/10.pdf"}
+    ],
+    "staff": [
+        {"label":"Principal","value":"1"},
+        {"label":"Vice Principal","value":"0"},
+        {"label":"Headmistress/Headmaster","value":"-"},
+        {"label":"Total No. of Teachers","value":"54"},
+        {"label":"PGT","value":"16"},
+        {"label":"TGT","value":"15"},
+        {"label":"PRT","value":"23"},
+        {"label":"NTT","value":"6"},
+        {"label":"PET","value":"2"},
+        {"label":"Teacher Student Ratio","value":"1:1.5"},
+        {"label":"Special Educator","value":"Ms. Neetu, B.A., Diploma in Special Education"},
+        {"label":"Wellness Teacher","value":"Ms. Sonia, M.A. Hindi, Pol. Science, NTT, B.Ed."}
+    ],
+    "infrastructure_specs": [
+        {"sno":"1","label":"TOTAL CAMPUS AREA OF THE SCHOOL (IN SQR MTR)","value":"10117 SQ MTR (2.5 ACRES)"},
+        {"sno":"2","label":"NO. AND SIZE OF THE CLASSSROOM (IN SQR MTR)","value":"42 CLASSROOMS (55 SQ MTR EACH)"},
+        {"sno":"3","label":"NO. AND SIZE OF LABORATORIES INCLUDING COMPUTER LABS (IN SQR MTR)","value":"5 LABORATORIES (PHYSICS, CHEMISTRY, BIOLOGY, COMPOSITE SCIENCE, COMPUTER LAB - 75 SQ MTR EACH)"},
+        {"sno":"4","label":"NO. AND SIZE OF LIBRARY (IN SQR MTR)","value":"1 LIBRARY (120 SQ MTR)"},
+        {"sno":"5","label":"INTERNET FACILITY (YES/NO)","value":"YES (HIGH-SPEED BROADBAND & WI-FI ACROSS CAMPUS)"},
+        {"sno":"6","label":"NO. OF GIRLS TOILETS","value":"16"},
+        {"sno":"7","label":"NO. OF BOYS TOILETS","value":"16"},
+        {"sno":"8","label":"NO. OF CWSN TOILETS","value":"2 (BARRIER-FREE TOILETS FOR CHILDREN WITH SPECIAL NEEDS)"},
+        {"sno":"9","label":"LINK OF YOU TUBE VIDEO OF THE INSPECTION OF SCHOOL COVERING THE INFRASTRUCTURE OPF THE SCHOOL","value":"https://www.youtube.com/@maxinternationalschool2041"}
+    ],
+    "infrastructure": []
+}

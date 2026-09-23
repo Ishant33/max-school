@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/session_init.php';
 session_start();
 $_SESSION = [];
 if (ini_get('session.use_cookies')) {
