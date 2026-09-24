@@ -18,7 +18,7 @@
 
         const limit = container.dataset.cmsLimit ? parseInt(container.dataset.cmsLimit, 10) : 0;
 
-        let url = `/backend/cms_list.php?module=${encodeURIComponent(module)}`;
+        let url = `backend/cms_list.php?module=${encodeURIComponent(module)}`;
         if (limit > 0) url += `&limit=${limit}`;
 
         fetch(url)

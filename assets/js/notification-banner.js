@@ -32,7 +32,7 @@
             }[c]));
     }
 
-    fetch('/backend/cms_list.php?module=notifications&featured=1&limit=1')
+    fetch('backend/cms_list.php?module=notifications&featured=1&limit=1')
         .then(res => res.ok ? res.json() : Promise.reject('Network error'))
         .then(items => {
             if (!items || !items.length) return;

@@ -538,7 +538,7 @@
 
         <div class="gc-leader-card">
           <div class="gc-leader-img-box">
-            <img src="assets/img/Faculty%20images/secretary.jpg" alt="Mr. Kapil Gupta, Director" loading="lazy" decoding="async">
+            <img src="assets/img/Faculty%20images/director.jpg" alt="Mr. Kapil Gupta, Director" loading="lazy" decoding="async">
           </div>
           <div class="gc-leader-info">
             <h4>Mr. Kapil Gupta</h4>
@@ -824,58 +824,10 @@
     </a>
   </div>
 
-  <script src="assets/js/menu.js?v=20260923"></script>
-  <script src="assets/js/preview-grand.js?v=20260923"></script>
+  <script src="assets/js/menu.js?v=20260924"></script>
+  <script src="assets/js/preview-grand.js?v=20260924"></script>
   <script src="assets/js/cms-content.js"></script>
   <script src="assets/js/notification-banner.js"></script>
   <script src="assets/js/chatbot.js"></script>
-  <script>
-    // Bulletproof Counter Trigger (bypasses any browser JS cache or observer delay)
-    (function() {
-      function runCounters() {
-        var counters = document.querySelectorAll('.gc-counter-val');
-        if (!counters.length) return;
-        counters.forEach(function(el) {
-          var raw = el.getAttribute('data-target') || el.textContent;
-          var target = parseFloat(raw);
-          if (isNaN(target)) return;
-          var isDecimal = raw.includes('.');
-          var duration = 1800;
-          var startTime = null;
-          function tick(now) {
-            if (!startTime) startTime = now;
-            var p = Math.min((now - startTime) / duration, 1);
-            var ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-            var val = ease * target;
-            el.textContent = isDecimal ? val.toFixed(1) : Math.floor(val).toLocaleString();
-            if (p < 1) {
-              requestAnimationFrame(tick);
-            } else {
-              el.textContent = isDecimal ? target.toFixed(1) : target.toLocaleString();
-            }
-          }
-          requestAnimationFrame(tick);
-        });
-      }
-
-      if ('IntersectionObserver' in window) {
-        var obs = new IntersectionObserver(function(entries) {
-          entries.forEach(function(e) {
-            if (e.isIntersecting) {
-              runCounters();
-              obs.disconnect();
-            }
-          });
-        }, { threshold: 0.1 });
-        var targetSection = document.getElementById('whymax') || document.querySelector('.gc-about-section');
-        if (targetSection) obs.observe(targetSection);
-        else runCounters();
-      } else {
-        runCounters();
-      }
-      // Safety fallback: ensure numbers display if not scrolled after 2 seconds
-      setTimeout(runCounters, 2200);
-    })();
-  </script>
 </body>
 </html>

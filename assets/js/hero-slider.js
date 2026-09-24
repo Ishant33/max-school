@@ -34,7 +34,7 @@
 
   const FEED = 'backend/cms_list.php?module=hero';
   const CACHE_KEY = 'maxHeroSlides';
-  const INTERVAL = 3000;
+  const INTERVAL = 5000;
   // A new set is handed over once its first photograph has decoded. If the
   // network stalls we hand over anyway rather than stranding the visitor on the
   // old set — the <img> paints itself whenever it does arrive.
