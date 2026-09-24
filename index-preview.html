@@ -4,17 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Max International School — Grand Columbus Style Live Preview</title>
-  <script>
-    // Site Maintenance Gate (Password: school1234)
-    (function() {
-      var MAINTENANCE_ACTIVE = true;
-      if (!MAINTENANCE_ACTIVE) return;
-      var isAuthorized = document.cookie.indexOf('mis_access=authorized') !== -1 || localStorage.getItem('mis_access') === 'authorized';
-      if (!isAuthorized) {
-        window.location.replace('maintenance.html');
-      }
-    })();
-  </script>
   <meta name="description" content="Live preview of Max International School Assandh, redesigned with the modern Webflow aesthetic of Grand Columbus International School.">
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <!-- Modern Google Fonts -->
@@ -84,7 +73,7 @@
                 <a href="admin.html">🔐 Student / Staff Login</a>
                 <a href="admission.html#fees">💳 Online Fee Details</a>
                 <a href="academics.html#planner">📅 Academic Calendar</a>
-                <a href="mandatory-disclosure.php">📋 CBSE Mandatory Disclosure</a>
+                <a href="mandatory-disclosure.html">📋 CBSE Mandatory Disclosure</a>
                 <a href="gallery.html#notif">📢 Circulars &amp; News</a>
                 <a href="gallery.html#events">📸 Campus Photo Gallery</a>
                 <a href="about-us.html#infra">🌐 360° Virtual Campus Tour</a>
@@ -750,7 +739,7 @@
             <li><a href="about-us.html#chairman">Chairman's Message</a></li>
             <li><a href="about-us.html#director">Director's Message</a></li>
             <li><a href="about-us.html#principal">Principal's Message</a></li>
-            <li><a href="mandatory-disclosure.php">Mandatory Disclosure</a></li>
+            <li><a href="mandatory-disclosure.html">Mandatory Disclosure</a></li>
             <li><a href="career.html">Career Opportunities</a></li>
           </ul>
         </div>
