@@ -90,6 +90,18 @@
             description: 'Manage statutory disclosure information and documents',
             custom: 'disclosure',
         },
+        ticker: {
+            label: 'Running Ticker',
+            description: 'Highlights and announcements scrolling horizontally across the homepage banner.',
+            fields: [],
+            titleLabel: 'Ticker Announcement / Highlight Text',
+            bodyLabel: 'Optional Internal Note',
+        },
+        leadership: {
+            label: 'Leadership Messages',
+            description: 'Manage Chairperson, Director, and Principal messages, quotes, and photographs.',
+            custom: 'leadership',
+        },
     };
 
     /* ----------------------------------------------------------------------
@@ -103,6 +115,7 @@
         fees: { global: 'FeeAdmin', title: 'Fee Structure Management', loading: 'Loading fee structure…' },
         images: { global: 'SiteImages', title: 'Photos Used on the Site', loading: 'Loading photos…' },
         enquiries: { global: 'Enquiries', title: 'Received Enquiries', loading: 'Loading enquiries…' },
+        leadership: { global: 'LeadershipAdmin', title: 'Leadership Messages Management', loading: 'Loading leadership messages…' },
     };
 
     /* ----------------------------------------------------------------------

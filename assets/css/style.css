@@ -1200,6 +1200,8 @@ footer ul li a:hover{color:var(--orange-light);}
   .brand-actions .btn{min-width:0; padding:9px 11px; font-size:11px;}
   .nav-cta{gap:0; flex-shrink:0;}
   .nav-cta .btn{padding:9px 11px; font-size:12px; white-space:nowrap;}
+  .nav-cta .gc-btn-pill{padding:8px 14px; font-size:12px; gap:6px;}
+  .nav-cta .gc-btn-pill .btn-arrow-circle{width:18px; height:18px; font-size:10px;}
   .burger{margin-right:0; padding:8px;}
   .about-wrap > *, .split > *, .two-col > *, .contact-grid > *, .feature-grid > *, .why-grid > *, .leader-grid > *, .testi-grid > *{min-width:0;}
   img,video,iframe{max-width:100%;}
@@ -2716,7 +2718,8 @@ footer ul li a:hover{color:var(--orange-light);}
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 .gc-mosaic-card:hover {
   transform: translateY(-6px);
@@ -2727,6 +2730,10 @@ footer ul li a:hover{color:var(--orange-light);}
   height: auto;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gc-mosaic-card:hover img {
+  transform: scale(1.05);
 }
 .gc-mosaic-card .card-caption {
   position: absolute;
@@ -2743,60 +2750,98 @@ footer ul li a:hover{color:var(--orange-light);}
   font-weight: 700;
   line-height: 1.3;
 }
-.gc-card-navy {
-  background: var(--navy);
-  color: #ffffff;
-  padding: 24px 20px;
-  border-radius: var(--radius);
+
+/* ==========================================================================
+   UNIFIED STATIC STAT / ACCENT CARDS IN MOSAIC GRID
+   Shared layout, sizing, typography, and interactive hover elevation
+   ========================================================================== */
+.gc-card-navy,
+.gc-card-teal,
+.gc-card-orange {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 22px 20px;
+  border-radius: var(--radius);
+  aspect-ratio: 3 / 2;
+  min-height: 147px;
+  box-sizing: border-box;
+  box-shadow: var(--shadow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  overflow: hidden;
 }
-.gc-card-navy h3 {
+
+/* Hover elevation and lighting response for static cards */
+.gc-card-navy:hover,
+.gc-card-teal:hover,
+.gc-card-orange:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.04);
+}
+
+.gc-card-navy h3,
+.gc-card-teal h3,
+.gc-card-orange h3 {
+  font-family: 'Poppins', sans-serif;
   font-size: 38px;
-  color: var(--gold);
+  font-weight: 700;
   line-height: 1;
   margin-bottom: 6px;
+  letter-spacing: -0.5px;
+  transition: transform 0.25s ease;
+}
+
+.gc-card-navy:hover h3,
+.gc-card-teal:hover h3,
+.gc-card-orange:hover h3 {
+  transform: scale(1.04);
+  transform-origin: left center;
+}
+
+.gc-card-navy p,
+.gc-card-teal p,
+.gc-card-orange p {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.38;
+  margin: 0;
+}
+
+/* Individual Colorway Overrides */
+.gc-card-navy {
+  background: var(--navy);
+  color: #ffffff;
+}
+.gc-card-navy h3 {
+  color: var(--gold);
 }
 .gc-card-navy p {
-  font-size: 13.5px;
   color: #d1e2f7;
-  font-weight: 500;
-  line-height: 1.4;
 }
+
 .gc-card-teal {
   background: linear-gradient(135deg, #019e89, #0f6e61);
   color: #ffffff;
-  padding: 24px 20px;
-  border-radius: var(--radius);
 }
 .gc-card-teal h3 {
-  font-size: 26px;
   color: #ffffff;
-  line-height: 1.15;
-  margin-bottom: 8px;
 }
 .gc-card-teal p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.95);
 }
+
 .gc-card-orange {
   background: linear-gradient(135deg, #f1791e, #d95e07);
   color: #ffffff;
-  padding: 24px 20px;
-  border-radius: var(--radius);
 }
 .gc-card-orange h3 {
-  font-size: 36px;
   color: #ffffff;
-  line-height: 1;
-  margin-bottom: 6px;
 }
 .gc-card-orange p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Marquee Running Ticker */
@@ -2814,6 +2859,10 @@ footer ul li a:hover{color:var(--orange-light);}
   width: fit-content;
   animation: marqueeScroll 25s linear infinite;
   white-space: nowrap;
+}
+.gc-marquee-section:hover .gc-marquee-track,
+.gc-marquee-track:hover {
+  animation-play-state: paused;
 }
 .gc-marquee-content {
   display: flex;
@@ -3601,9 +3650,8 @@ footer ul li a:hover{color:var(--orange-light);}
   .gc-hero-title { font-size: 26px; }
   .gc-hero-subtitle { font-size: 14.8px; line-height: 1.6; }
   .gc-mosaic-grid { gap: 10px; }
-  .gc-card-navy, .gc-card-teal, .gc-card-orange { padding: 18px 14px; border-radius: 12px; }
-  .gc-card-navy h3, .gc-card-orange h3 { font-size: 28px; }
-  .gc-card-teal h3 { font-size: 22px; }
+  .gc-card-navy, .gc-card-teal, .gc-card-orange { padding: 18px 14px; border-radius: 12px; min-height: 120px; }
+  .gc-card-navy h3, .gc-card-teal h3, .gc-card-orange h3 { font-size: 26px; }
   .gc-card-navy p, .gc-card-teal p, .gc-card-orange p { font-size: 12px; line-height: 1.35; }
   .gc-mosaic-card { border-radius: 12px; }
   .gc-mosaic-card .card-caption { padding: 10px; }

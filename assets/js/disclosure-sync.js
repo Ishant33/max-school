@@ -18,7 +18,7 @@
     const viewPdfBtn = url => `<a class="cbse-link-btn" href="${esc(url)}" target="_blank" rel="noopener">${pdfSvg()}<span>VIEW PDF</span></a>`;
     const officeSpan = '<span class="cbse-office-text">Available at school office</span>';
 
-    fetch('backend/disclosure_list.php')
+    fetch('backend/disclosure_list.php?_t=' + Date.now(), { cache: 'no-store' })
         .then(res => res.ok ? res.json() : Promise.reject('HTTP ' + res.status))
         .then(res => {
             if (!res || !res.ok || !res.data) return;

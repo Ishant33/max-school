@@ -15,7 +15,6 @@
     const brandInner = document.createElement('div');
     const brandActions = document.createElement('div');
     const login = navCta.querySelector('.login-pill');
-    const apply = navCta.querySelector('.btn');
 
     brandBar.className = 'brand-bar';
     brandInner.className = 'container brand-inner';
@@ -26,12 +25,15 @@
       login.textContent = 'Log In';
       brandActions.appendChild(login);
     }
-    if (apply) {
-      apply.href = 'admission.html#apply';
-      apply.classList.remove('btn-orange');
-      apply.classList.add('btn-navy');
-      brandActions.appendChild(apply);
+
+    // Keep Apply Now on the navy sticky navigation row.
+    // If a subpage has the legacy button class, normalize it to the orange pill button with arrow circle:
+    const legacyApply = navCta.querySelector('.btn:not(.gc-btn-pill)');
+    if (legacyApply) {
+      legacyApply.className = 'gc-btn-pill';
+      legacyApply.innerHTML = '<span>Apply Now</span><span class="btn-arrow-circle">→</span>';
     }
+
     brandInner.appendChild(brandActions);
     brandBar.appendChild(brandInner);
     header.before(brandBar);

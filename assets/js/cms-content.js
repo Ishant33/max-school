@@ -163,4 +163,103 @@
                 // Static HTML fallback remains visible
             });
     }
+
+    // Render Homepage Running Marquee Ticker if present
+    const marqueeSection = document.querySelector('.gc-marquee-section');
+    if (marqueeSection) {
+        fetch('backend/cms_list.php?module=ticker')
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(items => {
+                if (!items || !items.length) return;
+                const contentHtml = items.map(item => `<span>${esc(item.title)}</span><span class="star">✦</span>`).join('');
+                const tracks = marqueeSection.querySelectorAll('.gc-marquee-content');
+                if (tracks.length >= 2) {
+                    tracks[0].innerHTML = contentHtml;
+                    tracks[1].innerHTML = contentHtml;
+                } else {
+                    const track = marqueeSection.querySelector('.gc-marquee-track');
+                    if (track) {
+                        track.innerHTML = `<div class="gc-marquee-content">${contentHtml}</div><div class="gc-marquee-content">${contentHtml}</div>`;
+                    }
+                }
+            })
+            .catch(() => {});
+    }
+
+    // Render Leadership Messages (Chairperson, Director, Principal)
+    const chairCard = document.getElementById('chairperson');
+    const dirCard = document.getElementById('director');
+    const prinCard = document.getElementById('principal');
+    const leaderCards = document.querySelectorAll('.gc-leader-card');
+
+    if (chairCard || dirCard || prinCard || (leaderCards && leaderCards.length > 0)) {
+        fetch('backend/leadership_list.php')
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(res => {
+                if (!res || !res.ok || !res.data) return;
+                const d = res.data;
+
+                // Update about-us.html cards
+                const updateLeaderMsg = (card, data) => {
+                    if (!card || !data) return;
+                    const img = card.querySelector('.msg-photo img');
+                    if (img && data.image_url) {
+                        img.src = data.image_url;
+                        img.alt = `${data.name || ''}, ${data.role || ''}`;
+                    }
+                    const roleEl = card.querySelector('.role');
+                    if (roleEl && data.role) roleEl.textContent = data.role;
+                    const nameEl = card.querySelector('h3');
+                    if (nameEl && data.name) nameEl.textContent = data.name;
+                    const quoteEl = card.querySelector('blockquote');
+                    if (quoteEl) {
+                        if (data.quote && data.quote.trim()) {
+                            quoteEl.textContent = `"${data.quote.replace(/^["']|["']$/g, '').trim()}"`;
+                            quoteEl.style.display = '';
+                        } else {
+                            quoteEl.style.display = 'none';
+                        }
+                    }
+                    if (Array.isArray(data.paragraphs) && data.paragraphs.length > 0) {
+                        const existingPs = card.querySelectorAll('.msg-body > p');
+                        existingPs.forEach(p => p.remove());
+                        const signEl = card.querySelector('.sign');
+                        data.paragraphs.forEach(text => {
+                            if (!text || !text.trim()) return;
+                            const p = document.createElement('p');
+                            p.textContent = text;
+                            if (signEl) card.querySelector('.msg-body').insertBefore(p, signEl);
+                            else card.querySelector('.msg-body').appendChild(p);
+                        });
+                    }
+                    const signEl = card.querySelector('.sign');
+                    if (signEl && data.sign) signEl.textContent = data.sign;
+                };
+
+                updateLeaderMsg(chairCard, d.chairperson);
+                updateLeaderMsg(dirCard, d.director);
+                updateLeaderMsg(prinCard, d.principal);
+
+                // Update index.html homepage leader cards if present
+                if (leaderCards && leaderCards.length >= 3) {
+                    const keys = ['chairperson', 'director', 'principal'];
+                    leaderCards.forEach((card, idx) => {
+                        const item = d[keys[idx]];
+                        if (!item) return;
+                        const img = card.querySelector('.gc-leader-img-box img');
+                        if (img && item.image_url) {
+                            img.src = item.image_url;
+                            img.alt = `${item.name}, ${item.role}`;
+                        }
+                        const nameEl = card.querySelector('.gc-leader-info h4');
+                        if (nameEl && item.name) nameEl.textContent = item.name;
+                        const desigEl = card.querySelector('.gc-leader-info .designation');
+                        if (desigEl && item.role) {
+                            desigEl.textContent = item.role.replace(/^Message from the\s+/i, '');
+                        }
+                    });
+                }
+            })
+            .catch(() => {});
+    }
 })();
