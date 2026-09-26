@@ -208,7 +208,10 @@ function disclosure_table(array $rows): void {
       </nav>
       <div class="nav-cta">
         <a href="admin.html" class="login-pill">Log In</a>
-        <a href="admission.html#apply" class="btn btn-orange">Apply Now</a>
+        <a href="admission.html#apply" class="gc-btn-pill">
+          <span>Apply Now</span>
+          <span class="btn-arrow-circle">→</span>
+        </a>
         <div class="burger"><span></span><span></span><span></span></div>
       </div>
     </div>
